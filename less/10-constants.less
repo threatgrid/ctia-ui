@@ -1,0 +1,162 @@
+// "Constants" are variables that remain the same throughout the LESS / CSS.
+// Constants are labeled in camelCase.
+// @constantVariable: ;
+
+
+//------------------------------------------------------------------------------
+// MEASUREMENTS
+//------------------------------------------------------------------------------
+@minBodyWidth: 600px;
+@smallBodyBreakpoint: 610px;
+@mediumBodyBreakpoint: 1030px;
+
+@pageBarHeight: 39px;
+@globalSearchHeight: @pageBarHeight; // Reserved for search bar height in IROH
+@pageNavIconTop: (@pageBarHeight - 7)/2;
+@headerOffset: @pageBarHeight + @globalSearchHeight;
+
+@btnRadius: 5px;
+
+
+//------------------------------------------------------------------------------
+// PRIMARY COLORS
+//------------------------------------------------------------------------------
+@white: #fff;
+@black: #000;
+@gray: #555;
+@darkGray: #333;
+
+@red: #ff3333;
+@green: #22bb55;
+@blue: #3388ff;
+@orange: #ff8833;
+@purple: #7733ff;
+@shadow: #1a2633;
+@overlay: #1f2b38;
+
+@disabledText: #a6abb3;
+@disabledInput: #e3e4e6;
+
+
+
+
+//------------------------------------------------------------------------------
+// PRIMARY BACKGROUNDS
+//------------------------------------------------------------------------------
+@pageBackgroundColor: #f3f4f5;
+@panelBackgroundColor: #fcfcfc;
+
+
+
+//------------------------------------------------------------------------------
+// PAGE BAR
+//------------------------------------------------------------------------------
+@pageBarTitleColor: #000000;
+
+
+
+//------------------------------------------------------------------------------
+// PAGE NAV
+//------------------------------------------------------------------------------
+@pageNavIcon: #9aa1aa;
+@pageNavIconHover: #1f2b38;
+@pageNavIconOffset: 20px;
+
+@pageTabBg: none;
+@pageTabHoverBg: #e8ebee;
+@pageTabActiveBg: #dfe2e5;
+@pageTabFocusBg: #e6e8eb;
+@pageTabSelectedBg: #e6e8eb;
+
+@pageTabBorder: transparent;
+@pageTabHoverBorder: #dfe2e5;
+@pageTabActiveBorder: #d7dadd;
+@pageTabFocusBorder: #dfe2e5;
+// @pageTabSelectedBorder: #d7dadd;
+@pageTabSelectedBorder: #dfe2e5;
+
+@pageTabLabel: #4e5764;
+@pageTabLabelHover: #1f2b38;
+@pageTabLabelActive: #4e5764;
+@pageTabLabelFocus: #1f2b38;
+@pageTabLabelSelected: #1f2b38;
+
+@pageTabIcon: #9aa1aa;
+@pageTabIconHover: #1f2b38;
+@pageTabIconActive: #4e5764;
+@pageTabIconFocus: #1f2b38;
+@pageTabIconSelected: #1f2b38;
+
+
+
+//------------------------------------------------------------------------------
+// SEARCH
+//------------------------------------------------------------------------------
+@pageSearchIcon: #9aa1aa;
+@globalSearchIcon: #c2c7cc;
+@globalSearchHoverActive: #ffffff;
+
+@globalSearchText: #9aa1aa;
+@globalSearchTextHover: #ffffff;
+
+@globalBreadcrumb: #9aa1aa;
+@globalBreadcrumbRoot: #c2c7cc;
+@globalBreadcrumbCurrNode: #e6ecf2;
+
+@globalBreadcrumbIcon: #5b6c7d;
+@globalSearchHoverBreadcrumbIcon: #9aa1aa;
+@globalBreadcrumbIconHover: #ffffff;
+@globalBreadcrumbIconWorking: #9aa1aa;
+
+
+
+//------------------------------------------------------------------------------
+// INPUT ICONS
+//------------------------------------------------------------------------------
+@inputIcon: #6b6e73;
+@inputIconDisabled: #a6abb3;
+
+
+//------------------------------------------------------------------------------
+// TOOLTIP
+//------------------------------------------------------------------------------
+@tooltipBgPrimary: #1f2b38;
+@tooltipBgSecondary: #263545;
+@tooltipFontColor: #ffffff;
+
+
+
+//------------------------------------------------------------------------------
+// INPUTS
+//------------------------------------------------------------------------------
+@defaultFocus: @blue;
+
+
+//------------------------------------------------------------------------------
+// TABLES
+//------------------------------------------------------------------------------
+@colHeader: #4e5764;
+@colHeaderHover: #1f2b38;
+@colHeaderActive: #4e5764;
+@colHeaderHoverBg: #e8ebee;
+@colHeaderCaret: #9aa1aa;
+@tbodyBgColor: @white;
+@tableRowHover: mix(@tbodyBgColor, @blue, 95%);
+@tableRowActive: mix(@tbodyBgColor, @blue, 90%);
+
+
+//------------------------------------------------------------------------------
+// ANIMATIONS
+//------------------------------------------------------------------------------
+@veryFast: 25ms ease-in-out;
+@fast:     50ms ease-in-out;
+@med:     100ms ease-in-out;
+@reg:     150ms ease-in-out;
+@slow:    200ms ease-in-out;
+
+
+//------------------------------------------------------------------------------
+// TESTS
+//------------------------------------------------------------------------------
+@testBorder: rgba(26,38,51, 0.03) rgba(26,38,51, 0.03) rgba(26,38,51, 0.06);
+@testDarkBlue: #1f2b38;

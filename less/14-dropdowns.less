@@ -1,0 +1,998 @@
+//------------------------------------------------------------------------------
+// SANDBOX OVERRIDES
+//------------------------------------------------------------------------------
+.sandbox .drop-down-menu-59e92,
+.sandbox .drop-up-menu-45cf5,
+.sandbox .drop-down-left-d413c,
+.sandbox .drop-up-left-3c7ea,
+.sandbox .token-down-menu-0e11b,
+.sandbox .token-up-menu-5db5d,
+.sandbox .token-down-left-367bd,
+.sandbox .token-up-left-dce78,
+.sandbox .date-time-down-menu-f021e,
+.sandbox .date-time-up-menu-4550f,
+.sandbox .datepicker-03f4a,
+.sandbox .sort-filter-down-menu-e2277,
+.sandbox .sort-filter-down-left-menu-88b88 {
+  display: none;
+}
+
+//------------------------------------------------------------------------------
+// MIXINS - .Mixin_TitleCase(){}
+//------------------------------------------------------------------------------
+
+// MARGIN OVERRIDE
+  .Mixing_SelectBtnMargin() {
+    margin: 0;
+  }
+
+// CARETS
+  .Mixin_DropCaret() {
+    content: '';
+    display: inline-block;
+    box-sizing: border-box;
+    vertical-align: middle;
+    margin-top: -4px;
+    margin-bottom: 0;
+    margin-left: 14px;
+    margin-right: 2px;
+    border: 0 solid @gray;
+    border-width: 0 1px 1px 0;
+    width: 6px;
+    height: 6px;
+    .Mixin_Rotate(45);
+  }
+
+  .Mixin_DropCaretHover() {
+    border-color: @darkGray;
+  }
+
+  .Mixin_DropCaretActive() {
+    border-color: @black;
+  }
+
+  .Mixin_DropCaretDisabled() {
+    border-color: #dfe2e5;
+  }
+
+  .Mixin_DropCaretMed() {
+    .Mixin_DropCaret();
+    width: 6px;
+    height: 6px;
+    margin-left: 10px;
+
+  }
+
+  .Mixin_DropCaretSml() {
+    .Mixin_DropCaret();
+    width: 5px;
+    height: 5px;
+    margin-left: 8px;
+  }
+
+  .Mixin_DropCaretColor(@color){
+    border-color: @color;
+  }
+
+  .Mixin_DropCaretWhite() {
+    .Mixin_DropCaret();
+    .Mixin_DropCaretColor(@white);
+  }
+
+  .Mixin_DropCaretMedWhite() {
+    .Mixin_DropCaretMed();
+    .Mixin_DropCaretColor(@white);
+  }
+
+  .Mixin_DropCaretSmlWhite() {
+    .Mixin_DropCaretSml();
+    .Mixin_DropCaretColor(@white);
+  }
+
+  .Mixin_DropCaretBlue() {
+    .Mixin_DropCaret();
+    .Mixin_DropCaretColor(@blue);
+  }
+
+  .Mixin_DropCaretBlueHover() {
+    .Mixin_DropCaretColor(hsv(hsvhue(@blue), hsvsaturation(@blue) + 20%, hsvvalue(@blue) - 20%));
+  }
+
+  .Mixin_DropCaretBlueDisabled() {
+    .Mixin_DropCaretColor(hsv(hsvhue(@blue), 10%, 90%));
+  }
+
+  .Mixin_DropCaretMedBlue() {
+    .Mixin_DropCaretMed();
+    .Mixin_DropCaretColor(@blue);
+  }
+
+  .Mixin_DropCaretSmlBlue() {
+    .Mixin_DropCaretSml();
+    .Mixin_DropCaretColor(@blue);
+  }
+
+// MENU
+  .Mixin_DropMenu() {
+    // "display: none;" has been removed for production. Sandbox override is at the top of this sheet.
+    position: absolute;
+    margin:  1px -5px;
+    overflow: hidden;
+    overflow-y: auto;
+    padding: 5px 0;
+    text-align: left;
+    border: 1px solid red;
+    border-color: #e1e1e2 #e1e1e2 #c9cbcd;
+    border-color: rgba(26,38,51, 0.1) rgba(26,38,51, 0.1) rgba(26,38,51, 0.1);
+    border-radius: 5px;
+    background-color: #fcfcfc;
+    background-clip: padding-box;
+    box-shadow: inset 0 0 0 1px #fff, 0 5px 15px fade(@shadow, 10%), 0 20px 40px fade(@shadow, 10%);
+    outline: none;
+    cursor: default;
+    z-index: 10 !important;
+  }
+
+  .Mixin_SelectMenu() {
+    min-width: calc(~"100% + 10px");
+  }
+
+  .Mixin_ContextMenu() {
+    .Mixin_DropMenu();
+    display: none;
+    position: fixed;
+    margin:0;
+    z-index: 999;
+  }
+
+// MENU OPTIONS
+  .Mixin_DropOption() {
+    display: block;
+    position: relative;
+    color: @darkGray;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 9px;
+    padding: 7px 20px 8px;
+    white-space: nowrap;
+    border: 0 solid transparent;
+    border-width: 1px 0;
+
+  }
+
+  .Mixin_ContextOption() {
+    .Mixin_DropOption();
+    padding: 4px 20px 5px;
+    font-weight: 600;
+  }
+
+  .Mixin_DropOptionHover() {
+    // color: #0055cc;
+    color: #000000;
+    // background: fade(@blue, 20%);
+    // border-color: fade(@blue, 30%);
+
+    background: linear-gradient(#e8ebee, #dfe2e5);
+    border-color: #d7dadd transparent #cbced1;
+
+    // color: #000;
+    // border-color: #dfe2e5;
+    // background-color: @pageTabHoverBg;
+
+    // color: #fff;
+    // border-color: #626e80;
+    // background-color: #727c8a;
+
+  }
+
+  .Mixin_DropOptionActive() {
+    color: #000;
+    background: fade(@blue, 30%);
+    border-color: fade(@blue, 50%);
+
+    // border-color: #d7dadd;
+    // background-color: #dfe2e5;
+
+    // border-color: transparent;
+    // background-color: #626e80;
+  }
+
+  .Mixin_DropOptionSelected() {
+    color: @black;
+    font-weight: 600;
+
+    &:before {
+      content: '';
+      display: inline-block;
+      position: absolute;
+      vertical-align: middle;
+      width: 3px;
+      height: 8px;
+      margin: -1px 0 0 -10px;
+      border: 0 solid @black;
+      border-width: 0 1px 1px 0;
+      .Mixin_Rotate(42);
+      box-sizing: border-box;
+    }
+  }
+
+  .Mixin_DropOptionDisabled() {
+    color: #d4d4d4;
+    background: none;
+    border-color: transparent;
+    cursor: not-allowed;
+
+    &:before {
+      border-color: #d4d4d4;
+    }
+  }
+
+  .Mixin_DropTitle() {
+    display: block;
+    position: relative;
+    white-space: nowrap;
+    color: #bbbbbb;
+    font-size: 10px;
+    line-height: 10px;
+    font-weight: 700;
+    padding: 9px 15px 2px;
+    text-transform:  uppercase;
+    background: none;
+    border: none;
+  }
+
+  .Mixin_DropDivider() {
+    display: block;
+    height: 1px;
+    margin: 5px 0;
+    background: @pageTabHoverBg;
+    background-clip: padding-box;
+    border: 0 solid transparent;
+    border-width: 0 10px;
+  }
+
+// MENU DIRECTION
+  .Mixin_DropDown() {
+    top: 100%;
+    left: 0;
+  }
+
+  .Mixin_DropUp() {
+    bottom: 100%;
+    left: 0;
+  }
+
+  .Mixin_DropDownLeft() {
+    top: 100%;
+    right: 0;
+  }
+
+  .Mixin_DropUpLeft() {
+    bottom: 100%;
+    right: 0;
+  }
+
+  .Mixin_DropDownCenter() {
+    top: 100%;
+    .Mixin_CenterHorizontally();
+  }
+
+
+
+
+//------------------------------------------------------------------------------
+// SELECT CONTAINER
+//------------------------------------------------------------------------------
+.select-262cc {
+  display: inline-block;
+  position: relative;
+}
+
+.select-7544a {
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+}
+
+
+
+//------------------------------------------------------------------------------
+// DROP MENU
+//------------------------------------------------------------------------------
+.drop-down-menu-59e92 {
+  .Mixin_DropMenu();
+  .Mixin_DropDown();
+  .Mixin_SelectMenu();
+}
+
+.drop-up-menu-45cf5 {
+  .Mixin_DropMenu();
+  .Mixin_DropUp();
+  .Mixin_SelectMenu();
+}
+
+.drop-down-left-d413c {
+  .Mixin_DropMenu();
+  .Mixin_DropDownLeft();
+  .Mixin_SelectMenu();
+}
+
+.drop-up-left-3c7ea {
+  .Mixin_DropMenu();
+  .Mixin_DropUpLeft();
+  .Mixin_SelectMenu();
+}
+
+.drop-down-center-5d418 {
+  .Mixin_DropMenu();
+  .Mixin_DropDownCenter();
+  .Mixin_SelectMenu();
+}
+
+
+
+//------------------------------------------------------------------------------
+// TOKEN MENU
+//------------------------------------------------------------------------------
+.token-down-menu-0e11b {
+  .Mixin_DropMenu();
+  .Mixin_DropDown();
+  max-height: 142px;
+}
+
+.token-up-menu-5db5d {
+  .Mixin_DropMenu();
+  .Mixin_DropUp();
+  max-height: 142px;
+}
+
+.token-down-left-367bd {
+  .Mixin_DropMenu();
+  .Mixin_DropDownLeft();
+  max-height: 142px;
+}
+
+.token-up-left-dce78 {
+  .Mixin_DropMenu();
+  .Mixin_DropUpLeft();
+  max-height: 142px;
+}
+
+
+
+//------------------------------------------------------------------------------
+// SORT & FILTER MENU
+//------------------------------------------------------------------------------
+.sort-filter-down-menu-e2277 {
+  .Mixin_DropMenu();
+  .Mixin_DropDown();
+  margin-top: -5px;
+}
+
+.sort-filter-down-left-menu-88b88 {
+  .Mixin_DropMenu();
+  .Mixin_DropDownLeft();
+  margin-top: -5px;
+}
+
+
+
+//------------------------------------------------------------------------------
+// DROP MENU OPTIONS
+//------------------------------------------------------------------------------
+.drop-option-97dd0 {
+  .Mixin_DropOption();
+
+  &:checked  { .Mixin_DropOptionSelected(); }
+  &.selected { .Mixin_DropOptionSelected(); }
+  &:hover    { .Mixin_DropOptionHover(); }
+  &:active   { .Mixin_DropOptionActive(); }
+  &:disabled { .Mixin_DropOptionDisabled(); }
+  &.disabled { .Mixin_DropOptionDisabled(); }
+}
+
+.drop-option-6d13b {
+  .Mixin_DropOption();
+  color: @gray;
+
+  &:checked  { .Mixin_DropOptionSelected(); }
+  &.selected { .Mixin_DropOptionSelected(); }
+  &:hover    { .Mixin_DropOptionHover(); }
+  &:active   { .Mixin_DropOptionActive(); }
+  &:disabled { .Mixin_DropOptionDisabled(); }
+  &.disabled { .Mixin_DropOptionDisabled(); }
+}
+
+.drop-option-cbd57 {
+  .Mixin_DropOption();
+  text-align: right;
+  color: @gray;
+
+  &:checked  { .Mixin_DropOptionSelected(); }
+  &.selected { .Mixin_DropOptionSelected(); }
+  &:hover    { .Mixin_DropOptionHover(); }
+  &:active   { .Mixin_DropOptionActive(); }
+  &:disabled { .Mixin_DropOptionDisabled(); }
+  &.disabled { .Mixin_DropOptionDisabled(); }
+}
+
+.drop-title-076df {
+  .Mixin_DropTitle();
+}
+
+.hr-4aa22 {
+  .Mixin_DropDivider();
+}
+
+:focus + .drop-down-menu-59e92,
+:focus + .drop-down-left-d413c,
+:focus + .drop-up-menu-45cf5,
+:focus + .drop-up-left-3c7ea,
+:focus + .token-down-menu-0e11b,
+:focus + .token-down-left-367bd,
+:focus + .token-up-menu-5db5d,
+:focus + .token-up-left-dce78,
+:focus + .date-time-down-menu-f021e,
+:focus + .date-time-up-menu-4550f,
+:focus + .date-time-down-left-d3dc9,
+:focus + .date-time-up-left-4bcc0,
+:focus + .datepicker-03f4a,
+:focus + .sort-filter-down-menu-e2277,
+:focus + .sort-filter-down-left-menu-88b88 {
+  display: block;
+}
+
+.drop-search-7f9d8 {
+  position: relative;
+  padding: 2px 7px;
+}
+
+.token-option-cd274 {
+  .Mixin_DropOption();
+  color: @gray;
+
+  &:checked  { .Mixin_DropOptionSelected(); }
+  &.selected { .Mixin_DropOptionSelected(); }
+  &:hover    { .Mixin_DropOptionHover(); }
+  &:active   { .Mixin_DropOptionActive(); }
+  &:disabled { .Mixin_DropOptionDisabled(); }
+  &.disabled { .Mixin_DropOptionDisabled(); }
+}
+
+.token-option-cd274.active-2e410 {
+  .Mixin_DropOptionHover();
+}
+
+.suggested-fab7c {
+  color: @black;
+  font-weight: 600;
+}
+
+.nothing-found-75aec {
+  .Mixin_DropOption();
+  .Mixin_DropOptionDisabled();
+  font-weight: 600;
+}
+
+.id-0ed5b {
+  display: inline-block;
+  position: relative;
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 0.6;
+
+  &:before {
+    content: '\00a0-\00a0';
+    color: @disabledText;
+  }
+}
+
+.secondary-cdca9 {
+  display: block;
+  max-width: 360px;
+  margin-bottom: -5px;
+  font-size: 11px;
+  line-height: 19px;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  opacity: 0.5;
+}
+
+
+
+//------------------------------------------------------------------------------
+// GLOBAL SEARCH MENU
+//------------------------------------------------------------------------------
+.global-search-more-menu-bdd54 {
+  .Mixin_DropMenu();
+  .Mixin_DropDown();
+  .Mixin_SelectMenu();
+  overflow: visible;
+  margin-left: -25px;
+
+  &:before, &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left:42px;
+    border-style: solid;
+    border-color: transparent;
+  }
+  &:before {
+    bottom: ~"calc(100% + 1px)";
+    border-width: 0 14px 14px;
+    border-bottom-color: rgba(26,38,51,0.1);
+  }
+  &:after {
+    bottom: ~"calc(100% - 1px)";
+    border-width: 0 15px 15px;
+    border-bottom-color: #fcfcfc;
+  }
+}
+
+
+//------------------------------------------------------------------------------
+// GLOBAL SEARCH MENU OPTIONS
+//------------------------------------------------------------------------------
+.global-search-option-c5d4a {
+  .Mixin_DropOption();
+  padding-left: 0;
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:checked  { .Mixin_DropOptionSelected(); }
+  &.selected { .Mixin_DropOptionSelected(); }
+  &:hover    { .Mixin_DropOptionHover(); }
+  &:active   { .Mixin_DropOptionActive(); }
+  &:active .more-node-type-a69bc { color:fade(@blue, 80%); }
+  &:active .show-history-38b37 { fill:fade(@blue, 80%); }
+  &:disabled { .Mixin_DropOptionDisabled(); }
+  &.disabled { .Mixin_DropOptionDisabled(); }
+}
+
+.node-wrapper-2a5b3 {
+  display: inline-block;
+  position: relative;
+}
+
+.more-node-type-a69bc {
+  display: inline-block;
+  position: relative;
+  color: #999;
+  font-size: 11px;
+  font-weight: 700;
+  width: 48px;
+  text-align: right;
+  text-transform: uppercase;
+  overflow: hidden;
+  margin-right: 7px;
+
+  &:after {
+    content: '\003A';
+  }
+}
+
+.show-history-38b37 {
+  display: inline-block;
+  position: relative;
+  top: -1px;
+  width: 20px;
+  height: 20px;
+  margin: -7px 7px -7px 28px;
+  vertical-align: middle;
+  fill: #999;
+}
+
+
+
+//------------------------------------------------------------------------------
+// CONTEXT MENU
+//------------------------------------------------------------------------------
+.context-menu-7bd3d{
+  .Mixin_ContextMenu();
+}
+
+//------------------------------------------------------------------------------
+// CONTEXT MENU OPTIONS
+//------------------------------------------------------------------------------
+.context-option-2f420 {
+  .Mixin_ContextOption();
+
+  &:checked  { .Mixin_DropOptionSelected(); }
+  &.selected { .Mixin_DropOptionSelected(); }
+  &:hover    { .Mixin_DropOptionHover(); }
+  &:active   { .Mixin_DropOptionActive(); }
+  &:disabled { .Mixin_DropOptionDisabled(); }
+  &.disabled { .Mixin_DropOptionDisabled(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// MORE ICON
+//------------------------------------------------------------------------------
+.elipsis-fe2c0 {
+  display: inline-block;
+  font-weight: 900;
+  // vertical-align: middle;
+}
+.elipsis-fe2c0:before {
+  content: '\A0\B7\A0\B7\A0\B7\A0';
+  vertical-align: middle;
+}
+
+
+
+//------------------------------------------------------------------------------
+// DEFAULT BUTTON
+//------------------------------------------------------------------------------
+.select-btn-e9375 {
+  .btn-df5f9; // Class found in buttons.less
+  .Mixing_SelectBtnMargin();
+
+  &:after          { .Mixin_DropCaret(); }
+  &:hover:after    { .Mixin_DropCaretHover(); }
+  &:focus:after    { .Mixin_DropCaretHover(); }
+  &:active:after   { .Mixin_DropCaretActive(); }
+  &:disabled:after { .Mixin_DropCaretDisabled(); }
+  &.disabled:after { .Mixin_DropCaretDisabled(); }
+}
+
+.select-btn-med-3a32f {
+  .btn-med-f59ac; // Class found in buttons.less
+  .Mixing_SelectBtnMargin();
+
+  &:after          { .Mixin_DropCaretMed(); }
+  &:hover:after    { .Mixin_DropCaretHover(); }
+  &:focus:after    { .Mixin_DropCaretHover(); }
+  &:active:after   { .Mixin_DropCaretActive(); }
+  &:disabled:after { .Mixin_DropCaretDisabled(); }
+  &.disabled:after { .Mixin_DropCaretDisabled(); }
+}
+
+.select-btn-sml-3d17e {
+  .btn-sml-03d87; // Class found in buttons.less
+  .Mixing_SelectBtnMargin();
+
+  &:after          { .Mixin_DropCaretSml(); }
+  &:hover:after    { .Mixin_DropCaretHover(); }
+  &:focus:after    { .Mixin_DropCaretHover(); }
+  &:active:after   { .Mixin_DropCaretActive(); }
+  &:disabled:after { .Mixin_DropCaretDisabled(); }
+  &.disabled:after { .Mixin_DropCaretDisabled(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// PRIMARY BUTTON
+//------------------------------------------------------------------------------
+.select-primary-btn-284eb {
+  .primary-btn-7d131; // Class found in buttons.less
+  .Mixing_SelectBtnMargin();
+
+  &:after          { .Mixin_DropCaret(); }
+  &:hover:after    { .Mixin_DropCaretHover(); }
+  &:focus:after    { .Mixin_DropCaretHover(); }
+  &:active:after   { .Mixin_DropCaretActive(); }
+  &:disabled:after { .Mixin_DropCaretDisabled(); }
+  &.disabled:after { .Mixin_DropCaretDisabled(); }
+}
+
+.select-primary-btn-med-5a13d {
+  .primary-btn-med-e350a; // Class found in buttons.less
+  .Mixing_SelectBtnMargin();
+
+  &:after          { .Mixin_DropCaretMed(); }
+  &:hover:after    { .Mixin_DropCaretHover(); }
+  &:focus:after    { .Mixin_DropCaretHover(); }
+  &:active:after   { .Mixin_DropCaretActive(); }
+  &:disabled:after { .Mixin_DropCaretDisabled(); }
+  &.disabled:after { .Mixin_DropCaretDisabled(); }
+}
+
+.select-primary-btn-sml-34d6b {
+  .primary-btn-sml-9d3d9; // Class found in buttons.less
+  .Mixing_SelectBtnMargin();
+
+  &:after          { .Mixin_DropCaretSml(); }
+  &:hover:after    { .Mixin_DropCaretHover(); }
+  &:focus:after    { .Mixin_DropCaretHover(); }
+  &:active:after   { .Mixin_DropCaretActive(); }
+  &:disabled:after { .Mixin_DropCaretDisabled(); }
+  &.disabled:after { .Mixin_DropCaretDisabled(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// BLUE BUTTON
+//------------------------------------------------------------------------------
+.select-blue-btn-6f90c {
+  .blue-btn-680b8; // Class found in buttons.less
+  .Mixing_SelectBtnMargin();
+
+  &:after          { .Mixin_DropCaretWhite(); }
+  &:hover:after    { .Mixin_DropCaretWhite(); }
+  &:focus:after    { .Mixin_DropCaretWhite(); }
+  &:active:after   { .Mixin_DropCaretWhite(); }
+  &:disabled:after { .Mixin_DropCaretWhite(); }
+  &.disabled:after { .Mixin_DropCaretWhite(); }
+}
+
+.select-blue-btn-med-c067e {
+  .blue-btn-med-a6220; // Class found in buttons.less
+  .Mixing_SelectBtnMargin();
+
+  &:after          { .Mixin_DropCaretMedWhite(); }
+  &:hover:after    { .Mixin_DropCaretMedWhite(); }
+  &:focus:after    { .Mixin_DropCaretMedWhite(); }
+  &:active:after   { .Mixin_DropCaretMedWhite(); }
+  &:disabled:after { .Mixin_DropCaretMedWhite(); }
+  &.disabled:after { .Mixin_DropCaretMedWhite(); }
+}
+
+.select-blue-btn-sml-9ebd4 {
+  .blue-btn-sml-6cc96; // Class found in buttons.less
+  .Mixing_SelectBtnMargin();
+
+  &:after          { .Mixin_DropCaretSmlWhite(); }
+  &:hover:after    { .Mixin_DropCaretSmlWhite(); }
+  &:focus:after    { .Mixin_DropCaretSmlWhite(); }
+  &:active:after   { .Mixin_DropCaretSmlWhite(); }
+  &:disabled:after { .Mixin_DropCaretSmlWhite(); }
+  &.disabled:after { .Mixin_DropCaretSmlWhite(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// OUTLINE BUTTON
+//------------------------------------------------------------------------------
+.select-outline-btn-bffd2 {
+  .outline-btn-fafd3; // Class found in buttons.less
+  .Mixing_SelectBtnMargin();
+
+  &:after          { .Mixin_DropCaret(); }
+  &:hover:after    { .Mixin_DropCaretHover(); }
+  &:focus:after    { .Mixin_DropCaretHover(); }
+  &:active:after   { .Mixin_DropCaretActive(); }
+  &:disabled:after { .Mixin_DropCaretDisabled(); }
+  &.disabled:after { .Mixin_DropCaretDisabled(); }
+}
+
+.select-outline-btn-med-8c017 {
+  .outline-btn-med-1c619; // Class found in buttons.less
+  .Mixing_SelectBtnMargin();
+
+  &:after          { .Mixin_DropCaretMed(); }
+  &:hover:after    { .Mixin_DropCaretHover(); }
+  &:focus:after    { .Mixin_DropCaretHover(); }
+  &:active:after   { .Mixin_DropCaretActive(); }
+  &:disabled:after { .Mixin_DropCaretDisabled(); }
+  &.disabled:after { .Mixin_DropCaretDisabled(); }
+}
+
+.select-outline-btn-sml-a13a9 {
+  .outline-btn-sml-b39fb; // Class found in buttons.less
+  .Mixing_SelectBtnMargin();
+
+  &:after          { .Mixin_DropCaretSml(); }
+  &:hover:after    { .Mixin_DropCaretHover(); }
+  &:focus:after    { .Mixin_DropCaretHover(); }
+  &:active:after   { .Mixin_DropCaretActive(); }
+  &:disabled:after { .Mixin_DropCaretDisabled(); }
+  &.disabled:after { .Mixin_DropCaretDisabled(); }
+}
+
+.select-outline-btn-sml-404c5 {
+  .select-outline-btn-sml-a13a9; // Class found above
+  box-shadow: none;
+
+  &:after          { box-shadow: none; }
+  &:hover:after    { box-shadow: none; }
+  &:focus:after    { box-shadow: none; }
+  &:active:after   { box-shadow: none; }
+  &:disabled:after { box-shadow: none; }
+  &.disabled:after { box-shadow: none; }
+}
+
+
+
+//------------------------------------------------------------------------------
+// PRIMARY OUTLINE BUTTON
+//------------------------------------------------------------------------------
+.select-primary-outline-btn-ad705 {
+  .primary-outline-btn-888fb; // Class found in buttons.less
+  .Mixing_SelectBtnMargin();
+
+  &:after          { .Mixin_DropCaret(); }
+  &:hover:after    { .Mixin_DropCaretHover(); }
+  &:focus:after    { .Mixin_DropCaretHover(); }
+  &:active:after   { .Mixin_DropCaretActive(); }
+  &:disabled:after { .Mixin_DropCaretDisabled(); }
+  &.disabled:after { .Mixin_DropCaretDisabled(); }
+}
+
+.select-primary-outline-btn-med-e7e69 {
+  .primary-outline-btn-med-512fd; // Class found in buttons.less
+  .Mixing_SelectBtnMargin();
+
+  &:after          { .Mixin_DropCaretMed(); }
+  &:hover:after    { .Mixin_DropCaretHover(); }
+  &:focus:after    { .Mixin_DropCaretHover(); }
+  &:active:after   { .Mixin_DropCaretActive(); }
+  &:disabled:after { .Mixin_DropCaretDisabled(); }
+  &.disabled:after { .Mixin_DropCaretDisabled(); }
+}
+
+.select-primary-outline-btn-sml-44d2b {
+  .primary-outline-btn-sml-6742a; // Class found in buttons.less
+  .Mixing_SelectBtnMargin();
+
+  &:after          { .Mixin_DropCaretSml(); }
+  &:hover:after    { .Mixin_DropCaretHover(); }
+  &:focus:after    { .Mixin_DropCaretHover(); }
+  &:active:after   { .Mixin_DropCaretActive(); }
+  &:disabled:after { .Mixin_DropCaretDisabled(); }
+  &.disabled:after { .Mixin_DropCaretDisabled(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// BLUE OUTLINE BUTTON
+//------------------------------------------------------------------------------
+.select-outline-blue-btn-d3e8d {
+  .outline-blue-btn-d9227; // Class found in buttons.less
+  .Mixing_SelectBtnMargin();
+
+  &:after          { .Mixin_DropCaretBlue(); }
+  &:hover:after    { .Mixin_DropCaretBlueHover(); }
+  &:active:after   { .Mixin_DropCaretBlueHover(); }
+  &:disabled:after { .Mixin_DropCaretBlueDisabled(); }
+  &.disabled:after { .Mixin_DropCaretBlueDisabled(); }
+}
+
+.select-outline-blue-btn-med-8279c {
+  .outline-blue-btn-med-d0d5e; // Class found in buttons.less
+  .Mixing_SelectBtnMargin();
+
+  &:after          { .Mixin_DropCaretMedBlue(); }
+  &:hover:after    { .Mixin_DropCaretBlueHover(); }
+  &:active:after   { .Mixin_DropCaretBlueHover(); }
+  &:disabled:after { .Mixin_DropCaretBlueDisabled(); }
+  &.disabled:after { .Mixin_DropCaretBlueDisabled(); }
+}
+
+.select-outline-blue-btn-sml-a3cd0 {
+  .outline-blue-btn-sml-7e384; // Class found in buttons.less
+  .Mixing_SelectBtnMargin();
+
+  &:after          { .Mixin_DropCaretSmlBlue(); }
+  &:hover:after    { .Mixin_DropCaretBlueHover(); }
+  &:active:after   { .Mixin_DropCaretBlueHover(); }
+  &:disabled:after { .Mixin_DropCaretBlueDisabled(); }
+  &.disabled:after { .Mixin_DropCaretBlueDisabled(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// FLAT BUTTON
+//------------------------------------------------------------------------------
+.select-flat-btn-b93e6 {
+  .flat-btn-7fb59; // Class found in buttons.less
+  .Mixing_SelectBtnMargin();
+
+  &:after          { .Mixin_DropCaret(); }
+  &:hover:after    { .Mixin_DropCaretHover(); }
+  &:focus:after    { .Mixin_DropCaretHover(); }
+  &:active:after   { .Mixin_DropCaretActive(); }
+  &:disabled:after { .Mixin_DropCaretDisabled(); }
+  &.disabled:after { .Mixin_DropCaretDisabled(); }
+}
+
+.select-flat-btn-med-a9ddc {
+  .flat-btn-med-700b3; // Class found in buttons.less
+  .Mixing_SelectBtnMargin();
+
+  &:after          { .Mixin_DropCaretMed(); }
+  &:hover:after    { .Mixin_DropCaretHover(); }
+  &:focus:after    { .Mixin_DropCaretHover(); }
+  &:active:after   { .Mixin_DropCaretActive(); }
+  &:disabled:after { .Mixin_DropCaretDisabled(); }
+  &.disabled:after { .Mixin_DropCaretDisabled(); }
+}
+
+.select-flat-btn-sml-d6dcf {
+  .flat-btn-sml-e3804; // Class found in buttons.less
+  .Mixing_SelectBtnMargin();
+
+  &:after          { .Mixin_DropCaretSml(); }
+  &:hover:after    { .Mixin_DropCaretHover(); }
+  &:focus:after    { .Mixin_DropCaretHover(); }
+  &:active:after   { .Mixin_DropCaretActive(); }
+  &:disabled:after { .Mixin_DropCaretDisabled(); }
+  &.disabled:after { .Mixin_DropCaretDisabled(); }
+}
+
+//------------------------------------------------------------------------------
+// PRIMARY FLAT BUTTON
+//------------------------------------------------------------------------------
+.select-primary-flat-btn-b7a59 {
+  .primary-flat-btn-cca4b; // Class found in buttons.less
+  .Mixing_SelectBtnMargin();
+
+  &:after          { .Mixin_DropCaret(); }
+  &:hover:after    { .Mixin_DropCaretHover(); }
+  &:focus:after    { .Mixin_DropCaretHover(); }
+  &:active:after   { .Mixin_DropCaretActive(); }
+  &:disabled:after { .Mixin_DropCaretDisabled(); }
+  &.disabled:after { .Mixin_DropCaretDisabled(); }
+}
+
+.select-primary-flat-btn-med-f907d {
+  .primary-flat-btn-med-5bf03; // Class found in buttons.less
+  .Mixing_SelectBtnMargin();
+
+  &:after          { .Mixin_DropCaretMed(); }
+  &:hover:after    { .Mixin_DropCaretHover(); }
+  &:focus:after    { .Mixin_DropCaretHover(); }
+  &:active:after   { .Mixin_DropCaretActive(); }
+  &:disabled:after { .Mixin_DropCaretDisabled(); }
+  &.disabled:after { .Mixin_DropCaretDisabled(); }
+}
+
+.select-primary-flat-btn-sml-32ded {
+  .primary-flat-btn-sml-a6ec7; // Class found in buttons.less
+  .Mixing_SelectBtnMargin();
+
+  &:after          { .Mixin_DropCaretSml(); }
+  &:hover:after    { .Mixin_DropCaretHover(); }
+  &:focus:after    { .Mixin_DropCaretHover(); }
+  &:active:after   { .Mixin_DropCaretActive(); }
+  &:disabled:after { .Mixin_DropCaretDisabled(); }
+  &.disabled:after { .Mixin_DropCaretDisabled(); }
+}
+
+//------------------------------------------------------------------------------
+// BLUE FLAT BUTTON
+//------------------------------------------------------------------------------
+.select-flat-blue-btn-300fb {
+  .flat-blue-btn-5aa02; // Class found in buttons.less
+  .Mixing_SelectBtnMargin();
+
+  &:after          { .Mixin_DropCaretWhite(); }
+  &:hover:after    { .Mixin_DropCaretWhite(); }
+  &:focus:after    { .Mixin_DropCaretWhite(); }
+  &:active:after   { .Mixin_DropCaretWhite(); }
+  &:disabled:after { .Mixin_DropCaretWhite(); }
+  &.disabled:after { .Mixin_DropCaretWhite(); }
+}
+
+.select-flat-blue-btn-med-1ddd4 {
+  .flat-blue-btn-med-d3b42; // Class found in buttons.less
+  .Mixing_SelectBtnMargin();
+
+  &:after          { .Mixin_DropCaretMedWhite(); }
+  &:hover:after    { .Mixin_DropCaretMedWhite(); }
+  &:focus:after    { .Mixin_DropCaretMedWhite(); }
+  &:active:after   { .Mixin_DropCaretMedWhite(); }
+  &:disabled:after { .Mixin_DropCaretMedWhite(); }
+  &.disabled:after { .Mixin_DropCaretMedWhite(); }
+}
+
+.select-flat-blue-btn-sml-2b80e {
+  .flat-blue-btn-sml-f987c; // Class found in buttons.less
+  .Mixing_SelectBtnMargin();
+
+  &:after          { .Mixin_DropCaretSmlWhite(); }
+  &:hover:after    { .Mixin_DropCaretSmlWhite(); }
+  &:focus:after    { .Mixin_DropCaretSmlWhite(); }
+  &:active:after   { .Mixin_DropCaretSmlWhite(); }
+  &:disabled:after { .Mixin_DropCaretSmlWhite(); }
+  &.disabled:after { .Mixin_DropCaretSmlWhite(); }
+}

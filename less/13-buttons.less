@@ -1,0 +1,1745 @@
+// TODO: Hash "selected" and "disabled" classes
+
+//------------------------------------------------------------------------------
+// MIXINS - .Mixin_TitleCase(){}
+//------------------------------------------------------------------------------
+
+// COMMON BUTTON PROPERTIES
+  .Mixin_BtnBase() {
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    background: none;
+    box-sizing: border-box;
+    transition: box-shadow @med;
+    text-decoration: none;
+    cursor: default;
+    z-index: 1;
+  }
+
+
+// COMMON SIZE VARIATIONS
+  .Mixin_LargeBtn() {
+    margin-right: 10px;
+    padding: 10px 15px 11px;
+    line-height: 10px;
+    font-size: 14px;
+    border-radius: @btnRadius;
+  }
+  .Mixin_MediumBtn() {
+    margin-right: 10px;
+    padding: 7px 10px 8px;
+    line-height: 9px;
+    font-size: 12px;
+    border-radius: @btnRadius - 1;
+  }
+  .Mixin_SmallBtn() {
+    margin-right: 5px;
+    padding: 6px 8px 7px;
+    line-height: 7px;
+    font-size: 11px;
+    border-radius: @btnRadius - 2;
+  }
+
+  .Mixin_LargeBtnSeries() {
+    margin-right: -1px;
+    padding: 10px 15px 11px;
+    line-height: 10px;
+    font-size: 14px;
+
+    &:first-child { border-radius: @btnRadius 0 0 @btnRadius; }
+    &.first-child { border-radius: @btnRadius 0 0 @btnRadius; }
+    &:last-child  { border-radius: 0 @btnRadius @btnRadius 0; }
+    &.last-child  { border-radius: 0 @btnRadius @btnRadius 0; }
+  }
+  .Mixin_MediumBtnSeries() {
+    margin-right: -1px;
+    padding: 7px 10px 8px;
+    line-height: 9px;
+    font-size: 12px;
+
+    &:first-child { border-radius: (@btnRadius - 1) 0 0 (@btnRadius - 1); }
+    &.first-child { border-radius: (@btnRadius - 1) 0 0 (@btnRadius - 1); }
+    &:last-child  { border-radius: 0 (@btnRadius - 1) (@btnRadius - 1) 0; }
+    &.last-child  { border-radius: 0 (@btnRadius - 1) (@btnRadius - 1) 0; }
+  }
+  .Mixin_SmallBtnSeries() {
+    margin-right: -1px;
+    padding: 6px 8px 7px;
+    line-height: 7px;
+    font-size: 11px;
+
+    &:first-child { border-radius: (@btnRadius - 2) 0 0 (@btnRadius - 2); }
+    &.first-child { border-radius: (@btnRadius - 2) 0 0 (@btnRadius - 2); }
+    &:last-child  { border-radius: 0 (@btnRadius - 2) (@btnRadius - 2) 0; }
+    &.last-child  { border-radius: 0 (@btnRadius - 2) (@btnRadius - 2) 0; }
+  }
+
+
+// COMMON BLUE PROPERTIES
+  .Mixin_Blue() {
+    .Mixin_SemiBoldBtn();
+    color: @white;
+    box-shadow: inset 0 0.5px 0 fade(@white, 20%),
+                inset 0 0 0 0 fade(@white, 20%),
+                0 2px 3px -3px fade(@shadow, 100%);
+  }
+
+  .Mixin_BlueHover() {
+    box-shadow: inset 0 0.5px 0 fade(@white, 20%),
+                inset 0 0 0 0.5px fade(@white, 20%),
+                0 2px 3px -3px fade(@shadow, 100%);
+  }
+
+  .Mixin_Solidblue(@color) {
+    .Mixin_SemiBoldBtn();
+    color: @white;
+    background: @color;
+  }
+
+  .Mixin_ShadedBtn( @color ) {
+    text-shadow: 0 1px 0 hsv( hsvhue(@color), hsvsaturation(@color) + 20%, hsvvalue(@color) - 30%);
+    border-color: hsv( hsvhue(@color), hsvsaturation(@color) + 10%, hsvvalue(@color) - 10%)
+                  hsv( hsvhue(@color), hsvsaturation(@color) + 20%, hsvvalue(@color) - 20%)
+                  hsv( hsvhue(@color), hsvsaturation(@color) + 20%, hsvvalue(@color) - 40%);
+    background-image: linear-gradient(
+                        hsv( hsvhue(@color), hsvsaturation(@color) - 8%, hsvvalue(@color)),
+                        hsv( hsvhue(@color), hsvsaturation(@color) + 10%, hsvvalue(@color) - 10%));
+  }
+
+  .Mixin_ColoredOutlineBtn(@color) {
+    color: @color;
+    border-color: @color;
+  }
+
+
+// COMMON HOVER PROPERTIES
+  .Mixin_BtnHover() {
+    z-index: 3;
+  }
+
+  .Mixin_BtnHoverBgImage(@color) {
+    background-image: linear-gradient(
+                        hsv(hsvhue(@color), hsvsaturation(@color) + 2%, hsvvalue(@color)),
+                        hsv(hsvhue(@color), hsvsaturation(@color) + 20%, hsvvalue(@color) - 20%));
+  }
+
+  .Mixin_BtnHoverBgColor(@color) {
+    background: hsv(hsvhue(@color), hsvsaturation(@color) + 10%, hsvvalue(@color) - 10%);
+  }
+
+  .Mixin_ColoredOutlineBtnHover(@color) {
+    color: hsv(hsvhue(@color), hsvsaturation(@color) + 20%, hsvvalue(@color) - 20%);
+    border-color: hsv(hsvhue(@color), hsvsaturation(@color), hsvvalue(@color) - 10%);
+  }
+
+
+// COMMON FOCUS PROPERTIES
+  .Mixin_BtnFocus() {
+    outline: 0;
+    z-index: 1;
+  }
+
+  .Mixin_DefaultBtnFocus() {
+    .Mixin_BtnFocus();
+    color: @darkGray;
+    border-color: @defaultFocus;
+    box-shadow: inset 0 1px 0 @white,
+                0 0 0 2px fade(@white, 80%),
+                0 0 0 5px fade(@defaultFocus, 30%);
+  }
+
+  .Mixin_ShadedBtnFocus(@color) {
+    .Mixin_BtnFocus();
+    box-shadow: inset 0 0.5px 0 0 fade(@white, 20%),
+                inset 0 0 0 0.5px fade(@white, 20%),
+                0 2px 3px -3px fade(@shadow, 100%),
+                0 0 0 2px fade(@white, 80%),
+                0 0 0 5px fade(@color, 50%);
+  }
+
+  .Mixin_FlatBtnFocus(@color) {
+    .Mixin_BtnFocus();
+    border-color: transparent;
+    box-shadow: 0 0 0 2px fade(@white, 80%),
+                0 0 0 5px fade(@color, 50%);
+  }
+
+  .Mixin_ColoredOutlineBtnFocus(@color) {
+    .Mixin_BtnFocus();
+    box-shadow: inset 0 0.5px 0 0 fade(@white, 20%),
+                inset 0 0 0 0.5px fade(@white, 20%),
+                0 0 0 2px fade(@white, 80%),
+                0 0 0 5px fade(@color, 50%);
+  }
+
+
+// COMMON ACTIVE PROPERTIES
+  .Mixin_BtnActive() {
+    z-index: 2;
+  }
+
+  .Mixin_DefaultBtnActive() {
+    .Mixin_BtnActive();
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.1);
+  }
+
+  .Mixin_ColorBtnActive() {
+    .Mixin_BtnActive();
+    box-shadow: none;
+  }
+
+  .Mixin_ShadedBtnActive(@color) {
+    border-color: hsv(hsvhue(@color), hsvsaturation(@color) + 20%, hsvvalue(@color) - 50%)
+                  hsv(hsvhue(@color), hsvsaturation(@color) + 20%, hsvvalue(@color) - 40%)
+                  hsv(hsvhue(@color), hsvsaturation(@color) + 20%, hsvvalue(@color) - 30%);
+    background-image: linear-gradient(
+                      hsv(hsvhue(@color), hsvsaturation(@color) + 20%, hsvvalue(@color) - 20%),
+                      hsv(hsvhue(@color), hsvsaturation(@color), hsvvalue(@color) - 20%));
+  }
+
+  .Mixin_FlatBtnActive(@color) {
+    border-color: transparent;
+    background-color: hsv(hsvhue(@color), hsvsaturation(@color) + 20%, hsvvalue(@color) - 20%);
+  }
+
+  .Mixin_FlatColoredBtnSelected(@color) {
+    box-shadow: none;
+    border-color: hsv(hsvhue(@color), hsvsaturation(@color) + 20%, hsvvalue(@color) - 50%)
+                  hsv(hsvhue(@color), hsvsaturation(@color) + 20%, hsvvalue(@color) - 40%)
+                  hsv(hsvhue(@color), hsvsaturation(@color) + 20%, hsvvalue(@color) - 30%);
+    z-index: 2;
+  }
+
+  .Mixin_ColoredOutlineBtnActive(@color) {
+    .Mixin_DefaultBtnActive();
+    color: hsv(hsvhue(@color), hsvsaturation(@color) + 18%, hsvvalue(@color) - 23%);
+    border-color: hsv(hsvhue(@color), hsvsaturation(@color) + 20%, hsvvalue(@color) - 30%)
+                  hsv(hsvhue(@color), hsvsaturation(@color) + 20%, hsvvalue(@color) - 20%)
+                  hsv(hsvhue(@color), hsvsaturation(@color) - 20%, hsvvalue(@color) - 10%);
+    background-color: fade(@color, 3%);
+    background-image: none;
+  }
+
+
+// COMMON DISABLED PROPERTIES
+  .Mixin_deafultBtnDisabled() {
+    z-index: 0;
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+
+  .Mixin_ColorBtnDisabled() {
+    .Mixin_deafultBtnDisabled();
+    color: @white;
+  }
+
+  .Mixin_ShadedBtnDisabled(@color) {
+    .Mixin_ColorBtnDisabled();
+    border-color: hsv(hsvhue(@color), 5%, 95%);
+    text-shadow: 0 1px 0 hsv(hsvhue(@color), 5%, 95%);
+    background: hsv(hsvhue(@color), 3%, 96%);
+  }
+
+  .Mixin_FlatBtnDisabled(@color) {
+    .Mixin_ColorBtnDisabled();
+    background-color: hsv(hsvhue(@color), 5%, 95%);
+  }
+
+  .Mixin_ColoredOutlineBtnDisabled(@color) {
+    .Mixin_deafultBtnDisabled();
+    color: hsv(hsvhue(@color), 10%, 90%);
+    border-color: hsv(hsvhue(@color), 10%, 90%);
+  }
+
+
+
+//------------------------------------------------------------------------------
+// MIXIN MASHUP
+//------------------------------------------------------------------------------
+
+// GRAY
+  .Mixin_GrayBtn() {
+    .Mixin_GrayOutlineBtn();
+    border-top-color: #edf0f2;
+    border-bottom-color: #ced3d9;
+    background-image: linear-gradient(#fcfcfc, #f5f5f5);
+
+  }
+  .Mixin_GrayBtnHover() {
+    .Mixin_BtnHover();
+    color: @darkGray;
+    border-color: @blue;
+  }
+  .Mixin_GrayBtnFocus() {
+    .Mixin_DefaultBtnFocus();
+  }
+  .Mixin_GrayBtnActive() {
+    .Mixin_DefaultBtnActive();
+    color: @black;
+    border-color: hsv(hsvhue(@blue), hsvsaturation(@blue) + 20%, hsvvalue(@blue) - 40%)
+                  hsv(hsvhue(@blue), hsvsaturation(@blue) + 20%, hsvvalue(@blue) - 20%)
+                  hsv(hsvhue(@blue), hsvsaturation(@blue) - 20%, hsvvalue(@blue) - 10%);
+    background-color: rgba(0,0,0,0.02);
+    background-image: linear-gradient(#f0f0f0, #f5f5f5);
+  }
+  .Mixin_GrayBtnDisabled() {
+    .Mixin_deafultBtnDisabled();
+    color: #dfe2e5;
+    border-color: #edf0f2;
+    background: #f7f7f7;
+  }
+
+// FLAT GRAY
+  .Mixin_FlatGrayBtn() {
+    .Mixin_Solidblue( #dfe2e5 );
+    color: @darkGray;
+  }
+  .Mixin_FlatGrayBtnHover() {
+    .Mixin_BtnHover();
+    color: @black;
+    background: #cbced1;
+
+  }
+  .Mixin_FlatGrayBtnFocus() {
+    .Mixin_FlatBtnFocus( #a6abb3 );
+  }
+  .Mixin_FlatGrayBtnActive() {
+    box-shadow: none;
+    background: #a6abb3;
+  }
+  .Mixin_FlatGrayBtnDisabled() {
+    color: #dfe2e5;
+    background: #f2f4f5;
+  }
+
+// OUTLINED GRAY
+  .Mixin_GrayOutlineBtn() {
+    color: @gray;
+    border-color: #dfe2e5;
+    box-shadow: inset 0 1px 0 @white, 0 1px 0 fade(@white, 50%);
+  }
+  .Mixin_GrayOutlineBtnDisabled() {
+    .Mixin_deafultBtnDisabled();
+    .Mixin_GrayBtnDisabled();
+    background: none;
+  }
+
+
+// BLUE
+  .Mixin_BlueBtn() {
+    .Mixin_Blue();
+    .Mixin_ShadedBtn( @blue );
+  }
+  .Mixin_BlueBtnHover() {
+    .Mixin_BtnHover();
+    .Mixin_BlueHover();
+    .Mixin_BtnHoverBgImage( @blue );
+  }
+  .Mixin_BlueBtnFocus() {
+    .Mixin_ShadedBtnFocus(@blue);
+  }
+  .Mixin_BlueBtnActive() {
+    .Mixin_ColorBtnActive();
+    .Mixin_ShadedBtnActive(@blue);
+  }
+  .Mixin_BlueBtnDisabled() {
+    .Mixin_ShadedBtnDisabled( @blue );
+  }
+
+// FLAT BLUE
+  .Mixin_FlatBlueBtn() {
+    .Mixin_Solidblue( @blue );
+  }
+  .Mixin_FlatBlueBtnHover() {
+    .Mixin_BtnHover();
+    .Mixin_BtnHoverBgColor( @blue );
+  }
+  .Mixin_FlatBlueBtnFocus() {
+    .Mixin_FlatBtnFocus(@blue)
+  }
+  .Mixin_FlatBlueBtnActive() {
+    .Mixin_ColorBtnActive();
+    .Mixin_FlatBtnActive(@blue);
+  }
+  .Mixin_FlatBlueBtnDisabled() {
+    .Mixin_FlatBtnDisabled( @blue );
+  }
+
+// OUTLINED BLUE
+  .Mixin_BlueOutlineBtn() {
+    .Mixin_ColoredOutlineBtn( @blue );
+  }
+  .Mixin_BlueOutlineBtnHover() {
+    .Mixin_ColoredOutlineBtnHover( @blue );
+  }
+  .Mixin_BlueOutlineBtnFocus() {
+    .Mixin_ColoredOutlineBtnFocus( @blue );
+  }
+  .Mixin_BlueOutlineBtnActive() {
+    .Mixin_ColoredOutlineBtnActive( @blue );
+  }
+  .Mixin_BlueOutlineBtnDisabled() {
+    .Mixin_ColoredOutlineBtnDisabled( @blue );
+  }
+
+
+// RED
+  .Mixin_RedBtn() {
+    .Mixin_Blue();
+    .Mixin_ShadedBtn( @red );
+  }
+  .Mixin_RedBtnHover() {
+    .Mixin_BtnHover();
+    .Mixin_BlueHover();
+    .Mixin_BtnHoverBgImage( @red );
+  }
+  .Mixin_RedBtnFocus() {
+    .Mixin_ShadedBtnFocus(@red);
+  }
+  .Mixin_RedBtnActive() {
+    .Mixin_ColorBtnActive();
+    .Mixin_ShadedBtnActive(@red);
+  }
+  .Mixin_RedBtnDisabled() {
+    .Mixin_ShadedBtnDisabled( @red );
+  }
+
+// FLAT RED
+  .Mixin_FlatRedBtn() {
+    .Mixin_Solidblue( @red );
+  }
+  .Mixin_FlatRedBtnHover() {
+    .Mixin_BtnHover();
+    .Mixin_BtnHoverBgColor( @red )
+  }
+  .Mixin_FlatRedBtnFocus() {
+    .Mixin_FlatBtnFocus(@red)
+  }
+  .Mixin_FlatRedBtnActive() {
+    .Mixin_ColorBtnActive();
+    .Mixin_FlatBtnActive(@red);
+  }
+  .Mixin_FlatRedBtnDisabled() {
+    .Mixin_FlatBtnDisabled( @red );
+  }
+
+// OUTLINED RED
+  .Mixin_RedOutlineBtn() {
+    .Mixin_ColoredOutlineBtn( @red );
+  }
+  .Mixin_RedOutlineBtnHover() {
+    .Mixin_ColoredOutlineBtnHover( @red );
+  }
+  .Mixin_RedOutlineBtnFocus() {
+    .Mixin_ColoredOutlineBtnFocus( @red );
+  }
+  .Mixin_RedOutlineBtnActive() {
+    .Mixin_ColoredOutlineBtnActive( @red );
+  }
+  .Mixin_RedOutlineBtnDisabled() {
+    .Mixin_ColoredOutlineBtnDisabled( @red );
+  }
+
+
+// GREEN
+  .Mixin_GreenBtn() {
+    .Mixin_Blue();
+    .Mixin_ShadedBtn( @green );
+  }
+  .Mixin_GreenBtnHover() {
+    .Mixin_BtnHover();
+    .Mixin_BlueHover();
+    .Mixin_BtnHoverBgImage( @green );
+  }
+  .Mixin_GreenBtnFocus() {
+    .Mixin_ShadedBtnFocus(@green);
+  }
+  .Mixin_GreenBtnActive() {
+    .Mixin_ColorBtnActive();
+    .Mixin_ShadedBtnActive(@green);
+  }
+  .Mixin_GreenBtnDisabled() {
+    .Mixin_ShadedBtnDisabled( @green );
+  }
+
+// FLAT GREEN
+  .Mixin_FlatGreenBtn() {
+    .Mixin_Solidblue( @green );
+  }
+  .Mixin_FlatGreenBtnHover() {
+    .Mixin_BtnHover();
+    .Mixin_BtnHoverBgColor( @green );
+  }
+  .Mixin_FlatGreenBtnFocus() {
+    .Mixin_FlatBtnFocus(@green)
+  }
+  .Mixin_FlatGreenBtnActive() {
+    .Mixin_ColorBtnActive();
+    .Mixin_FlatBtnActive(@green);
+  }
+  .Mixin_FlatGreenBtnDisabled() {
+    .Mixin_FlatBtnDisabled( @green );
+  }
+
+// OUTLINED GREEN
+  .Mixin_GreenOutlineBtn() {
+    .Mixin_ColoredOutlineBtn( @green );
+  }
+  .Mixin_GreenOutlineBtnHover() {
+    .Mixin_ColoredOutlineBtnHover( @green );
+  }
+  .Mixin_GreenOutlineBtnFocus() {
+    .Mixin_ColoredOutlineBtnFocus( @green );
+  }
+  .Mixin_GreenOutlineBtnActive() {
+    .Mixin_ColoredOutlineBtnActive( @green );
+  }
+  .Mixin_GreenOutlineBtnDisabled() {
+    .Mixin_ColoredOutlineBtnDisabled( @green );
+  }
+
+
+// ORANGE
+  .Mixin_OrangeBtn() {
+    .Mixin_Blue();
+    .Mixin_ShadedBtn( @orange );
+  }
+  .Mixin_OrangeBtnHover() {
+    .Mixin_BtnHover();
+    .Mixin_BlueHover();
+    .Mixin_BtnHoverBgImage( @orange );
+  }
+  .Mixin_OrangeBtnFocus() {
+    .Mixin_ShadedBtnFocus( @orange );
+  }
+  .Mixin_OrangeBtnActive() {
+    .Mixin_ColorBtnActive();
+    .Mixin_ShadedBtnActive( @orange );
+  }
+  .Mixin_OrangeBtnDisabled() {
+    .Mixin_ShadedBtnDisabled( @orange );
+  }
+
+// FLAT ORANGE
+  .Mixin_FlatOrangeBtn() {
+    .Mixin_Solidblue( @orange );
+  }
+  .Mixin_FlatOrangeBtnHover() {
+    .Mixin_BtnHover();
+    .Mixin_BtnHoverBgColor( @orange );
+  }
+  .Mixin_FlatOrangeBtnFocus() {
+    .Mixin_FlatBtnFocus(@orange)
+  }
+  .Mixin_FlatOrangeBtnActive() {
+    .Mixin_ColorBtnActive();
+    .Mixin_FlatBtnActive(@orange);
+  }
+  .Mixin_FlatOrangeBtnDisabled() {
+    .Mixin_FlatBtnDisabled( @orange );
+  }
+
+// OUTLNED ORANGE
+  .Mixin_OrangeOutlineBtn() {
+    .Mixin_ColoredOutlineBtn( @orange );
+  }
+  .Mixin_OrangeOutlineBtnHover() {
+    .Mixin_ColoredOutlineBtnHover( @orange );
+  }
+  .Mixin_OrangeOutlineBtnFocus() {
+    .Mixin_ColoredOutlineBtnFocus( @orange );
+  }
+  .Mixin_OrangeOutlineBtnActive() {
+    .Mixin_ColoredOutlineBtnActive( @orange );
+  }
+  .Mixin_OrangeOutlineBtnDisabled() {
+    .Mixin_ColoredOutlineBtnDisabled( @orange );
+  }
+
+
+// PURPLE
+  .Mixin_PurpleBtn() {
+    .Mixin_Blue();
+    .Mixin_ShadedBtn( @purple );
+  }
+  .Mixin_PurpleBtnHover() {
+    .Mixin_BtnHover();
+    .Mixin_BlueHover();
+    .Mixin_BtnHoverBgImage( @purple );
+  }
+  .Mixin_PurpleBtnFocus() {
+    .Mixin_ShadedBtnFocus( @purple );
+  }
+  .Mixin_PurpleBtnActive() {
+    .Mixin_ColorBtnActive();
+    .Mixin_ShadedBtnActive( @purple );
+  }
+  .Mixin_PurpleBtnDisabled() {
+    .Mixin_ShadedBtnDisabled( @purple );
+  }
+
+// FLAT PURPLE
+  .Mixin_FlatPurpleBtn() {
+    .Mixin_Solidblue( @purple );
+  }
+  .Mixin_FlatPurpleBtnHover() {
+    .Mixin_BtnHover();
+    .Mixin_BtnHoverBgColor( @purple );
+  }
+  .Mixin_FlatPurpleBtnFocus() {
+    .Mixin_FlatBtnFocus(@purple)
+  }
+  .Mixin_FlatPurpleBtnActive() {
+    .Mixin_ColorBtnActive();
+    .Mixin_FlatBtnActive(@purple);
+  }
+  .Mixin_FlatPurpleBtnDisabled() {
+    .Mixin_FlatBtnDisabled( @purple );
+  }
+
+// OUTLNED PURPLE
+  .Mixin_PurpleOutlineBtn() {
+    .Mixin_ColoredOutlineBtn( @purple );
+  }
+  .Mixin_PurpleOutlineBtnHover() {
+    .Mixin_ColoredOutlineBtnHover( @purple );
+  }
+  .Mixin_PurpleOutlineBtnFocus() {
+    .Mixin_ColoredOutlineBtnFocus( @purple );
+  }
+  .Mixin_PurpleOutlineBtnActive() {
+    .Mixin_ColoredOutlineBtnActive( @purple );
+  }
+  .Mixin_PurpleOutlineBtnDisabled() {
+    .Mixin_ColoredOutlineBtnDisabled( @purple );
+  }
+
+
+
+// TRAFFIC LIGHT PROTOCOL (TLP)
+  .Mixin_TlpWhiteSelected() {
+    .Mixin_Blue();
+    .Mixin_FlatBlueBtnHover();
+    .Mixin_FlatColoredBtnSelected(@blue);
+  }
+
+  .Mixin_TlpGreenSelected() {
+    .Mixin_Blue();
+    .Mixin_FlatGreenBtnHover();
+    .Mixin_FlatColoredBtnSelected(@green);
+  }
+
+  .Mixin_TlpAmberSelected() {
+    .Mixin_Blue();
+    .Mixin_FlatOrangeBtnHover();
+    .Mixin_FlatColoredBtnSelected(@orange);
+  }
+
+  .Mixin_TlpRedSelected() {
+    .Mixin_Blue();
+    .Mixin_FlatRedBtnHover();
+    .Mixin_FlatColoredBtnSelected(@red);
+  }
+
+
+
+
+//------------------------------------------------------------------------------
+// DEFAULT BUTTON
+//------------------------------------------------------------------------------
+.btn-df5f9 {
+  .Mixin_BtnBase();
+  .Mixin_GrayBtn();
+  .Mixin_LargeBtn();
+  .Mixin_NormalBtn();
+
+  &:hover    { .Mixin_GrayBtnHover(); }
+  &:focus    { .Mixin_GrayBtnFocus(); }
+  &:active   { .Mixin_GrayBtnActive(); }
+  &:disabled { .Mixin_GrayBtnDisabled(); }
+  &.disabled { .Mixin_GrayBtnDisabled(); }
+}
+
+.btn-med-f59ac {
+  .Mixin_BtnBase();
+  .Mixin_GrayBtn();
+  .Mixin_MediumBtn();
+  .Mixin_SemiBoldBtn();
+
+  &:hover    { .Mixin_GrayBtnHover(); }
+  &:focus    { .Mixin_GrayBtnFocus(); }
+  &:active   { .Mixin_GrayBtnActive(); }
+  &:disabled { .Mixin_GrayBtnDisabled(); }
+  &.disabled { .Mixin_GrayBtnDisabled(); }
+}
+
+.btn-sml-03d87 {
+  .Mixin_BtnBase();
+  .Mixin_GrayBtn();
+  .Mixin_SmallBtn();
+  .Mixin_SemiBoldBtn();
+
+  &:hover    { .Mixin_GrayBtnHover(); }
+  &:focus    { .Mixin_GrayBtnFocus(); }
+  &:active   { .Mixin_GrayBtnActive(); }
+  &:disabled { .Mixin_GrayBtnDisabled(); }
+  &.disabled { .Mixin_GrayBtnDisabled(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// PRIMARY BUTTON
+//------------------------------------------------------------------------------
+.primary-btn-7d131 {
+  .Mixin_BtnBase();
+  .Mixin_GrayBtn();
+  .Mixin_LargeBtn();
+  .Mixin_SemiBoldBtn();
+
+  &:hover    { .Mixin_GrayBtnHover(); }
+  &:focus    { .Mixin_GrayBtnFocus(); }
+  &:active   { .Mixin_GrayBtnActive(); }
+  &:disabled { .Mixin_GrayBtnDisabled(); }
+  &.disabled { .Mixin_GrayBtnDisabled(); }
+}
+
+.primary-btn-med-e350a {
+  .Mixin_BtnBase();
+  .Mixin_GrayBtn();
+  .Mixin_MediumBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_GrayBtnHover(); }
+  &:focus    { .Mixin_GrayBtnFocus(); }
+  &:active   { .Mixin_GrayBtnActive(); }
+  &:disabled { .Mixin_GrayBtnDisabled(); }
+  &.disabled { .Mixin_GrayBtnDisabled(); }
+}
+
+.primary-btn-sml-9d3d9 {
+  .Mixin_BtnBase();
+  .Mixin_GrayBtn();
+  .Mixin_SmallBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_GrayBtnHover(); }
+  &:focus    { .Mixin_GrayBtnFocus(); }
+  &:active   { .Mixin_GrayBtnActive(); }
+  &:disabled { .Mixin_GrayBtnDisabled(); }
+  &.disabled { .Mixin_GrayBtnDisabled(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// CALL TO ACTION BUTTON
+//------------------------------------------------------------------------------
+.blue-btn-680b8 {
+  .Mixin_BtnBase();
+  .Mixin_BlueBtn();
+  .Mixin_LargeBtn();
+
+  &:hover    { .Mixin_BlueBtnHover(); }
+  &:focus    { .Mixin_BlueBtnFocus(); }
+  &:active   { .Mixin_BlueBtnActive(); }
+  &:disabled { .Mixin_BlueBtnDisabled(); }
+  &.disabled { .Mixin_BlueBtnDisabled(); }
+}
+
+.blue-btn-med-a6220 {
+  .Mixin_BtnBase();
+  .Mixin_BlueBtn();
+  .Mixin_MediumBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_BlueBtnHover(); }
+  &:focus    { .Mixin_BlueBtnFocus(); }
+  &:active   { .Mixin_BlueBtnActive(); }
+  &:disabled { .Mixin_BlueBtnDisabled(); }
+  &.disabled { .Mixin_BlueBtnDisabled(); }
+}
+
+.blue-btn-sml-6cc96 {
+  .Mixin_BtnBase();
+  .Mixin_BlueBtn();
+  .Mixin_SmallBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_BlueBtnHover(); }
+  &:focus    { .Mixin_BlueBtnFocus(); }
+  &:active   { .Mixin_BlueBtnActive(); }
+  &:disabled { .Mixin_BlueBtnDisabled(); }
+  &.disabled { .Mixin_BlueBtnDisabled(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// RED BUTTON
+//------------------------------------------------------------------------------
+.red-btn-0eaca {
+  .Mixin_BtnBase();
+  .Mixin_RedBtn();
+  .Mixin_LargeBtn();
+
+  &:hover    { .Mixin_RedBtnHover(); }
+  &:focus    { .Mixin_RedBtnFocus(); }
+  &:active   { .Mixin_RedBtnActive(); }
+  &:disabled { .Mixin_RedBtnDisabled(); }
+  &.disabled { .Mixin_RedBtnDisabled(); }
+}
+
+.red-btn-med-9a73d {
+  .Mixin_BtnBase();
+  .Mixin_RedBtn();
+  .Mixin_MediumBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_RedBtnHover(); }
+  &:focus    { .Mixin_RedBtnFocus(); }
+  &:active   { .Mixin_RedBtnActive(); }
+  &:disabled { .Mixin_RedBtnDisabled(); }
+  &.disabled { .Mixin_RedBtnDisabled(); }
+}
+
+.red-btn-sml-c55c6 {
+  .Mixin_BtnBase();
+  .Mixin_RedBtn();
+  .Mixin_SmallBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_RedBtnHover(); }
+  &:focus    { .Mixin_RedBtnFocus(); }
+  &:active   { .Mixin_RedBtnActive(); }
+  &:disabled { .Mixin_RedBtnDisabled(); }
+  &.disabled { .Mixin_RedBtnDisabled(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// GREEN BUTTON
+//------------------------------------------------------------------------------
+.green-btn-f7bbe {
+  .Mixin_BtnBase();
+  .Mixin_GreenBtn();
+  .Mixin_LargeBtn();
+
+  &:hover    { .Mixin_GreenBtnHover(); }
+  &:focus    { .Mixin_GreenBtnFocus(); }
+  &:active   { .Mixin_GreenBtnActive(); }
+  &:disabled { .Mixin_GreenBtnDisabled(); }
+  &.disabled { .Mixin_GreenBtnDisabled(); }
+}
+
+.green-btn-med-f18d4 {
+  .Mixin_BtnBase();
+  .Mixin_GreenBtn();
+  .Mixin_MediumBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_GreenBtnHover(); }
+  &:focus    { .Mixin_GreenBtnFocus(); }
+  &:active   { .Mixin_GreenBtnActive(); }
+  &:disabled { .Mixin_GreenBtnDisabled(); }
+  &.disabled { .Mixin_GreenBtnDisabled(); }
+}
+
+.green-btn-sml-8e141 {
+  .Mixin_BtnBase();
+  .Mixin_GreenBtn();
+  .Mixin_SmallBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_GreenBtnHover(); }
+  &:focus    { .Mixin_GreenBtnFocus(); }
+  &:active   { .Mixin_GreenBtnActive(); }
+  &:disabled { .Mixin_GreenBtnDisabled(); }
+  &.disabled { .Mixin_GreenBtnDisabled(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// ORANGE BUTTON
+//------------------------------------------------------------------------------
+.orange-btn-058b2 {
+  .Mixin_BtnBase();
+  .Mixin_OrangeBtn();
+  .Mixin_LargeBtn();
+
+  &:hover    { .Mixin_OrangeBtnHover(); }
+  &:focus    { .Mixin_OrangeBtnFocus(); }
+  &:active   { .Mixin_OrangeBtnActive(); }
+  &:disabled { .Mixin_OrangeBtnDisabled(); }
+  &.disabled { .Mixin_OrangeBtnDisabled(); }
+}
+
+.orange-btn-med-3f483 {
+  .Mixin_BtnBase();
+  .Mixin_OrangeBtn();
+  .Mixin_MediumBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_OrangeBtnHover(); }
+  &:focus    { .Mixin_OrangeBtnFocus(); }
+  &:active   { .Mixin_OrangeBtnActive(); }
+  &:disabled { .Mixin_OrangeBtnDisabled(); }
+  &.disabled { .Mixin_OrangeBtnDisabled(); }
+}
+
+.orange-btn-sml-e7928 {
+  .Mixin_BtnBase();
+  .Mixin_OrangeBtn();
+  .Mixin_SmallBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_OrangeBtnHover(); }
+  &:focus    { .Mixin_OrangeBtnFocus(); }
+  &:active   { .Mixin_OrangeBtnActive(); }
+  &:disabled { .Mixin_OrangeBtnDisabled(); }
+  &.disabled { .Mixin_OrangeBtnDisabled(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// PURPLE BUTTON
+//------------------------------------------------------------------------------
+.purple-btn-fc90a {
+  .Mixin_BtnBase();
+  .Mixin_PurpleBtn();
+  .Mixin_LargeBtn();
+
+  &:hover    { .Mixin_PurpleBtnHover(); }
+  &:focus    { .Mixin_PurpleBtnFocus(); }
+  &:active   { .Mixin_PurpleBtnActive(); }
+  &:disabled { .Mixin_PurpleBtnDisabled(); }
+  &.disabled { .Mixin_PurpleBtnDisabled(); }
+}
+
+.purple-btn-med-81fcc {
+  .Mixin_BtnBase();
+  .Mixin_PurpleBtn();
+  .Mixin_MediumBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_PurpleBtnHover(); }
+  &:focus    { .Mixin_PurpleBtnFocus(); }
+  &:active   { .Mixin_PurpleBtnActive(); }
+  &:disabled { .Mixin_PurpleBtnDisabled(); }
+  &.disabled { .Mixin_PurpleBtnDisabled(); }
+}
+
+.purple-btn-sml-410fd {
+  .Mixin_BtnBase();
+  .Mixin_PurpleBtn();
+  .Mixin_SmallBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_PurpleBtnHover(); }
+  &:focus    { .Mixin_PurpleBtnFocus(); }
+  &:active   { .Mixin_PurpleBtnActive(); }
+  &:disabled { .Mixin_PurpleBtnDisabled(); }
+  &.disabled { .Mixin_PurpleBtnDisabled(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// OUTLINE BUTTON
+//------------------------------------------------------------------------------
+.outline-btn-fafd3 {
+  .Mixin_BtnBase();
+  .Mixin_GrayOutlineBtn();
+  .Mixin_LargeBtn();
+  .Mixin_NormalBtn();
+
+  &:hover    { .Mixin_GrayBtnHover(); }
+  &:focus    { .Mixin_GrayBtnFocus(); }
+  &:active   { .Mixin_GrayBtnActive(); }
+  &:disabled { .Mixin_GrayOutlineBtnDisabled(); }
+  &.disabled { .Mixin_GrayOutlineBtnDisabled(); }
+}
+
+.outline-btn-med-1c619 {
+  .Mixin_BtnBase();
+  .Mixin_GrayOutlineBtn();
+  .Mixin_MediumBtn();
+  .Mixin_SemiBoldBtn();
+
+  &:hover    { .Mixin_GrayBtnHover(); }
+  &:focus    { .Mixin_GrayBtnFocus(); }
+  &:active   { .Mixin_GrayBtnActive(); }
+  &:disabled { .Mixin_GrayOutlineBtnDisabled(); }
+  &.disabled { .Mixin_GrayOutlineBtnDisabled(); }
+}
+
+.outline-btn-sml-b39fb {
+  .Mixin_BtnBase();
+  .Mixin_GrayOutlineBtn();
+  .Mixin_SmallBtn();
+  .Mixin_SemiBoldBtn();
+
+  &:hover    { .Mixin_GrayBtnHover(); }
+  &:focus    { .Mixin_GrayBtnFocus(); }
+  &:active   { .Mixin_GrayBtnActive(); }
+  &:disabled { .Mixin_GrayOutlineBtnDisabled(); }
+  &.disabled { .Mixin_GrayOutlineBtnDisabled(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// PRIMARY OUTLINE BUTTON
+//------------------------------------------------------------------------------
+.primary-outline-btn-888fb {
+  .Mixin_BtnBase();
+  .Mixin_GrayOutlineBtn();
+  .Mixin_LargeBtn();
+  .Mixin_SemiBoldBtn();
+  border-color: #ced3d9;
+
+  &:hover    { .Mixin_GrayBtnHover(); }
+  &:focus    { .Mixin_GrayBtnFocus(); }
+  &:active   { .Mixin_GrayBtnActive(); }
+  &:disabled { .Mixin_GrayOutlineBtnDisabled(); }
+  &.disabled { .Mixin_GrayOutlineBtnDisabled(); }
+}
+
+.primary-outline-btn-med-512fd {
+  .Mixin_BtnBase();
+  .Mixin_GrayOutlineBtn();
+  .Mixin_MediumBtn();
+  .Mixin_BoldBtn();
+  border-color: #ced3d9;
+
+  &:hover    { .Mixin_GrayBtnHover(); }
+  &:focus    { .Mixin_GrayBtnFocus(); }
+  &:active   { .Mixin_GrayBtnActive(); }
+  &:disabled { .Mixin_GrayOutlineBtnDisabled(); }
+  &.disabled { .Mixin_GrayOutlineBtnDisabled(); }
+}
+
+.primary-outline-btn-sml-6742a {
+  .Mixin_BtnBase();
+  .Mixin_GrayOutlineBtn();
+  .Mixin_SmallBtn();
+  .Mixin_BoldBtn();
+  border-color: #ced3d9;
+
+  &:hover    { .Mixin_GrayBtnHover(); }
+  &:focus    { .Mixin_GrayBtnFocus(); }
+  &:active   { .Mixin_GrayBtnActive(); }
+  &:disabled { .Mixin_GrayOutlineBtnDisabled(); }
+  &.disabled { .Mixin_GrayOutlineBtnDisabled(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// OUTLINE BLUE BUTTON
+//------------------------------------------------------------------------------
+.outline-blue-btn-d9227 {
+  .Mixin_BtnBase();
+  .Mixin_BlueOutlineBtn();
+  .Mixin_LargeBtn();
+  .Mixin_SemiBoldBtn();
+
+  &:hover    { .Mixin_BlueOutlineBtnHover(); }
+  &:focus    { .Mixin_BlueOutlineBtnFocus(); }
+  &:active   { .Mixin_BlueOutlineBtnActive(); }
+  &:disabled { .Mixin_BlueOutlineBtnDisabled(); }
+  &.disabled { .Mixin_BlueOutlineBtnDisabled(); }
+}
+
+.outline-blue-btn-med-d0d5e {
+  .Mixin_BtnBase();
+  .Mixin_BlueOutlineBtn();
+  .Mixin_MediumBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_BlueOutlineBtnHover(); }
+  &:focus    { .Mixin_BlueOutlineBtnFocus(); }
+  &:active   { .Mixin_BlueOutlineBtnActive(); }
+  &:disabled { .Mixin_BlueOutlineBtnDisabled(); }
+  &.disabled { .Mixin_BlueOutlineBtnDisabled(); }
+}
+
+.outline-blue-btn-sml-7e384 {
+  .Mixin_BtnBase();
+  .Mixin_BlueOutlineBtn();
+  .Mixin_SmallBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_BlueOutlineBtnHover(); }
+  &:focus    { .Mixin_BlueOutlineBtnFocus(); }
+  &:active   { .Mixin_BlueOutlineBtnActive(); }
+  &:disabled { .Mixin_BlueOutlineBtnDisabled(); }
+  &.disabled { .Mixin_BlueOutlineBtnDisabled(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// OUTLINE RED BUTTON
+//------------------------------------------------------------------------------
+.outline-red-btn-8248f {
+  .Mixin_BtnBase();
+  .Mixin_RedOutlineBtn();
+  .Mixin_LargeBtn();
+  .Mixin_SemiBoldBtn();
+
+  &:hover    { .Mixin_RedOutlineBtnHover(); }
+  &:focus    { .Mixin_RedOutlineBtnFocus(); }
+  &:active   { .Mixin_RedOutlineBtnActive(); }
+  &:disabled { .Mixin_RedOutlineBtnDisabled(); }
+  &.disabled { .Mixin_RedOutlineBtnDisabled(); }
+}
+
+.outline-red-btn-med-715d1 {
+  .Mixin_BtnBase();
+  .Mixin_RedOutlineBtn();
+  .Mixin_MediumBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_RedOutlineBtnHover(); }
+  &:focus    { .Mixin_RedOutlineBtnFocus(); }
+  &:active   { .Mixin_RedOutlineBtnActive(); }
+  &:disabled { .Mixin_RedOutlineBtnDisabled(); }
+  &.disabled { .Mixin_RedOutlineBtnDisabled(); }
+}
+
+.outline-red-btn-sml-38e7b {
+  .Mixin_BtnBase();
+  .Mixin_RedOutlineBtn();
+  .Mixin_SmallBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_RedOutlineBtnHover(); }
+  &:focus    { .Mixin_RedOutlineBtnFocus(); }
+  &:active   { .Mixin_RedOutlineBtnActive(); }
+  &:disabled { .Mixin_RedOutlineBtnDisabled(); }
+  &.disabled { .Mixin_RedOutlineBtnDisabled(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// OUTLINE GREEN BUTTON
+//------------------------------------------------------------------------------
+.outline-green-btn-c99d9 {
+  .Mixin_BtnBase();
+  .Mixin_GreenOutlineBtn();
+  .Mixin_LargeBtn();
+  .Mixin_SemiBoldBtn();
+
+  &:hover    { .Mixin_GreenOutlineBtnHover(); }
+  &:focus    { .Mixin_GreenOutlineBtnFocus(); }
+  &:active   { .Mixin_GreenOutlineBtnActive(); }
+  &:disabled { .Mixin_GreenOutlineBtnDisabled(); }
+  &.disabled { .Mixin_GreenOutlineBtnDisabled(); }
+}
+
+.outline-green-btn-med-05cfc {
+  .Mixin_BtnBase();
+  .Mixin_GreenOutlineBtn();
+  .Mixin_MediumBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_GreenOutlineBtnHover(); }
+  &:focus    { .Mixin_GreenOutlineBtnFocus(); }
+  &:active   { .Mixin_GreenOutlineBtnActive(); }
+  &:disabled { .Mixin_GreenOutlineBtnDisabled(); }
+  &.disabled { .Mixin_GreenOutlineBtnDisabled(); }
+}
+
+.outline-green-btn-sml-559b2 {
+  .Mixin_BtnBase();
+  .Mixin_GreenOutlineBtn();
+  .Mixin_SmallBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_GreenOutlineBtnHover(); }
+  &:focus    { .Mixin_GreenOutlineBtnFocus(); }
+  &:active   { .Mixin_GreenOutlineBtnActive(); }
+  &:disabled { .Mixin_GreenOutlineBtnDisabled(); }
+  &.disabled { .Mixin_GreenOutlineBtnDisabled(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// OUTLINE ORANGE BUTTON
+//------------------------------------------------------------------------------
+.outline-orange-btn-a0bb1 {
+  .Mixin_BtnBase();
+  .Mixin_OrangeOutlineBtn();
+  .Mixin_LargeBtn();
+  .Mixin_SemiBoldBtn();
+
+  &:hover    { .Mixin_OrangeOutlineBtnHover(); }
+  &:focus    { .Mixin_OrangeOutlineBtnFocus(); }
+  &:active   { .Mixin_OrangeOutlineBtnActive(); }
+  &:disabled { .Mixin_OrangeOutlineBtnDisabled(); }
+  &.disabled { .Mixin_OrangeOutlineBtnDisabled(); }
+}
+
+.outline-orange-btn-med-432a1 {
+  .Mixin_BtnBase();
+  .Mixin_OrangeOutlineBtn();
+  .Mixin_MediumBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_OrangeOutlineBtnHover(); }
+  &:focus    { .Mixin_OrangeOutlineBtnFocus(); }
+  &:active   { .Mixin_OrangeOutlineBtnActive(); }
+  &:disabled { .Mixin_OrangeOutlineBtnDisabled(); }
+  &.disabled { .Mixin_OrangeOutlineBtnDisabled(); }
+}
+
+.outline-orange-btn-sml-ec3e6 {
+  .Mixin_BtnBase();
+  .Mixin_OrangeOutlineBtn();
+  .Mixin_SmallBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_OrangeOutlineBtnHover(); }
+  &:focus    { .Mixin_OrangeOutlineBtnFocus(); }
+  &:active   { .Mixin_OrangeOutlineBtnActive(); }
+  &:disabled { .Mixin_OrangeOutlineBtnDisabled(); }
+  &.disabled { .Mixin_OrangeOutlineBtnDisabled(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// OUTLINE PURPLE BUTTON
+//------------------------------------------------------------------------------
+.outline-purple-btn-a2aca {
+  .Mixin_BtnBase();
+  .Mixin_PurpleOutlineBtn();
+  .Mixin_LargeBtn();
+  .Mixin_SemiBoldBtn();
+
+  &:hover    { .Mixin_PurpleOutlineBtnHover(); }
+  &:focus    { .Mixin_PurpleOutlineBtnFocus(); }
+  &:active   { .Mixin_PurpleOutlineBtnActive(); }
+  &:disabled { .Mixin_PurpleOutlineBtnDisabled(); }
+  &.disabled { .Mixin_PurpleOutlineBtnDisabled(); }
+}
+
+.outline-purple-btn-med-daaa3 {
+  .Mixin_BtnBase();
+  .Mixin_PurpleOutlineBtn();
+  .Mixin_MediumBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_PurpleOutlineBtnHover(); }
+  &:focus    { .Mixin_PurpleOutlineBtnFocus(); }
+  &:active   { .Mixin_PurpleOutlineBtnActive(); }
+  &:disabled { .Mixin_PurpleOutlineBtnDisabled(); }
+  &.disabled { .Mixin_PurpleOutlineBtnDisabled(); }
+}
+
+.outline-purple-btn-sml-812b7 {
+  .Mixin_BtnBase();
+  .Mixin_PurpleOutlineBtn();
+  .Mixin_SmallBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_PurpleOutlineBtnHover(); }
+  &:focus    { .Mixin_PurpleOutlineBtnFocus(); }
+  &:active   { .Mixin_PurpleOutlineBtnActive(); }
+  &:disabled { .Mixin_PurpleOutlineBtnDisabled(); }
+  &.disabled { .Mixin_PurpleOutlineBtnDisabled(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// FLAT BUTTON
+//------------------------------------------------------------------------------
+.flat-btn-7fb59 {
+  .Mixin_BtnBase();
+  .Mixin_FlatGrayBtn();
+  .Mixin_LargeBtn();
+  .Mixin_NormalBtn();
+
+  &:hover    { .Mixin_FlatGrayBtnHover(); }
+  &:focus    { .Mixin_FlatGrayBtnFocus(); }
+  &:active   { .Mixin_FlatGrayBtnActive(); }
+  &:disabled { .Mixin_FlatGrayBtnDisabled(); }
+  &.disabled { .Mixin_FlatGrayBtnDisabled(); }
+}
+
+.flat-btn-med-700b3 {
+  .Mixin_BtnBase();
+  .Mixin_FlatGrayBtn();
+  .Mixin_MediumBtn();
+  .Mixin_SemiBoldBtn();
+
+  &:hover    { .Mixin_FlatGrayBtnHover(); }
+  &:focus    { .Mixin_FlatGrayBtnFocus(); }
+  &:active   { .Mixin_FlatGrayBtnActive(); }
+  &:disabled { .Mixin_FlatGrayBtnDisabled(); }
+  &.disabled { .Mixin_FlatGrayBtnDisabled(); }
+}
+
+.flat-btn-sml-e3804 {
+  .Mixin_BtnBase();
+  .Mixin_FlatGrayBtn();
+  .Mixin_SmallBtn();
+  .Mixin_SemiBoldBtn();
+
+  &:hover    { .Mixin_FlatGrayBtnHover(); }
+  &:focus    { .Mixin_FlatGrayBtnFocus(); }
+  &:active   { .Mixin_FlatGrayBtnActive(); }
+  &:disabled { .Mixin_FlatGrayBtnDisabled(); }
+  &.disabled { .Mixin_FlatGrayBtnDisabled(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// PRIMARY FLAT BUTTON
+//------------------------------------------------------------------------------
+.primary-flat-btn-cca4b {
+  .Mixin_BtnBase();
+  .Mixin_FlatGrayBtn();
+  .Mixin_LargeBtn();
+
+  &:hover    { .Mixin_FlatGrayBtnHover(); }
+  &:focus    { .Mixin_FlatGrayBtnFocus(); }
+  &:active   { .Mixin_FlatGrayBtnActive(); }
+  &:disabled { .Mixin_FlatGrayBtnDisabled(); }
+  &.disabled { .Mixin_FlatGrayBtnDisabled(); }
+}
+
+.primary-flat-btn-med-5bf03 {
+  .Mixin_BtnBase();
+  .Mixin_FlatGrayBtn();
+  .Mixin_MediumBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_FlatGrayBtnHover(); }
+  &:focus    { .Mixin_FlatGrayBtnFocus(); }
+  &:active   { .Mixin_FlatGrayBtnActive(); }
+  &:disabled { .Mixin_FlatGrayBtnDisabled(); }
+  &.disabled { .Mixin_FlatGrayBtnDisabled(); }
+}
+
+.primary-flat-btn-sml-a6ec7 {
+  .Mixin_BtnBase();
+  .Mixin_FlatGrayBtn();
+  .Mixin_SmallBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_FlatGrayBtnHover(); }
+  &:focus    { .Mixin_FlatGrayBtnFocus(); }
+  &:active   { .Mixin_FlatGrayBtnActive(); }
+  &:disabled { .Mixin_FlatGrayBtnDisabled(); }
+  &.disabled { .Mixin_FlatGrayBtnDisabled(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// FLAT BLUE BUTTON
+//------------------------------------------------------------------------------
+.flat-blue-btn-5aa02 {
+  .Mixin_BtnBase();
+  .Mixin_FlatBlueBtn();
+  .Mixin_LargeBtn();
+
+  &:hover    { .Mixin_FlatBlueBtnHover(); }
+  &:focus    { .Mixin_FlatBlueBtnFocus(); }
+  &:active   { .Mixin_FlatBlueBtnActive(); }
+  &:disabled { .Mixin_FlatBlueBtnDisabled(); }
+  &.disabled { .Mixin_FlatBlueBtnDisabled(); }
+}
+
+.flat-blue-btn-med-d3b42 {
+  .Mixin_BtnBase();
+  .Mixin_FlatBlueBtn();
+  .Mixin_MediumBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_FlatBlueBtnHover(); }
+  &:focus    { .Mixin_FlatBlueBtnFocus(); }
+  &:active   { .Mixin_FlatBlueBtnActive(); }
+  &:disabled { .Mixin_FlatBlueBtnDisabled(); }
+  &.disabled { .Mixin_FlatBlueBtnDisabled(); }
+}
+
+.flat-blue-btn-sml-f987c {
+  .Mixin_BtnBase();
+  .Mixin_FlatBlueBtn();
+  .Mixin_SmallBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_FlatBlueBtnHover(); }
+  &:focus    { .Mixin_FlatBlueBtnFocus(); }
+  &:active   { .Mixin_FlatBlueBtnActive(); }
+  &:disabled { .Mixin_FlatBlueBtnDisabled(); }
+  &.disabled { .Mixin_FlatBlueBtnDisabled(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// FLAT RED BUTTON
+//------------------------------------------------------------------------------
+.flat-red-btn-92c25 {
+  .Mixin_BtnBase();
+  .Mixin_FlatRedBtn();
+  .Mixin_LargeBtn();
+
+  &:hover    { .Mixin_FlatRedBtnHover(); }
+  &:focus    { .Mixin_FlatRedBtnFocus(); }
+  &:active   { .Mixin_FlatRedBtnActive(); }
+  &:disabled { .Mixin_FlatRedBtnDisabled(); }
+  &.disabled { .Mixin_FlatRedBtnDisabled(); }
+}
+
+.flat-red-btn-med-a8e54 {
+  .Mixin_BtnBase();
+  .Mixin_FlatRedBtn();
+  .Mixin_MediumBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_FlatRedBtnHover(); }
+  &:focus    { .Mixin_FlatRedBtnFocus(); }
+  &:active   { .Mixin_FlatRedBtnActive(); }
+  &:disabled { .Mixin_FlatRedBtnDisabled(); }
+  &.disabled { .Mixin_FlatRedBtnDisabled(); }
+}
+
+.flat-red-btn-sml-9c286 {
+  .Mixin_BtnBase();
+  .Mixin_FlatRedBtn();
+  .Mixin_SmallBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_FlatRedBtnHover(); }
+  &:focus    { .Mixin_FlatRedBtnFocus(); }
+  &:active   { .Mixin_FlatRedBtnActive(); }
+  &:disabled { .Mixin_FlatRedBtnDisabled(); }
+  &.disabled { .Mixin_FlatRedBtnDisabled(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// FLAT GREEN BUTTON
+//------------------------------------------------------------------------------
+.flat-green-btn-f3ed7 {
+  .Mixin_BtnBase();
+  .Mixin_FlatGreenBtn();
+  .Mixin_LargeBtn();
+
+  &:hover    { .Mixin_FlatGreenBtnHover(); }
+  &:focus    { .Mixin_FlatGreenBtnFocus(); }
+  &:active   { .Mixin_FlatGreenBtnActive(); }
+  &:disabled { .Mixin_FlatGreenBtnDisabled(); }
+  &.disabled { .Mixin_FlatGreenBtnDisabled(); }
+}
+
+.flat-green-btn-med-7adc0 {
+  .Mixin_BtnBase();
+  .Mixin_FlatGreenBtn();
+  .Mixin_MediumBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_FlatGreenBtnHover(); }
+  &:focus    { .Mixin_FlatGreenBtnFocus(); }
+  &:active   { .Mixin_FlatGreenBtnActive(); }
+  &:disabled { .Mixin_FlatGreenBtnDisabled(); }
+  &.disabled { .Mixin_FlatGreenBtnDisabled(); }
+}
+
+.flat-green-btn-sml-8da26 {
+  .Mixin_BtnBase();
+  .Mixin_FlatGreenBtn();
+  .Mixin_SmallBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_FlatGreenBtnHover(); }
+  &:focus    { .Mixin_FlatGreenBtnFocus(); }
+  &:active   { .Mixin_FlatGreenBtnActive(); }
+  &:disabled { .Mixin_FlatGreenBtnDisabled(); }
+  &.disabled { .Mixin_FlatGreenBtnDisabled(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// FLAT ORANGE BUTTON
+//------------------------------------------------------------------------------
+.flat-orange-btn-5ff78 {
+  .Mixin_BtnBase();
+  .Mixin_FlatOrangeBtn();
+  .Mixin_LargeBtn();
+
+  &:hover    { .Mixin_FlatOrangeBtnHover(); }
+  &:focus    { .Mixin_FlatOrangeBtnFocus(); }
+  &:active   { .Mixin_FlatOrangeBtnActive(); }
+  &:disabled { .Mixin_FlatOrangeBtnDisabled(); }
+  &.disabled { .Mixin_FlatOrangeBtnDisabled(); }
+}
+
+.flat-orange-btn-med-c77c2 {
+  .Mixin_BtnBase();
+  .Mixin_FlatOrangeBtn();
+  .Mixin_MediumBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_FlatOrangeBtnHover(); }
+  &:focus    { .Mixin_FlatOrangeBtnFocus(); }
+  &:active   { .Mixin_FlatOrangeBtnActive(); }
+  &:disabled { .Mixin_FlatOrangeBtnDisabled(); }
+  &.disabled { .Mixin_FlatOrangeBtnDisabled(); }
+}
+
+.flat-orange-btn-sml-2f539 {
+  .Mixin_BtnBase();
+  .Mixin_FlatOrangeBtn();
+  .Mixin_SmallBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_FlatOrangeBtnHover(); }
+  &:focus    { .Mixin_FlatOrangeBtnFocus(); }
+  &:active   { .Mixin_FlatOrangeBtnActive(); }
+  &:disabled { .Mixin_FlatOrangeBtnDisabled(); }
+  &.disabled { .Mixin_FlatOrangeBtnDisabled(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// FLAT PURPLE BUTTON
+//------------------------------------------------------------------------------
+.flat-purple-btn-1c505 {
+  .Mixin_BtnBase();
+  .Mixin_FlatPurpleBtn();
+  .Mixin_LargeBtn();
+
+  &:hover    { .Mixin_FlatPurpleBtnHover(); }
+  &:focus    { .Mixin_FlatPurpleBtnFocus(); }
+  &:active   { .Mixin_FlatPurpleBtnActive(); }
+  &:disabled { .Mixin_FlatPurpleBtnDisabled(); }
+  &.disabled { .Mixin_FlatPurpleBtnDisabled(); }
+}
+
+.flat-purple-btn-med-5bb7b {
+  .Mixin_BtnBase();
+  .Mixin_FlatPurpleBtn();
+  .Mixin_MediumBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_FlatPurpleBtnHover(); }
+  &:focus    { .Mixin_FlatPurpleBtnFocus(); }
+  &:active   { .Mixin_FlatPurpleBtnActive(); }
+  &:disabled { .Mixin_FlatPurpleBtnDisabled(); }
+  &.disabled { .Mixin_FlatPurpleBtnDisabled(); }
+}
+
+.flat-purple-btn-sml-47c43 {
+  .Mixin_BtnBase();
+  .Mixin_FlatPurpleBtn();
+  .Mixin_SmallBtn();
+  .Mixin_BoldBtn();
+
+  &:hover    { .Mixin_FlatPurpleBtnHover(); }
+  &:focus    { .Mixin_FlatPurpleBtnFocus(); }
+  &:active   { .Mixin_FlatPurpleBtnActive(); }
+  &:disabled { .Mixin_FlatPurpleBtnDisabled(); }
+  &.disabled { .Mixin_FlatPurpleBtnDisabled(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// GROUPED BUTTON SERIES
+//------------------------------------------------------------------------------
+.btn-series-96fae {
+  .Mixin_BtnBase();
+  .Mixin_GrayBtn();
+  .Mixin_LargeBtnSeries();
+  .Mixin_NormalBtn();
+
+  &:hover    { .Mixin_GrayBtnHover(); }
+  &:focus    { .Mixin_GrayBtnFocus(); }
+  &:active   { .Mixin_GrayBtnActive(); z-index: 3; }
+  &.selected { .Mixin_GrayBtnActive(); z-index: 3; }
+  &:disabled { .Mixin_GrayBtnDisabled(); }
+  &.disabled { .Mixin_GrayBtnDisabled(); }
+}
+
+.btn-series-med-7566f {
+  .Mixin_BtnBase();
+  .Mixin_GrayBtn();
+  .Mixin_MediumBtnSeries();
+  .Mixin_SemiBoldBtn();
+
+  &:hover    { .Mixin_GrayBtnHover(); }
+  &:focus    { .Mixin_GrayBtnFocus(); }
+  &:active   { .Mixin_GrayBtnActive(); z-index: 3; }
+  &.selected { .Mixin_GrayBtnActive(); z-index: 3; }
+  &:disabled { .Mixin_GrayBtnDisabled(); }
+  &.disabled { .Mixin_GrayBtnDisabled(); }
+}
+
+.btn-series-sml-297cc {
+  .Mixin_BtnBase();
+  .Mixin_GrayBtn();
+  .Mixin_SmallBtnSeries();
+  .Mixin_SemiBoldBtn();
+
+  &:hover    { .Mixin_GrayBtnHover(); }
+  &:focus    { .Mixin_GrayBtnFocus(); }
+  &:active   { .Mixin_GrayBtnActive(); z-index: 3; }
+  &.selected { .Mixin_GrayBtnActive(); z-index: 3; }
+  &:disabled { .Mixin_GrayBtnDisabled(); }
+  &.disabled { .Mixin_GrayBtnDisabled(); }
+}
+
+
+
+
+//------------------------------------------------------------------------------
+// GROUPED OUTLINE BUTTON SERIES
+//------------------------------------------------------------------------------
+.outline-btn-series-f1745 {
+  .Mixin_BtnBase();
+  .Mixin_GrayOutlineBtn();
+  .Mixin_LargeBtnSeries();
+  .Mixin_NormalBtn();
+
+  &:hover    { .Mixin_GrayBtnHover(); }
+  &:focus    { .Mixin_GrayBtnFocus(); }
+  &:active   { .Mixin_GrayBtnActive(); z-index: 3; }
+  &.selected { .Mixin_BlueOutlineBtnActive(); z-index: 3; }
+  &:disabled { .Mixin_GrayOutlineBtnDisabled(); }
+  &.disabled { .Mixin_GrayOutlineBtnDisabled(); }
+}
+
+.outline-btn-series-med-247c0 {
+  .Mixin_BtnBase();
+  .Mixin_GrayOutlineBtn();
+  .Mixin_MediumBtnSeries();
+  .Mixin_SemiBoldBtn();
+
+  &:hover    { .Mixin_GrayBtnHover(); }
+  &:focus    { .Mixin_GrayBtnFocus(); }
+  &:active   { .Mixin_GrayBtnActive(); z-index: 3; }
+  &.selected { .Mixin_BlueOutlineBtnActive(); z-index: 3; }
+  &:disabled { .Mixin_GrayOutlineBtnDisabled(); }
+  &.disabled { .Mixin_GrayOutlineBtnDisabled(); }
+}
+
+.outline-btn-series-sml-d70c6 {
+  .Mixin_BtnBase();
+  .Mixin_GrayOutlineBtn();
+  .Mixin_SmallBtnSeries();
+  .Mixin_SemiBoldBtn();
+
+  &:hover    { .Mixin_GrayBtnHover(); }
+  &:focus    { .Mixin_GrayBtnFocus(); }
+  &:active   { .Mixin_GrayBtnActive(); z-index: 3; }
+  &.selected { .Mixin_BlueOutlineBtnActive(); z-index: 3; }
+  &:disabled { .Mixin_GrayOutlineBtnDisabled(); }
+  &.disabled { .Mixin_GrayOutlineBtnDisabled(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// SELECTED GROUPED BUTTON COLORS
+//------------------------------------------------------------------------------
+.selected-blue-2dc39,
+.selected-blue-2dc39:hover,
+.selected-blue-2dc39:focus,
+.selected-blue-2dc39:active {
+  .Mixin_Blue();
+  .Mixin_BlueBtnActive();
+  color: @white;
+  text-shadow: 0 1px 0 hsv(hsvhue(@blue), hsvsaturation(@blue) + 20%, hsvvalue(@blue) - 30%);
+  z-index: 2;
+}
+
+.selected-blue-a3bec,
+.selected-blue-a3bec:hover,
+.selected-blue-a3bec:focus,
+.selected-blue-a3bec:active {
+  .Mixin_Blue();
+  .Mixin_FlatBlueBtnHover();
+  box-shadow: none;
+  border-color: hsv(hsvhue(@blue), hsvsaturation(@blue) + 20%, hsvvalue(@blue) - 50%)
+                hsv(hsvhue(@blue), hsvsaturation(@blue) + 20%, hsvvalue(@blue) - 40%)
+                hsv(hsvhue(@blue), hsvsaturation(@blue) + 20%, hsvvalue(@blue) - 30%);
+  z-index: 2;
+}
+
+//------------------------------------------------------------------------------
+// TLP COLORS
+//------------------------------------------------------------------------------
+.tlp-46a54 {
+  display: none;
+
+  &:checked + .white-3b5aa {
+    .Mixin_BlueBtn();
+    .Mixin_BlueBtnActive();
+  }
+  &:checked + .green-b47d3 {
+    .Mixin_GreenBtn();
+    .Mixin_GreenBtnActive();
+  }
+  &:checked + .amber-512b0 {
+    .Mixin_OrangeBtn();
+    .Mixin_OrangeBtnActive();
+  }
+  &:checked + .red-2c682 {
+    .Mixin_RedBtn();
+    .Mixin_RedBtnActive();
+  }
+
+  &:checked + .white-517fd {
+    .Mixin_TlpWhiteSelected();
+  }
+  &:checked + .green-1234d {
+    .Mixin_TlpGreenSelected();
+  }
+  &:checked + .amber-f14b8 {
+    .Mixin_TlpAmberSelected();
+  }
+  &:checked + .red-9c809 {
+    .Mixin_TlpRedSelected();
+  }
+}
+
+.white-2ca39 {
+  .Mixin_GrayBtnActive();
+  &:hover  { .Mixin_GrayBtnActive(); }
+  &:active { .Mixin_GrayBtnActive(); }
+}
+.green-1eed1 {
+  .Mixin_GreenOutlineBtnActive();
+  &:hover  { .Mixin_GreenOutlineBtnActive(); }
+  &:active { .Mixin_GreenOutlineBtnActive(); }
+}
+.amber-2a2ee {
+  .Mixin_OrangeOutlineBtnActive();
+  &:hover  { .Mixin_OrangeOutlineBtnActive(); }
+  &:active { .Mixin_OrangeOutlineBtnActive(); }
+}
+.red-714b6 {
+  .Mixin_RedOutlineBtnActive();
+  &:hover  { .Mixin_RedOutlineBtnActive(); }
+  &:active { .Mixin_RedOutlineBtnActive(); }
+}

@@ -1,0 +1,696 @@
+//------------------------------------------------------------------------------
+// Constants
+//------------------------------------------------------------------------------
+
+@headerBgColor: #fcfcfc;
+@defaultTableCellColor: #626e80;
+@mutedTableCellColor: #9aa1aa;
+@linkBlue: #3388ff;
+@errorRed: #ff3333;
+
+@borderRadius: 5px;
+
+//------------------------------------------------------------------------------
+// Unique Classes for CTIA Crud Pages
+//------------------------------------------------------------------------------
+
+.crud-page-5a6ea {
+  background: @pageBackgroundColor;
+}
+
+.hdr-69f0a {
+  background: @headerBgColor;
+  border-bottom: 1px solid #ced3d9;
+  height: 50px;
+  padding-top: 10px;
+}
+
+.header-title-da044 {
+  color: #1f2b38;
+  display: inline-block;
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-icon-eda2d {
+  display: inline-block;
+  margin: 0 20px -3px 28px;
+  width: 16px;
+}
+
+.spacer-bar-dfb36 {
+  display: inline-block;
+  height: 20px;
+  background: #ced3d9;
+  margin: 0px 20px -4px 20px;
+  width: 1px;
+}
+
+.menu-btn-b52ad {
+  border: 1px solid #ced3d9;
+  border-radius: 4px;
+  color: #4e5764;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 10px;
+}
+
+.caret-icon-190e5 {
+  display: inline-block;
+  margin-left: 8px;
+  width: 10px;
+}
+
+.width-wrapper-20c02 {
+  margin: 0 auto;
+  min-width: @minBodyWidth;
+}
+
+.crud-wrapper-919de {
+  margin: 0 auto;
+  min-width: @minBodyWidth;
+  padding: 0 20px;
+}
+
+.title-13ae2 {
+  border-bottom: 1px solid #ccc;
+  font-size: 26px;
+  font-weight: 300;
+}
+
+.big-search-1c153 {
+  font-size: 18px;
+  font-weight: 400;
+  padding: 5px 10px;
+  width: 100%;
+}
+
+.chunk-e556a {
+  margin: 15px 0;
+}
+
+.label-07aa8 {
+  color: #6b6e73;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 5px 0;
+
+  .fa {
+    width: 12px;
+  }
+}
+
+.fixed-label-da5e7 {
+  color: #6b6e73;
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 5px 0;
+}
+
+.input-wrapper-ac07d {
+  margin: 5px 0;
+}
+
+.thin-label-7a75e {
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.body-wrapper-1227b {
+  display: flex;
+  margin: 10px;
+  min-width: @minBodyWidth;
+}
+
+.left-col-88c65 {
+  width: 220px;
+}
+
+.right-col-71df3 {
+  background: @headerBgColor;
+  border-radius: @borderRadius;
+  border: 1px solid #e1e2e4;
+  flex: 1;
+}
+
+.tabs-list-ab9be {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tab-a446b {
+  border-left: 3px solid @pageBackgroundColor;
+  color: @defaultTableCellColor;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.tab-a446b.active-c325f {
+  border-left: 3px solid #4e5764;
+  color: #4e5764;
+  font-weight: 600;
+}
+
+.label-83e55 {
+  display: inline-block;
+  margin-bottom: 9px;
+  vertical-align: bottom;
+}
+
+// nav icon sprite postiions
+@iconHeight: 30px;
+@iconWidth: 44px;
+@numIcons: 18;
+@numStates: 5;
+
+.NavIcon {
+  background: url('../images/nav-icon-sprite.svg');
+  background-size: (@iconWidth * @numStates) (@iconHeight * @numIcons);
+  display: inline-block;
+  height: @iconHeight;
+  width: @iconWidth;
+}
+
+.icon-actor-797d2 {
+  .NavIcon;
+  background-position: 0 (-5 * @iconHeight);
+}
+
+.icon-campaigns-e718d {
+  .NavIcon;
+  background-position: 0 (-6 * @iconHeight);
+}
+
+.icon-coa-db045 {
+  .NavIcon;
+  background-position: 0 (-7 * @iconHeight);
+}
+
+.icon-exploit-188be {
+  .NavIcon;
+  background-position: 0 (-8 * @iconHeight);
+}
+
+.icon-feedback-099c7 {
+  .NavIcon;
+  background-position: 0 (-9 * @iconHeight);
+}
+
+.icon-incidents-851a7 {
+  .NavIcon;
+  background-position: 0 (-10 * @iconHeight);
+}
+
+.icon-indicators-7835d {
+  .NavIcon;
+  background-position: 0 (-11 * @iconHeight);
+}
+
+.icon-judgements-f5123 {
+  .NavIcon;
+  background-position: 0 (-12 * @iconHeight);
+}
+
+.icon-ttps-ac0a1 {
+  .NavIcon;
+  background-position: 0 (-13 * @iconHeight);
+}
+
+.icon-verdicts-82d45 {
+  .NavIcon;
+  background-position: 0 (-14 * @iconHeight);
+}
+
+.icon-sightings-b6601 {
+  .NavIcon;
+  background-position: 0 (-15 * @iconHeight);
+}
+
+.icon-vocabularies-d7d74 {
+  .NavIcon;
+  background-position: 0 (-16 * @iconHeight);
+}
+
+// end icon sprites
+
+.icon-51d15 {
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 20px;
+  width: 16px;
+}
+
+.body-title-c14e3 {
+  border-bottom: 1px solid #dfe2e5;
+  color: #1f2b38;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 20px 0;
+  padding: 0 0 8px 0;
+}
+
+.body-wrapper-8686d {
+  margin: 0 auto;
+  min-width: @minBodyWidth;
+  padding: 0 20px;
+}
+
+.wrapper-67fb5 {
+  display: flex;
+}
+
+.left-4a3a0 {
+  flex: 1;
+}
+
+.right-02cb2 {
+  flex: 1;
+}
+
+.markdown-942d4 textarea {
+  height: 200px;
+  width: 90%;
+}
+
+.tabs-e2d5d a {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-bottom: 0;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  color: #555;
+  display: inline-block;
+  margin-right: 5px;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.active-tab-46f9a {
+  font-weight: bold;
+}
+
+.preview-23d39 {
+  border: 1px solid #ccc;
+}
+
+.datetime-input-06eda {
+  padding: 5px;
+  width: 80%;
+}
+
+.entity-tbl-1b087 {
+  border-collapse: collapse;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.entity-tbl-1b087 td {
+  padding: 10px 10px 10px 0;
+}
+
+.tbl-row-d3a4c {
+  border-bottom: 1px solid #dfe2e5;
+}
+
+.name-9d061 {
+  color: #1f2b38;
+  font-size: 16px;
+}
+
+.description-b1e7b {
+  color: @defaultTableCellColor;
+  font-size: 12px;
+}
+
+.version-cell-5c236 {
+  color: @defaultTableCellColor;
+}
+
+.header-cell-a445e {
+  background: linear-gradient(#fcfcfc, #f7f7f7);
+  border-bottom: 1px solid #dfe2e5;
+  border-top: 1px solid #edf0f2;
+  color: #1f2b38;
+  padding: 10px 10px 10px 0;
+  text-align: left;
+}
+
+.intent-cell-3d567 {
+  color: @defaultTableCellColor;
+}
+
+.muted-0c5dd {
+  color: @mutedTableCellColor;
+}
+
+.id-link-38e0b {
+  color: @linkBlue;
+  text-decoration: none;
+}
+
+.id-link-38e0b:hover {
+  text-decoration: underline;
+}
+
+.last-modified-b8bbf {
+  color: @defaultTableCellColor;
+}
+
+.expires-c99cb {
+  color: @mutedTableCellColor;
+}
+
+.search-wrapper-8ffea {
+  margin: 20px;
+}
+
+.header-row-c2217 {
+  th:first-child {
+    padding-left: 20px;
+  }
+}
+
+// TODO: this is not working correctly...
+// .tbl-row-d3a4c:hover {
+//   border: 1px solid @linkBlue;
+// }
+
+.tbl-row-d3a4c td:first-child {
+  padding-left: 20px;
+}
+
+.tbl-row-d3a4c td:last-child {
+  padding-right: 20px;
+}
+
+.menu-link-7551a {
+  border: 1px solid #dfe2e6;
+  border-radius: @borderRadius;
+  cursor: pointer;
+  padding: 5px 0;
+  text-align: center;
+  width: 45px;
+}
+
+.icon-dots-a2f0c {
+  display: inline-block;
+  margin-right: 5px;
+  width: 12px;
+}
+
+.icon-caret-04c3a {
+  display: inline-block;
+  width: 12px;
+}
+
+.caret-f2f3e {
+  display: inline-block;
+  width: 10px;
+  margin-left: 5px;
+}
+
+.body-wrapper-4f5c0 {
+  padding: 20px;
+}
+
+.required-8cc86 {
+  color: @errorRed;
+  display: inline-block;
+  margin-left: 4px;
+}
+
+// TODO: text-input-c27c0 and textarea-d74f8 should probably be combined somehow
+.text-input-c27c0 {
+  border: 1px solid #d3d7de;
+  border-top: 1px solid #b2bac5;
+  border-radius: @borderRadius;
+  color: #333;
+  font-size: 16px;
+  outline: 0;
+  padding: 5px 10px;
+  width: 400px;
+}
+
+.text-input-c27c0:focus {
+  border: 1px solid @linkBlue;
+  // TODO: need border shadow here
+}
+
+.textarea-d74f8 {
+  border: 1px solid #d3d7de;
+  border-top: 1px solid #b2bac5;
+  border-radius: @borderRadius;
+  color: #333;
+  font-size: 16px;
+  height: 100px;
+  outline: 0;
+  width: 400px;
+  padding: 5px 10px;
+}
+
+.textarea-d74f8:focus {
+  border: 1px solid @linkBlue;
+}
+
+.secondary-btn-03e5f {
+  background: #fcfcfc;
+  border: 1px solid #dfe2e5;
+  border-radius: @borderRadius;
+  color: #626e80;
+  cursor: pointer;
+  outline: 0;
+  padding: 5px 10px;
+}
+
+.tlp-btn-78e7f {
+  border: 1px solid #d8dadd;
+  border-right: 0;
+  color: #626e80;
+  cursor: pointer;
+  display: inline-block;
+  padding: 6px 12px;
+}
+
+.tlp-buttons-4040b .tlp-btn-78e7f:first-child {
+  border-bottom-left-radius: @borderRadius;
+  border-top-left-radius: @borderRadius;
+}
+
+.tlp-buttons-4040b .tlp-btn-78e7f:last-child {
+  border-right: 1px solid #d8dadd;
+  border-bottom-right-radius: @borderRadius;
+  border-top-right-radius: @borderRadius;
+}
+
+.tlp-btn-78e7f.active-fc3af {
+  // TODO: remove this important...
+  border: 1px solid #167efb !important;
+  color: #333;
+}
+
+.action-bar-9ca7b {
+  border-top: 1px solid #dfe2e5;
+  padding: 20px 0;
+
+  button {
+    display: inline-block;
+    margin-right: 10px;
+  }
+}
+
+.primary-btn-eaf0e {
+  background: none;
+  border: 1px solid @linkBlue;
+  border-radius: @borderRadius;
+  color: @linkBlue;
+  cursor: pointer;
+  font-weight: 600;
+  outline: 0;
+  padding: 6px 12px;
+}
+
+.row-item-62ed7 {
+  border-bottom: 1px solid #ececec;
+  padding: 5px 0;
+}
+
+.remove-btn-3bc46 {
+  border: 1px solid #ccc;
+  border-radius: @borderRadius;
+  background: none;
+  color: #626e80;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 8px;
+  padding: 2px 10px;
+}
+
+.date-input-dee73 {
+  .text-input-c27c0;
+  width: 140px;
+}
+
+.to-fba74 {
+  color: #888;
+  display: inline-block;
+  font-family: Georgia, serif;
+  margin: 0 10px;
+  font-size: 12px;
+  font-style: italic;
+}
+
+.label-4bc1b {
+  cursor: pointer;
+  display: inline-block;
+  margin-left: 10px;
+
+  .fa {
+    width: 16px;
+  }
+}
+
+.smaller-e5718 {
+  font-size: 11px;
+}
+
+.content-wrapper-10ace {
+  margin-right: 5px;
+  position: relative;
+  top: @headerOffset;
+  width: 100%;
+}
+
+.tokens-wrapper-4fc89 {
+  border: 1px solid #ccc;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.token-6c6cd {
+  background: #eaeaea;
+  border-radius: 5px;
+  margin-right: 10px;
+  padding: 5px 10px;
+}
+
+.token-input-wrapper-74c90 {
+  position: relative;
+}
+
+@optionMenuZ: 1;
+
+.option-list-0704c {
+  background: #f1f1f1;
+  border: 1px solid #ddd;
+  margin: 0;
+  max-height: 300px;
+  min-width: 280px;
+  overflow-y: scroll;
+  padding: 0;
+  position: absolute;
+  top: 24px;
+  z-index: @optionMenuZ;
+}
+
+.option-eb92f {
+  border-bottom: 1px solid #bbb;
+  cursor: pointer;
+  list-style: none;
+  margin: 0;
+  padding: 5px 10px;
+}
+
+.active-45f53 {
+  background: #d0d0ff;
+}
+
+.no-matches-1b0fa {
+  font-family: Georgia, serif;
+  font-style: italic;
+  padding: 5px 10px;
+}
+
+.fieldset-3cd7f {
+  border: 1px solid #cccccc;
+  padding: 5px 25px;
+}
+
+.header-b6a1a {
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.row-b1250 {
+  border-bottom: 1px solid #ccc;
+  padding: 15px 0;
+}
+
+.name-8e9a0 {
+  font-weight: 600;
+}
+
+.short-desc-4d5b5 {
+  color: #999;
+  font-style: italic;
+}
+
+.description-5c53e {
+  font-size: 12px;
+}
+
+.select-d38d0 {
+  font-size: 12px;
+  padding: 4px;
+}
+
+.tmp-e6ace {
+  font-size: medium;
+  line-height: normal;
+}
+
+.group-wrapper-92a48 {
+  display: flex;
+  width: 100%;
+}
+
+.left-17ca2 {
+  margin-right: 10px;
+}
+
+.middle-dbe47 {
+  flex: 1;
+}
+
+.right-77f10 {
+  margin-left: 10px;
+  padding-top: 5px;
+}
+
+.label-e557a {
+  font-weight: 300;
+  margin-right: 4px;
+}
+
+//------------------------------------------------------------------------------
+// Breakpoint Overrides
+//------------------------------------------------------------------------------
+
+@media all and (max-width: @mediumBodyBreakpoint) {
+  // shorten the left column
+  .left-col-88c65 {
+    width: 55px;
+  }
+
+  // hide left nav labels
+  .label-83e55 {
+    display: none;
+  }
+}

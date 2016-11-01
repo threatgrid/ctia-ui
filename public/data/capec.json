@@ -1,0 +1,30 @@
+[
+  {
+    "value": {
+      "id": "172",
+      "description": "Manipulate Timing and State"
+    },
+    "label": "172 - Manipulate Timing and State"
+  },
+  {
+    "value": {
+      "id": "210",
+      "description": "Abuse of Functionality"
+    },
+    "label": "210 - Abuse of Functionality"
+  },
+  {
+    "value": {
+      "id": "281",
+      "description": "Analyze Target"
+    },
+    "label": "281 - Analyze Target"
+  },
+  {
+    "value": {
+      "id": "436",
+      "description": "Gain Physical Access"
+    },
+    "label": "436 - Gain Physical Access"
+  }
+]

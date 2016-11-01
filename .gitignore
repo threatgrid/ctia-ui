@@ -1,0 +1,18 @@
+# ignore npm libraries
+node_modules/
+
+# ignore CLJS-generated files
+target/
+public/js/app-dev.js
+public/js/app-prod.js
+
+# ignore LESS-generated CSS files
+public/css/main.min.css
+
+# ignore diff files
+*.diff
+
+# ignore Mac system files
+.DS_Store
+Settings
+Shell

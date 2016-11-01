@@ -1,0 +1,334 @@
+//------------------------------------------------------------------------------
+// Constants
+//------------------------------------------------------------------------------
+
+@headerColor: #fff;
+@inputFocusBlue: #3388ff;
+@boxShadowBlue: rgba(51, 136, 255, 0.3);
+
+@circleBtnZ: 10;
+
+//------------------------------------------------------------------------------
+// Tag Selectors
+//------------------------------------------------------------------------------
+
+html {
+  background: @pageBackgroundColor;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  color: #555;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+//------------------------------------------------------------------------------
+// Generic
+//------------------------------------------------------------------------------
+
+.white-wrapper {
+  background: #fcfcfc;
+  background-clip: padding-box;
+  border: 1px solid rgba(0,0,0, 0.03);
+  border-bottom-color: rgba(0,0,0, 0.07);
+  border-radius: 4px;
+  box-shadow: 0 1px 1px rgba(26,38,51, 0.05);
+  padding: 20px;
+}
+
+.circle-btn {
+  background: #fff;
+  border-radius: 100%;
+  border: 1px solid @inputFocusBlue;
+  color: @inputFocusBlue;
+  cursor: pointer;
+  width: 25px;
+  z-index: @circleBtnZ;
+  height: 25px;
+  outline: none;
+  box-shadow: 0 0 0 0 @boxShadowBlue;
+  transition: border-color ease-in-out 120ms, box-shadow ease-in-out 120ms;
+}
+
+.circle-btn:focus {
+  box-shadow: 0 0 0 3px @boxShadowBlue;
+}
+
+.circle-btn.disabled {
+  border: 1px solid #e8e8e8;
+  box-shadow: 0 0 0 0 rgba(51,136,255,0);
+  color: #e8e8e8;
+  cursor: auto;
+  transition: border-color ease-in-out 0.1s, box-shadow ease-in-out 0.1s;
+}
+
+//------------------------------------------------------------------------------
+// Login Page
+//------------------------------------------------------------------------------
+
+@topBarTopColor: #314559;
+@topBarBottomColor: #3e5266;
+@topBarHeight: 40px;
+
+.top-bar {
+  background: linear-gradient(to bottom, @topBarTopColor, @topBarBottomColor);
+  height: @topBarHeight;
+  text-align: center;
+
+  h1 {
+    color: #c2c7cc;
+    font-size: 20px;
+    font-style: italic;
+    margin: 0;
+    padding: 5px 0 0 0;
+    text-transform: uppercase;
+  }
+}
+
+.login-page-wrapper {
+  .center {
+    left: 50%;
+    position: fixed;
+    top: 22%;
+    transform: translate(-50%, 0);
+  }
+
+  .white-wrapper {
+    margin: 0 auto;
+    width: 340px;
+  }
+
+  .big-input {
+    border: 1px solid #d3d7de;
+    border-top: 1px solid #b4bcc7;
+    border-radius: 5px;
+    box-shadow: 0 0 0 0 @boxShadowBlue;
+    color: #333;
+    display: block;
+    font-size: 14px;
+    height: 35px;
+    padding: 0 15px;
+    transition: border-color ease-in-out 120ms, box-shadow ease-in-out 120ms;
+    width: 100%;
+  }
+
+  .big-input:focus {
+    border: 1px solid @inputFocusBlue;
+    box-shadow: 0 0 0 3px @boxShadowBlue;
+    outline: none;
+  }
+
+  .btn-container {
+    position: relative;
+    text-align: right;
+  }
+
+  .checkbox-wrapper {
+    margin: 7px 0 0 47px;
+
+    label {
+      cursor: pointer;
+    }
+
+    .fa {
+      width: 20px;
+    }
+  }
+
+  .help-center {
+    border-top: 1px solid #d3d7de;
+    margin-top: 40px;
+    padding-top: 20px;
+    width: 400px;
+
+    .link-wrapper {
+      font-size: 12px;
+      margin: 0 0 7px 0;
+      text-align: center;
+    }
+
+    a {
+      border: 0 solid transparent;
+      border-width: 2px 6px;
+      border-radius: 3px;
+      color: #959ba2;
+      font-size: 12px;
+      outline: none;
+      text-decoration: none;
+      box-shadow: 0 0 0 0 @boxShadowBlue;
+      transition: border-color ease-in-out 120ms, box-shadow ease-in-out 120ms;
+    }
+
+    a:hover {
+      color: #38f;
+      text-decoration: none;
+    }
+
+    a:focus {
+      color: #38f;
+      box-shadow: 0 0 0 2px @boxShadowBlue;
+    }
+  }
+}
+
+.login-form {
+  button, input, label {
+    cursor: pointer;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  label i {
+    width: 16px;
+  }
+
+  .login-btn {
+    background: #fff;
+    border: 1px solid @inputFocusBlue;
+    border-radius: 3px;
+    color: @inputFocusBlue;
+    font-weight: bold;
+    outline: 0;
+    padding: 8px 0;
+    width: 100%;
+  }
+
+  .login-btn.disabled {
+    border: 1px solid #cfd8e5;
+    color: #cfd8e5;
+  }
+}
+
+.info-bar {
+  color: #555;
+  font-weight: 600;
+  font-size: 12px;
+  margin: 0;
+  padding: 10px 0;
+  text-align: center;
+}
+
+//------------------------------------------------------------------------------
+// Nav Bar
+//------------------------------------------------------------------------------
+
+@navbarHeight: 40px;
+
+.navbar-wrapper {
+  background: linear-gradient(to bottom, #314559, #3e5266);
+  color: #fff;
+  height: @navbarHeight;
+
+  .left {
+    float: left;
+  }
+
+  .right {
+    float: right;
+  }
+
+  .clear {
+    clear: both;
+  }
+
+  .search-icon {
+    display: inline-block;
+    margin: 12px 20px 0 20px;
+  }
+
+  .search-input {
+    background: 0;
+    border: 0;
+    color: #fff;
+    display: inline-block;
+    margin: 8px 0 0 0;
+    outline: 0;
+  }
+
+  .search-btn-wrapper {
+    min-height: 10px;
+    min-width: 30px;
+    text-align: center;
+  }
+
+  .no-btn {
+    height: 1px;
+    width: 25px;
+  }
+
+  .submit-search-btn {
+    background: 0;
+    border-radius: 100%;
+    border: 1px solid #fff;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    height: 25px;
+    margin-top: 6px;
+    outline: none;
+    width: 25px;
+  }
+
+  .searching-spinner {
+    color: #fff;
+    font-size: 20px;
+    margin-top: 8px;
+  }
+
+  .clear-breadcrumbs-icon {
+    border: 1px solid #fff;
+    border-radius: 100%;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 8px;
+    padding: 4px;
+    width: 22px;
+  }
+
+  .breadcrumb-ellipsis {
+    display: inline-block;
+    margin: 10px 10px 0 10px;
+    vertical-align: top;
+  }
+
+  .breadcrumb-token {
+    color: #9aa1aa;
+    display: inline-block;
+    margin: 4px 10px 0 10px;
+    vertical-align: top;
+
+    .label {
+      color: #C8C8CA;
+      font-size: 9px;
+      margin-bottom: -2px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .value {
+
+    }
+  }
+
+  .breadcrumb-token.active {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .menu-icon {
+    border-left: 1px solid #4c5d6f;
+    color: #c2c7cc;
+    cursor: pointer;
+    display: inline-block;
+    margin: 10px 0 0 0;
+    padding: 2px 12px;
+  }
+
+} // end .navbar-wrapper

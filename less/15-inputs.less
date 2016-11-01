@@ -1,0 +1,640 @@
+//------------------------------------------------------------------------------
+// MIXINS - .Mixin_TitleCase(){}
+//------------------------------------------------------------------------------
+
+// Common input properties
+  .Mixin_TextInput() {
+    display: block;
+    position: relative;
+    width: 100%;
+    padding: 7px 0 9px;
+    color: #333;
+    font-size: 14px;
+    line-height: 19px;
+    border: 1px solid #d3d7de;
+    border-top-color: #b1b9c5;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background: #FFF;
+    text-overflow: ellipsis;
+    cursor: text;
+    outline: none;
+    box-shadow: inset 0 1px 0.5px 0 fade(@black, 10%),
+                0 0 0 0 fade(@white, 80%),
+                0 0 0 0 fade(@defaultFocus, 30%);
+    transition: box-shadow @med;
+  }
+
+// Transparent input
+  .Mixin_TransInput() {
+    .Mixin_TextInput();
+    padding: 3px 0 5px;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    transition: none;
+  }
+
+// Date & Time Input
+  .Mixin_DateTimeInput() {
+    .Mixin_TextInput();
+    display: inline-block;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    transition: none;
+  }
+
+// Input Hover
+  .Mixin_InputHover() {
+    .Mixin_DefaultHover();
+  }
+
+// Input Focus
+  .Mixin_InputFocus() {
+    box-shadow: inset 0 1px 0.5px 0 fade(@black, 10%),
+                0 0 0 2px fade(@white, 80%),
+                0 0 0 5px fade(@defaultFocus, 30%);
+    border-color: @blue;
+  }
+
+  .Mixin_InputErrorFocus() {
+    box-shadow: inset 0 1px 0.5px 0 fade(@black, 10%),
+                0 0 0 2px fade(@white, 80%),
+                0 0 0 5px fade(@red, 30%);
+
+    border-color: @red;
+  }
+
+// Input Disabled
+  .Mixin_InputDisabled() {
+    color: @disabledText;
+    border-color: #b2bac5 #d3d7de #d3d7de;
+    background: @disabledInput;
+    cursor: not-allowed;
+    box-shadow: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+  }
+
+// Group
+  .selectable-group-c70ea {
+    display: inline-block;
+    position: relative;
+    margin: 0 20px 10px 0;
+    vertical-align: middle;
+  }
+
+// Labels
+  .Mixin_InputLabelBase() {
+    display: block;
+    position: relative;
+    font-size: 12px;
+    line-height: 10px;
+    font-weight: 700;
+    margin-top: 15px;
+    padding-bottom:7px;
+    color: #6b6e73;
+  }
+
+  .Mixin_InputRequired() {
+    &:after {
+      content: '\00a0*';
+      color: @red;
+    }
+  }
+
+  .Mixin_InputLabelDisabled() {
+    .Mixin_InputLabelBase();
+    color: @disabledText;
+  }
+
+// Selectables
+  .Mixin_SelectableBase() {
+    display: block;
+    position: relative;
+    width: 100%;
+    font-size: 13px;
+    line-height: 10px;
+    padding: 0 5px 5px 0;
+    background: none;
+    border: none;
+
+    color: @gray;
+    font-weight: 400;
+    text-align: left;
+    vertical-align: middle;
+
+    &:before {
+      content: '';
+      display: inline-block;
+      position: relative;
+      height: 14px;
+      width: 14px;
+      top: -1px;
+      margin-right: 7px;
+      color: #555555;
+      box-shadow: none;
+      border: 1px solid #d3d7de;
+      border-top-color: #b1b9c5;
+      box-sizing: border-box;
+      background: #FFF;
+      vertical-align: middle;
+      transition: box-shadow @med;
+      box-shadow: inset 0 0 0 14px fade(@white, 100%), 0 0 0 0 fade(@white, 80%), 0 0 0 0 fade(@defaultFocus, 30%);
+
+    }
+    &:after {
+      content: '';
+      display: inline-block;
+      position: absolute;
+      vertical-align: middle;
+    }
+    &:hover         { color: @black; }
+    &:hover:before  { border-color: @blue; }
+    &:focus         { outline:none; color:@black; }
+    &:focus:before  { border-color: @defaultFocus; box-shadow: inset 0 0 0 14px fade(@white, 100%), 0 0 0 2px fade(@white, 80%), 0 0 0 4px fade(@defaultFocus, 30%);}
+    &:active:before { background-color: @disabledInput; border-color: #004099 #05c #5c95e6; box-shadow: none;}
+    &:disabled      { color: #a6abb3; cursor: not-allowed; }
+    &:disabled:before { color: #959ba2;
+                        border-color: #d8dadd;
+                        background: @disabledInput;
+                        box-shadow: none;}
+  }
+
+  .Mixin_SelectableCheck() {
+    &:after  { top: -4px;
+               left: 7px;
+               width: 5px;
+               height: 13px;
+               border: 0 solid @darkGray;
+               border-width: 0 2px 2px 0;
+               .Mixin_Rotate(42);
+    }
+    &:disabled:after  { border-color: #a6abb3; }
+  }
+
+  .Mixin_SelectableRadio() {
+    &:after {
+      top: 3px;
+      left: 4px;
+      width: 6px;
+      height: 6px;
+      background-color: @darkGray;
+      border-radius: 100%;
+    }
+    &:disabled:after  { background-color: #a6abb3; }
+  }
+
+
+
+
+//------------------------------------------------------------------------------
+// LABELS
+//------------------------------------------------------------------------------
+.label-de00c {
+  .Mixin_InputLabelBase();
+}
+
+.required-label-f1b60 {
+  .Mixin_InputLabelBase();
+  .Mixin_InputRequired();
+}
+
+.required-label-error-acb95 {
+  .Mixin_InputLabelBase();
+  .Mixin_InputRequired();
+  color: @red;
+}
+
+.input-label-a1af2 {
+  .Mixin_InputLabelBase();
+  padding-bottom: 5px;
+  text-indent: 3px;
+}
+
+.required-input-label-29a82 {
+  .Mixin_InputLabelBase();
+  .Mixin_InputRequired();
+  padding-bottom: 5px;
+  text-indent: 3px;
+}
+
+.required-input-label-error-29a82 {
+  .Mixin_InputLabelBase();
+  .Mixin_InputRequired();
+  color: @red;
+  padding-bottom: 5px;
+  text-indent: 3px;
+}
+
+.input-label-disabled-752e1 {
+  .Mixin_InputLabelDisabled();
+  padding-bottom: 5px;
+  text-indent: 3px;
+}
+
+
+
+//------------------------------------------------------------------------------
+// CHECKBOX & RADIO BUTTONS
+//------------------------------------------------------------------------------
+.checkbox-7b421 {
+  .Mixin_SelectableBase();
+  .Mixin_SelectableCheck();
+  &:before { border-radius: 3px; }
+  &:after { top: 6px; left:4px;  height: 0; width: 0; border-width: 0; transition: width @veryFast, height @veryFast 25ms, top @veryFast 25ms, left @veryFast 25ms;}
+  &:active:after {
+    top: -4px;
+    left: 7px;
+    width: 5px;
+    height: 13px;
+    border-width: 0 2px 2px 0;
+  }
+}
+
+.selected-checkbox-da5f6 {
+  .checkbox-7b421; // Uses above checkbox as base
+  .Mixin_SelectableCheck();
+}
+
+.radioBtn-22cb7 {
+  .Mixin_SelectableBase();
+  &:before { border-radius: 100%; }
+  &:active:before {
+    background-color: @darkGray;
+    box-shadow: inset 0 0 0 3px fade(@white, 90%), 0 0 0 0 fade(@white, 80%), 0 0 0 0 fade(@defaultFocus, 30%);
+  }
+}
+
+.selected-radioBtn-6d936 {
+  .radioBtn-22cb7; // Uses above checkbox as base
+  .Mixin_SelectableRadio();
+}
+
+
+
+//------------------------------------------------------------------------------
+// TEXT INPUTS
+//------------------------------------------------------------------------------
+.text-input-65a69 {
+  .Mixin_TextInput();
+  text-indent: 15px;
+
+  &:hover    { .Mixin_DefaultHover(); }
+  &:focus    { .Mixin_InputFocus(); }
+  &:disabled { .Mixin_InputDisabled(); }
+}
+
+.text-input-error-b77a1 {
+  .Mixin_TextInput();
+  text-indent: 15px;
+  color: @red;
+  border-color: @red;
+
+  &:hover    { }
+  &:focus    { .Mixin_InputErrorFocus(); }
+  &:disabled { .Mixin_InputDisabled(); }
+}
+
+.text-input-sml-e0cc6  {
+  .Mixin_TextInput();
+  padding: 4px 0 5px;
+  text-indent: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  border-radius: 3px;
+
+  &:hover { .Mixin_InputHover(); }
+  &:focus { .Mixin_InputFocus(); }
+}
+
+.text-area-bc533 {
+  .Mixin_TextInput();
+  padding-left: 15px;
+  padding-right: 15px;
+  text-indent: 0;
+  resize: vertical;
+
+  &:hover    { .Mixin_DefaultHover(); }
+  &:focus    { .Mixin_InputFocus(); }
+  &:disabled { .Mixin_InputDisabled(); }
+}
+
+
+
+//------------------------------------------------------------------------------
+// TOKEN INPUT
+//------------------------------------------------------------------------------
+.token-wrapper-eb049  {
+  .Mixin_TextInput();
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px 0 0 5px;
+  text-indent: 0;
+  cursor: default;
+  font-size: 0;
+  line-height: 0;
+
+  &:hover    { .Mixin_DefaultHover(); }
+  &:focus    { .Mixin_InputFocus(); }
+  &.focus    { .Mixin_InputFocus(); }
+  &:disabled { .Mixin_InputDisabled(); }
+}
+
+.token-input-wrapper-2eace {
+  display: flex;
+  position: relative;
+  width: 50px;
+  margin: 0 0 5px -5px;
+  flex: 1;
+  min-width: 100px;
+}
+
+.token-input-f464e {
+  .Mixin_TransInput();
+  vertical-align: top;
+  text-indent: 15px;
+}
+
+.token-0ec5d {
+  display: inline-block;
+  position: relative;
+  padding: 4px 0;
+  margin: 0 5px 5px 0;
+  color: @blue;
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 700;
+  border: 1px solid hsv(hsvhue(@blue), hsvsaturation(@blue) - 40%, hsvvalue(@blue));
+  border-radius: 3px;
+  background: #c1dbff;
+  white-space: nowrap;
+  vertical-align: top;
+  outline: 0;
+
+  &:hover {
+    color: @white;
+    border-color: transparent;
+    background: @blue
+  }
+  &:focus {
+    color: @white;
+    border-color: transparent;
+    background: hsv(hsvhue(@blue), hsvsaturation(@blue) + 10%, hsvvalue(@blue) - 10%);
+  }
+  &:active {
+    color: @white;
+    border-color: transparent;
+    background: hsv(hsvhue(@blue), hsvsaturation(@blue) + 10%, hsvvalue(@blue) - 10%);
+  }
+}
+
+.token-label-a2683 {
+  display: inline-block;
+  position: relative;
+  max-width: 150px;
+  padding: 0 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+.remove-9f89b {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: -3px;
+  outline: 0;
+
+  &:after {
+    content: '\00d7';
+    display: inline-block;
+    padding-right: 7px;
+    margin: 0;
+    font-size: 19px;
+    line-height: 17px;
+    font-weight: 400;
+    color: #7ab1ff;
+  }
+  &:hover:after {
+    color: @white;
+  }
+  &:active:after {
+    color: #c1dbff;
+  }
+
+}
+
+
+//------------------------------------------------------------------------------
+// PAGE SEARCH
+//------------------------------------------------------------------------------
+.page-search-icon-64c30 {
+  .Mixin_SearchIcon();
+  fill: @pageSearchIcon;
+  cursor: text;
+}
+
+.page-search-input-9e520 {
+  .Mixin_TextInput();
+  text-indent: 0;
+  padding-left: 39px;
+
+  &:hover { .Mixin_InputHover(); }
+  &:focus { .Mixin_InputFocus(); }
+}
+
+.page-search-group-fc210 {
+  display: block;
+  position: relative;
+  margin: 20px;
+  vertical-align: top;
+}
+
+.page-search-group-ce894 {
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: -13px;
+}
+
+.result-count-0b9a1 {
+  display: inline-block;
+  color: #9aa1aa;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 8px;
+}
+
+.filter-fa6f7 {
+  display: inline-block;
+  color: #9aa1aa;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 8px;
+
+  &:hover {
+    color: @blue;
+  }
+
+  &:active {
+    color: #05c;
+  }
+}
+
+
+
+
+//------------------------------------------------------------------------------
+// GLOBAL SEARCH
+//------------------------------------------------------------------------------
+.global-search-icon-a61cb {
+  .Mixin_SearchIcon();
+  fill: @globalSearchIcon;
+}
+
+.global-search-b63a6 {
+  &:hover .global-search-icon-a61cb {
+    fill: @globalSearchHoverActive;
+  }
+}
+
+.global-search-input-337ab {
+  display: inline-block;
+  position: relative;
+  height: 100%;
+  width: 50%;
+  border: none;
+  background: none;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 18px;
+  color: @globalSearchTextHover;
+  text-shadow: 0 1px 0 rgba(0,0,0, 0.5);
+  padding:13px 0 14px 38px;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+
+  &:focus {
+    outline: 0;
+  }
+  &:focus + .global-search-icon-a61cb {
+    fill: @globalSearchHoverActive;
+  }
+  &::selection {
+    color: @globalSearchTextHover;
+    background-color: rgba(225,235,255, 30%);
+    text-shadow: none;
+  }
+}
+
+
+
+//------------------------------------------------------------------------------
+// DATE & TIME SELECTION
+//------------------------------------------------------------------------------
+.date-time-icon-bd68d {
+  .Mixin_InputIcon();
+  fill: @inputIcon;
+  left: 10px;
+  top: 18px;
+  cursor: text;
+}
+
+.date-time-wrapper-9b93d {
+  .Mixin_TextInput();
+  display: inline-block;
+  width: inherit;
+  padding: 0 0 0 28px;
+  text-indent: 0;
+  cursor: default;
+  font-size: 0;
+  line-height: 0;
+
+  &:hover    { .Mixin_DefaultHover(); }
+  &:focus    { .Mixin_InputFocus(); }
+  &.focus    { .Mixin_InputFocus(); }
+  &:disabled { .Mixin_InputDisabled(); }
+}
+
+.time-ddf22 { // http://jonthornton.github.io/jquery-timepicker/
+  // .Mixin_DateTimeInput();
+  .Mixin_TextInput();
+  width: calc(~"6.7em + 10px");
+  padding-left: 30px;
+
+  &:hover    { .Mixin_DefaultHover(); }
+  &:focus    { .Mixin_InputFocus(); }
+  &.focus    { .Mixin_InputFocus(); }
+  &:disabled { .Mixin_InputDisabled(); }
+}
+
+.date-9e63a { // http://jonthornton.github.io/jquery-timepicker/
+  // .Mixin_DateTimeInput();
+  .Mixin_TextInput();
+  width: calc(~"8.7em + 10px");
+  padding-left: 32px;
+
+  &:hover    { .Mixin_DefaultHover(); }
+  &:focus    { .Mixin_InputFocus(); }
+  &.focus    { .Mixin_InputFocus(); }
+  &:disabled { .Mixin_InputDisabled(); }
+}
+
+.date-time-input-10be7 {
+  .Mixin_DateTimeInput();
+  // width: 18px;
+  width: inherit;
+  min-width: 1.4em;
+  padding-left: 1px;
+  padding-right: 1px;
+}
+
+.date-time-text-a6bdf {
+  .Mixin_DateTimeInput();
+  width: initial;
+}
+
+.interstitial-d6112 {
+  display: inline-block;
+  position: relative;
+  margin: 0 10px;
+  font-size: 13px;
+  line-height: 10px;
+  background: none;
+  border: none;
+  font-weight: 400;
+  text-align: left;
+}
+
+
+//------------------------------------------------------------------------------
+// FORM WRAPPERS
+//------------------------------------------------------------------------------
+.form-wrapper-d8d6f {
+  max-width: 480px;
+  margin-bottom: 20px;
+}
+
+
+
+//------------------------------------------------------------------------------
+// Breakpoint Overrides
+//------------------------------------------------------------------------------
+@media all and (max-width: @smallBodyBreakpoint) {
+  .node-7a225 {
+    display: none;
+  }
+}
+@media all and (max-width: 360px) {
+  .current-node-ab368 {
+    display: none;
+  }
+}

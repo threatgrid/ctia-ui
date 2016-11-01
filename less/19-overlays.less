@@ -1,0 +1,365 @@
+//------------------------------------------------------------------------------
+// MIXINS - .Mixin_TitleCase(){}
+//------------------------------------------------------------------------------
+
+.Mixin_TooltipArrow() {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  border-style: solid;
+}
+
+// Enable Tooltip
+.Mixin_EnableTooltip() {
+  color: @tooltipFontColor;
+  opacity: 0.95;
+  transition: opacity @reg;
+  transition-delay: 900ms;
+  z-index: 100;
+}
+
+// Show Tool Tip
+.Mixin_ShowToolTip() {
+  color: @tooltipFontColor;
+  visibility: visible;
+}
+
+// Common arrow properties
+.Mixin_TooltipArrow() {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  border-style: solid;
+}
+
+
+
+//------------------------------------------------------------------------------
+// TOOLTIP
+//------------------------------------------------------------------------------
+// REQUIRED: containing element MUST be "position: relative;"
+// Basic Non-directional Tooltip
+.tooltip-0c232 {
+  display: inline-block;
+  position: absolute;
+  padding: 7px 10px 8px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height:9px;
+  color: transparent;
+  white-space: nowrap;
+  border-radius: 20px;
+  background: @tooltipBgPrimary;
+  background-clip: padding-box;
+  box-shadow: 0 5px 10px fade(@shadow, 30%), 0 10px 30px fade(@shadow, 30%);
+
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  transition-delay: 1s;
+  transition: opacity;
+  box-sizing: border-box;
+  vertical-align: middle
+}
+
+// Arrow top
+.tooltip-arrow-up-0f066 {
+  .tooltip-0c232();
+  .Mixin_CenterHorizontally();
+  top: 100%;
+  margin-top: 3px;
+  background-image: linear-gradient(to top, @tooltipBgSecondary 0%, @tooltipBgPrimary 95%);
+
+  &:before {
+    .Mixin_TooltipArrow();
+    .Mixin_CenterHorizontally();
+    bottom: 100%;
+    border-color: @tooltipBgPrimary transparent;
+    border-width: 0 8px 8px 8px;
+  }
+}
+
+// Arrow bottom
+.tooltip-arrow-down-ef7a4 {
+  .tooltip-0c232();
+  .Mixin_CenterHorizontally();
+  bottom: 100%;
+  margin-bottom: 3px;
+  background-image: linear-gradient(to bottom, @tooltipBgSecondary 0%, @tooltipBgPrimary 95%);
+
+  &:after {
+    .Mixin_TooltipArrow();
+    .Mixin_CenterHorizontally();
+    top: 100%;
+    border-color: @tooltipBgPrimary transparent;
+    border-width: 8px 8px 0 8px;
+  }
+}
+
+// Arrow left
+.tooltip-arrow-left-f034c {
+  .tooltip-0c232();
+  .Mixin_CenterVertically();
+  left: 100%;
+  background-image: linear-gradient(to left, @tooltipBgSecondary 0%, @tooltipBgPrimary 95%);
+
+  &:before {
+    .Mixin_TooltipArrow();
+    .Mixin_CenterVertically();
+    left: -5px;
+    border-color: transparent @tooltipBgPrimary;
+    border-width: 9px 9px 9px 0;
+  }
+}
+
+// Arrow right
+.tooltip-arrow-right-1ac51 {
+  .tooltip-0c232();
+  .Mixin_CenterVertically();
+  right: 100%;
+  background-image: linear-gradient(to right, @tooltipBgSecondary 0%, @tooltipBgPrimary 95%);
+
+  &:after {
+    .Mixin_TooltipArrow();
+    .Mixin_CenterVertically();
+    right: -5px;
+    border-color: transparent @tooltipBgPrimary;
+    border-width: 9px 0 9px 9px;
+  }
+}
+
+// Arrow top left
+.tooltip-arrow-top-left-c638d {
+  .tooltip-0c232;
+  top: 100%;
+  left: 75%;
+  margin-top: -6px;
+  background-image: linear-gradient(to left, @tooltipBgSecondary 0%, @tooltipBgPrimary 95%);
+
+  &:before {
+    .Mixin_TooltipArrow();
+    top: 0;
+    left: 0;
+    border-color: @tooltipBgPrimary transparent ;
+    border-width: 12px 12px 0 0;
+  }
+}
+
+// Arrow top right
+.tooltip-arrow-top-right-0fca2 {
+  .tooltip-0c232;
+  top: 100%;
+  right: 75%;
+  margin-top: -6px;
+  background-image: linear-gradient(to right, @tooltipBgSecondary 0%, @tooltipBgPrimary 95%);
+
+  &:after {
+    .Mixin_TooltipArrow();
+    top: 0;
+    right: 0;
+    border-color: @tooltipBgPrimary transparent;
+    border-width: 12px 0 0 12px;
+  }
+}
+
+// Arrow bottom left
+.tooltip-arrow-bottom-left-5cae1 {
+  .tooltip-0c232;
+  bottom: 100%;
+  left: 75%;
+  margin-bottom: -6px;
+  background-image: linear-gradient(to left, @tooltipBgSecondary 0%, @tooltipBgPrimary 95%);
+
+  &:before {
+    .Mixin_TooltipArrow();
+    bottom: 0;
+    left: 0;
+    border-color: transparent @tooltipBgPrimary;
+    border-width: 12px 0 0 12px;
+  }
+}
+
+// Arrow bottom right
+.tooltip-arrow-bottom-right-e3b03 {
+  .tooltip-0c232;
+  bottom: 100%;
+  right: 75%;
+  margin-bottom: -6px;
+  background-image: linear-gradient(to right, @tooltipBgSecondary 0%, @tooltipBgPrimary 95%);
+
+  &:after {
+    .Mixin_TooltipArrow();
+    bottom: 0;
+    right: 0;
+    border-color: transparent @tooltipBgPrimary;
+    border-width: 12px 12px 0 0;
+  }
+}
+
+.test-a2427:hover .tooltip-arrow-up-0f066,
+.test-a2427:hover .tooltip-arrow-down-ef7a4,
+.test-a2427:hover .tooltip-arrow-left-f034c,
+.test-a2427:hover .tooltip-arrow-right-1ac51,
+.test-a2427:hover .tooltip-arrow-top-left-c638d,
+.test-a2427:hover .tooltip-arrow-top-right-0fca2,
+.test-a2427:hover .tooltip-arrow-bottom-left-5cae1,
+.test-a2427:hover .tooltip-arrow-bottom-right-e3b03 {
+  .Mixin_EnableTooltip();
+  .Mixin_ShowToolTip();
+}
+
+
+
+//------------------------------------------------------------------------------
+// BREADCRUMB INFO
+//------------------------------------------------------------------------------
+.node-info-3ece6 {
+  display: inline-block;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  max-width: ~"calc(100% - 10px)";
+  margin: 2px 0 0 0;
+  padding: 16px 20px 18px;
+  white-space: nowrap;
+  border-radius: 5px;
+  background: @tooltipBgPrimary;
+  background-clip: padding-box;
+  box-shadow: 0 20px 40px fade(@shadow, 30%), 0 40px 80px fade(@shadow, 30%);
+  .Mixin_CenterHorizontally();
+
+  // visibility: hidden;
+  opacity: 0.95;
+  transition: opacity 1s ease-in-out;
+  transition-delay: 1s;
+  transition: opacity;
+  box-sizing: border-box;
+  vertical-align: middle;
+  z-index: 10;
+}
+
+.node-info-caret-15dff {
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+  bottom: -2px;
+  border-style: solid;
+  border-color:  @tooltipBgPrimary transparent;
+  border-width: 0 15px 15px;
+  z-index: 10;
+  .Mixin_CenterHorizontally();
+  opacity: 0.95;
+  transition: opacity 1s ease-in-out;
+  transition-delay: 1s;
+  transition: opacity;
+  box-sizing: border-box;
+}
+
+.node-info-header-20d86 {
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 24px;
+  line-height: 24px;
+  font-weight: 100;
+  color: #c2c7cc;
+}
+
+.node-type-77d82 {
+  display: inline-block;
+  position: relative;
+  margin-right: 0.25em;
+  font-weight: 400;
+  color: @white;
+
+  &:after {
+    content: '\003A';
+  }
+}
+
+.hr-d7e32 {
+  width: 100%;
+  height: 1px;
+  margin: 18px 0 10px;
+  background: fade(@white, 10%);
+}
+
+.node-details-a4cc4 {
+  font-size: 13px;
+  line-height: 18px;
+  color: #9aa1aa;
+  font-weight: 400;
+}
+
+.node-label-e316e {
+  display: block;
+  color: @white;
+  margin-right: 0.25em;
+
+  &:after {
+    content: '\003A';
+  }
+}
+
+.col-b03e4 {
+  display: inline-block;
+}
+
+
+
+//------------------------------------------------------------------------------
+// MODALS
+//------------------------------------------------------------------------------
+.modal-container-02bf3 {
+  display: block;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: fade(@shadow, 20%);
+  z-index: 999;
+  overflow: hidden;
+}
+
+//------------------------------------------------------------------------------
+// ENABLE SPECIFIC TOOLTIPS
+//------------------------------------------------------------------------------
+
+@media all and (max-width: @mediumBodyBreakpoint) {
+
+  // enable "page nav" tool tip timer & fade-in
+  .pg-nav-a5f89:hover .tooltip-arrow-left-f034c {
+    .Mixin_EnableTooltip();
+  }
+
+  // show "page nav" tool tip
+  .tab-5bd07:hover .tooltip-arrow-left-f034c {
+    .Mixin_ShowToolTip();
+  }
+}
+
+.token-0ec5d:hover .tooltip-arrow-down-ef7a4 {
+  .Mixin_EnableTooltip();
+}
+
+.token-0ec5d:hover .tooltip-arrow-down-ef7a4 {
+  .Mixin_ShowToolTip();
+}
+
+thead:hover .tooltip-arrow-down-ef7a4,
+thead:hover .tooltip-arrow-bottom-right-e3b03 {
+  .Mixin_EnableTooltip();
+}
+
+.down-0e2d6:hover .tooltip-arrow-down-ef7a4,
+.up-da2a5:hover .tooltip-arrow-down-ef7a4,
+.th-fbe2f:hover .tooltip-arrow-down-ef7a4 {
+  .Mixin_ShowToolTip();
+}

@@ -1,0 +1,16 @@
+{
+  "name": "ctia-ui",
+  "version": "0.0.1",
+  "description": "A user interface to the Cisco Threat Intelligence API (CTIA).",
+  "homepage": "https://github.com/threatgrid/ctia-ui",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/threatgrid/ctia-ui.git"
+  },
+  "devDependencies": {
+    "express": "4.12.3",
+    "grunt": "1.0.1",
+    "grunt-contrib-less": "1.2.0",
+    "grunt-contrib-watch": "1.0.0"
+  }
+}

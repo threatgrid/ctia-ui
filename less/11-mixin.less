@@ -1,0 +1,119 @@
+// Mixins are labeled in TitleCase, no hash.
+// .Mixin_NameOfMix() {}
+
+
+//------------------------------------------------------------------------------
+// Used for testing
+//------------------------------------------------------------------------------
+.Test_pxPerfect() {
+  font-size: 0;   // REQUIRED: This allows for elements to be precisely sized & positioned uniformly across browsers
+  line-height: 0; // REQUIRED: This allows for elements to be precisely sized & positioned uniformly across browsers
+
+  padding: 0;
+  margin: 0;
+  outline: 0;
+  border: none;
+  list-style: none;
+  text-decoration: none;
+  background-clip: padding-box;
+
+  cursor: default;
+  -webkit-touch-callout: none;
+}
+
+
+
+//------------------------------------------------------------------------------
+// GLOBAL
+//------------------------------------------------------------------------------
+
+// Pushes content down the page, the exact height of header
+.Mixin_HeaderOffset() {
+  top: @headerOffset;
+  position: relative;
+  cursor: default;
+}
+
+// Common page nav tab properties
+.Mixin_PageTabs() {
+  font-weight: 600;
+  line-height: 10px;
+  text-align: left;
+  white-space: nowrap;
+  background: @pageTabBg;
+  background-clip: padding-box;
+  vertical-align: middle;
+  // cursor: pointer;
+  box-shadow: none;
+  transition: box-shadow @med;
+}
+
+// Center Vertically
+.Mixin_CenterVertically() {
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+// Center Horizontally
+.Mixin_CenterHorizontally() {
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+
+// Default hover state
+.Mixin_DefaultHover() {
+  border-color: @blue;
+}
+
+// Focus
+.Mixin_DefaultFocus() {
+  box-shadow: inset 0 1px 0.5px 0 fade(@black, 10%),
+              0 0 0 2px fade(@white, 80%),
+              0 0 0 5px fade(@defaultFocus, 30%);
+}
+
+// Input Icons
+.Mixin_InputIcon() {
+  .Mixin_CenterVertically();
+  display: block;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  vertical-align: middle;
+}
+
+// Search Icons
+.Mixin_SearchIcon() {
+  .Mixin_CenterVertically();
+  .Mixin_InputIcon();
+  left: 15px;
+  // margin-top: -1;
+}
+
+// Common font weights
+.Mixin_LightBtn() {
+  font-weight: 300;
+}
+.Mixin_NormalBtn() {
+  font-weight: 400;
+}
+.Mixin_SemiBoldBtn() {
+  font-weight: 600;
+}
+.Mixin_BoldBtn() {
+  font-weight: 700;
+}
+.Mixin_ExtraBoldBtn() {
+  font-weight: 800;
+}
+
+.Mixin_Rotate(@deg) {
+  @rotateZ: ~"@{deg}deg";
+  // -webkit-transform: rotateZ(@rotateZ);
+  //    -moz-transform: rotateZ(@rotateZ);
+  //     -ms-transform: rotateZ(@rotateZ);
+  //      -o-transform: rotateZ(@rotateZ);
+          transform: rotateZ(@rotateZ);
+}
