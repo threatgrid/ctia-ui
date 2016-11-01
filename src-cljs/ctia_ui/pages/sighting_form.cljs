@@ -57,9 +57,6 @@
    :incidents related-incidents-settings
    :indicators related-incidents-settings})
 
-;; token input cursors
-(def sensor-cursor (rum/cursor-in app-state [:sighting-form :sensor]))
-
 ;;------------------------------------------------------------------------------
 ;; Action Bar
 ;;------------------------------------------------------------------------------
@@ -107,7 +104,7 @@
     ;; Optional Fields
     [:div.chunk-e556a
       (InputLabel "Sensor")
-      (TokensInput sensor-cursor sensor)]
+      (TokensInput [:sighting-form :sensor] sensor)]
     [:div.chunk-e556a
       (InputLabel "Observables")
       (ObservablesInput [:sighting-form :observables] observables)]

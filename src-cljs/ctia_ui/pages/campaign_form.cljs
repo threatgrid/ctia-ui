@@ -80,10 +80,6 @@
 
    :activity []})
 
-;; token input cursors
-(def names-cursor (rum/cursor-in app-state [:campaign-form :names]))
-(def intended-effect-cursor (rum/cursor-in app-state [:campaign-form :intended_effect]))
-
 ;;------------------------------------------------------------------------------
 ;; Action Bar
 ;;------------------------------------------------------------------------------
@@ -136,13 +132,13 @@
     ;; Optional Fields
     [:div.chunk-e556a
       (InputLabel "Names")
-      (TokensInput names-cursor names)]
+      (TokensInput [:campaign-form :names] names)]
     [:div.chunk-e556a
       (InputLabel "Related Indicators")
       (ReferenceInput [:campaign-form :indicators] indicators)]
     [:div.chunk-e556a
       (InputLabel "Intended Effect")
-      (TokensInput intended-effect-cursor intended_effect)]
+      (TokensInput [:campaign-form :intended_effect] intended_effect)]
     [:div.chunk-e556a
       (InputLabel "Status")
       (CampaignStatusButtons [:campaign-form :status] status)]

@@ -101,13 +101,6 @@
    :test_mechanisms test-mechanisms-token-settings
    :new-judgement initial-judgement-form-state})
 
-;; token input cursors
-(def indicator-type-cursor (rum/cursor-in app-state [:indicator-form :indicator_type]))
-(def tags-cursor (rum/cursor-in app-state [:indicator-form :tags]))
-(def kill-chain-phases-cursor (rum/cursor-in app-state [:indicator-form :kill_chain_phases]))
-(def test-mechanisms-cursor (rum/cursor-in app-state [:indicator-form :test_mechanisms]))
-(def alternate-ids-cursor (rum/cursor-in app-state [:indicator-form :alternate_ids]))
-
 ;;------------------------------------------------------------------------------
 ;; Specification Dropdown
 ;;------------------------------------------------------------------------------
@@ -179,10 +172,10 @@
       (TextInput [:indicator-form :producer] producer "What produced this Indicator?")]
     [:div.chunk-e556a
       (InputLabel "Alternate ID / Alias")
-      (TokensInput alternate-ids-cursor alternate_ids)]
+      (TokensInput [:indicator-form :alternate_ids] alternate_ids)]
     [:div.chunk-e556a
       (InputLabel "Indicator Types")
-      (TokensInput indicator-type-cursor indicator_type)]
+      (TokensInput [:indicator-form :indicator_type] indicator_type)]
     [:div.chunk-e556a
       (InputLabel "Confidence")
       (ConfidenceButtons [:indicator-form :confidence] confidence)]
@@ -192,13 +185,13 @@
     (TimeRange [:indicator-form :valid_time] valid_time)
     [:div.chunk-e556a
       (InputLabel "Test Mechanisms")
-      (TokensInput test-mechanisms-cursor test_mechanisms)]
+      (TokensInput [:indicator-form :test_mechanisms] test_mechanisms)]
     [:div.chunk-e556a
       (InputLabel "Descriptor Tags")
-      (TokensInput tags-cursor tags)]
+      (TokensInput [:indicator-form :tags] tags)]
     [:div.chunk-e556a
       (InputLabel "Kill Chain Phases")
-      (TokensInput kill-chain-phases-cursor kill_chain_phases)]
+      (TokensInput [:indicator-form :kill_chain_phases] kill_chain_phases)]
 
     ;; NOTE: composite_indicator_expression CompositeIndicatorExpression
     ;; punting on this for now...

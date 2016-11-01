@@ -150,16 +150,6 @@
    NOTE: most things in this module operate on this cursor."
   (rum/cursor-in app-state [:ttp-form]))
 
-;; some other useful cursors
-(def intended-effect-cursor (rum/cursor-in app-state [:ttp-form :intended-effect]))
-(def malware-types-cursor (rum/cursor-in app-state [:ttp-form :malware-types]))
-(def tool-types-cursor (rum/cursor-in app-state [:ttp-form :tool :types]))
-(def infrastructure-type-cursor (rum/cursor-in app-state [:ttp-form :infrastructure-type]))
-(def identity-targeted-cursor (rum/cursor-in app-state [:ttp-form :identity-targeted]))
-(def systems-targeted-cursor (rum/cursor-in app-state [:ttp-form :systems-targeted]))
-(def info-targeted-cursor (rum/cursor-in app-state [:ttp-form :info-targeted]))
-(def observables-targeted-cursor (rum/cursor-in app-state [:ttp-form :observables-targeted]))
-
 ;;------------------------------------------------------------------------------
 ;; Generic Select Input
 ;;------------------------------------------------------------------------------
@@ -264,7 +254,7 @@
       (TextInput [:ttp-form :malware-description] description "What does the malware do?")]
     [:div.chunk-e556a
       (InputLabel "Type of Malware" true)
-      (TokensInput malware-types-cursor malware-types)]])
+      (TokensInput [:ttp-form :malware-types] malware-types)]])
 
 ;;------------------------------------------------------------------------------
 ;; Tool Input
@@ -304,7 +294,7 @@
       (TextInput [:tool :description] description "What does the tool do?")]
     [:div.chunk-e556a
       (InputLabel "Type of Tool" true)
-      (TokensInput tool-types-cursor types)]
+      (TokensInput [:ttp-form :types] types)]
     [:div.chunk-e556a
       (InputLabel "References")
       (map-indexed ReferenceInputLine references)
@@ -358,7 +348,7 @@
       (TextInput [:ttp-form :infrastructure-description] description)]
     [:div.chunk-e556a
       (InputLabel "Type of Infrastructure" true)
-      (TokensInput infrastructure-type-cursor type)]])
+      (TokensInput [:ttp-form :infrastructure-type] type)]])
 
 ;;------------------------------------------------------------------------------
 ;; Exploit Target Row
@@ -440,7 +430,7 @@
     ;; Optional Fields
     [:div.chunk-e556a
       (InputLabel "Intended Effect" false)
-      (TokensInput intended-effect-cursor intended-effect)]
+      (TokensInput [:ttp-form :intended-effect] intended-effect)]
 
     [:div.chunk-e556a
       (InputLabel "Add Behavior or Resource" false)
@@ -457,16 +447,16 @@
     [:h3.panel-title-0235d "Victim Targeting"]
     [:div.chunk-e556a
       (InputLabel "Identity")
-      (TokensInput identity-targeted-cursor identity-targeted)]
+      (TokensInput [:ttp-form :identity-targeted] identity-targeted)]
     [:div.chunk-e556a
       (InputLabel "Systems Targeted")
-      (TokensInput systems-targeted-cursor systems-targeted)]
+      (TokensInput [:ttp-form :systems-targeted] systems-targeted)]
     [:div.chunk-e556a
       (InputLabel "Information Targeted")
-      (TokensInput info-targeted-cursor info-targeted)]
+      (TokensInput [:ttp-form :info-targeted] info-targeted)]
     [:div.chunk-e556a
       (InputLabel "Observable Targeted")
-      (TokensInput observables-targeted-cursor observables-targeted)]
+      (TokensInput [:ttp-form :observables-targeted] observables-targeted)]
 
     [:h3.panel-title-0235d "Exploit Targets"]
     (ReferenceInput [:ttp-form :exploit_targets] exploit_targets)

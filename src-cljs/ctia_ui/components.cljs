@@ -456,22 +456,23 @@
 ;; Vocabulary Token Input
 ;;------------------------------------------------------------------------------
 
-(defn- click-remove-token [cursor idx]
-  (swap! cursor update-in [:tokens] vec-remove idx))
+(defn- click-remove-token [app-path idx]
+  (swap! app-state update-in (conj app-path :tokens) vec-remove idx))
 
 (def token-mixin
   {:key-fn
-   (fn [cursor idx txt]
+   (fn [_app-path idx txt]
      (str idx "-" txt))})
 
 (rum/defc Token < (merge rum/static token-mixin)
-  [cursor idx txt]
+  [app-path idx txt]
   [:div.token-0ec5d
     [:div.token-label-a2683 txt]
-    [:div.remove-9f89b {:on-click (partial click-remove-token cursor idx)}]
+    [:div.remove-9f89b {:on-click (partial click-remove-token app-path idx)}]
     ;; TODO: only add the tooltip if the text is longer than N characters?
     [:span.tooltip-arrow-down-ef7a4 txt]])
 
+;; TODO: move this matching logic somewhere else. backend? util?
 (defn- beginning-match?
   "Is search-txt at the beginning of option-txt?"
   [search-txt option-txt]
@@ -498,7 +499,7 @@
       :else
       (compare a b))))
 
-(defn- change-token-input [cursor all-options allow-freeform? js-evt]
+(defn- change-token-input [app-path all-options allow-freeform? js-evt]
   (let [new-search-txt (aget js-evt "currentTarget" "value")
         ;; match against any text
         new-options (filter (partial any-match? new-search-txt) all-options)
@@ -508,41 +509,43 @@
         new-options (if allow-freeform?
                       (conj (vec new-options) {:option-text new-search-txt, :option-type :freeform})
                       new-options)]
-    (swap! cursor assoc :active-options new-options
-                        :search-txt new-search-txt
-                        :selected-option-idx 0)))
+    (swap! app-state update-in app-path merge {:active-options new-options
+                                               :search-txt new-search-txt
+                                               :selected-option-idx 0})))
 
-(defn- add-token [cursor new-value]
-  (let [new-value (if (string? new-value) new-value (:option-text new-value))
-        current-tokens (:tokens @cursor [])
+(defn- add-token [app-path new-value]
+  (let [current-state (get-in @app-state app-path)
+        new-value (if (string? new-value) new-value (:option-text new-value))
+        current-tokens (:tokens current-state [])
         new-tokens (conj current-tokens new-value)
-        all-options (:all-options @cursor)
-        max-tokens (:max-tokens @cursor)
+        all-options (:all-options current-state)
+        max-tokens (:max-tokens current-state)
         at-max-tokens? (and (number? max-tokens)
                             (>= (count new-tokens) max-tokens))]
-    (swap! cursor assoc :active-options all-options
-                        :options-showing? (not at-max-tokens?)
-                        :search-txt ""
-                        :selected-option-idx 0
-                        :tokens new-tokens)))
+    (swap! app-state update-in app-path merge
+      {:active-options all-options
+       :options-showing? (not at-max-tokens?)
+       :search-txt ""
+       :selected-option-idx 0
+       :tokens new-tokens})))
 
-(defn- move-token-up [cursor current-idx active-options]
+(defn- move-token-up [app-path current-idx active-options]
   (when-not (empty? active-options)
     (let [new-idx (if (zero? current-idx)
                     (dec (count active-options))
                     (dec current-idx))]
-      (swap! cursor assoc :selected-option-idx new-idx))))
+      (swap! app-state assoc-in (conj app-path :selected-option-idx) new-idx))))
 
-(defn- move-token-down [cursor current-idx active-options]
+(defn- move-token-down [app-path current-idx active-options]
   (when-not (empty? active-options)
     (let [new-idx (if (= current-idx (dec (count active-options)))
                     0
                     (inc current-idx))]
-      (swap! cursor assoc :selected-option-idx new-idx))))
+      (swap! app-state assoc-in (conj app-path :selected-option-idx) new-idx))))
 
 (defn- key-down-token-input
   "Fires with every keydown event inside a Token Input."
-  [cursor state js-evt]
+  [app-path state js-evt]
   (let [input-el (aget js-evt "currentTarget")
         key-code (aget js-evt "keyCode")
         active-options (:active-options state)
@@ -557,33 +560,33 @@
       ; (and (= key-code BACKSPACE)
       ;      (blank? current-txt)
       ;      (pos? num-tokens))
-      ; (click-remove-token cursor (dec num-tokens))
+      ; (click-remove-token app-path (dec num-tokens))
 
       ;; select the active token on enter
       (and (= key-code ENTER)
            (not (empty? active-options)))
-      (add-token cursor (nth active-options selected-option-idx))
+      (add-token app-path (nth active-options selected-option-idx))
 
       ;; move up the list
       (= key-code UP)
       (do (.preventDefault js-evt)
-          (move-token-up cursor selected-option-idx active-options))
+          (move-token-up app-path selected-option-idx active-options))
 
       ;; move down the list
       (= key-code DOWN)
       (do (.preventDefault js-evt)
-          (move-token-down cursor selected-option-idx active-options))
+          (move-token-down app-path selected-option-idx active-options))
 
       ;; blur the input field and hide the options on escape
       (= key-code ESC)
       (do (.blur input-el)
-          (swap! cursor assoc :options-showing? false))
+          (swap! app-state assoc-in (conj app-path :options-showing?) false))
 
       ;; else do nothing
       :else nil)))
 
-(defn- mouseover-token-option [cursor option-idx _js-evt]
-  (swap! cursor assoc :selected-option-idx option-idx))
+(defn- mouseover-token-option [app-path option-idx _js-evt]
+  (swap! app-state assoc-in (conj app-path :selected-option-idx) option-idx))
 
 (def active-token-id (random-element-id))
 
@@ -613,41 +616,41 @@
      state)})
 
 (rum/defc NormalListItem < rum/static
-  [cursor txt idx active?]
+  [app-path txt idx active?]
   [:li (merge
          {:class (str "token-option-cd274" (when active? " active-2e410"))
-          :on-click #(add-token cursor txt)
-          :on-mouse-over (partial mouseover-token-option cursor idx)}
+          :on-click #(add-token app-path txt)
+          :on-mouse-over (partial mouseover-token-option app-path idx)}
          (when active? {:id active-token-id}))
     txt])
 
 (rum/defc FreeformListItem < rum/static
-  [cursor option idx active?]
+  [app-path option idx active?]
   [:div
     (when-not (zero? idx) [:hr])
     [:li (merge
            {:class (str "token-option-cd274" (when active? " active-2e410"))
-            :on-click #(add-token cursor (:option-text option))
-            :on-mouse-over (partial mouseover-token-option cursor idx)}
+            :on-click #(add-token app-path (:option-text option))
+            :on-mouse-over (partial mouseover-token-option app-path idx)}
            (when active? {:id active-token-id}))
       (str "\"" (:option-text option) "\"")]])
 
 (def list-item-mixin
   {:key-fn
-   (fn [cursor option idx active?]
+   (fn [_app-path option idx active?]
      (str (pr-str option) "-" idx "-" (if active? "0" "1")))})
 
 (rum/defc ListItem < (merge rum/static list-item-mixin)
-  [cursor option idx active?]
+  [app-path option idx active?]
   (if (= (:option-type option) :freeform)
-    (FreeformListItem cursor option idx active?)
-    (NormalListItem cursor option idx active?)))
+    (FreeformListItem app-path option idx active?)
+    (NormalListItem app-path option idx active?)))
 
 (rum/defc ListMenu < (merge rum/static token-list-option-mixin)
-  [cursor active-options selected-option-idx]
+  [app-path active-options selected-option-idx]
   [:ul.token-down-menu-0e11b
     (map-indexed
-      (fn [idx itm] (ListItem cursor itm idx (= idx selected-option-idx)))
+      (fn [idx itm] (ListItem app-path itm idx (= idx selected-option-idx)))
       active-options)])
 
 (rum/defc NoMatchesMenu < rum/static
@@ -657,9 +660,9 @@
 
 (defn- focus-token-input
   "Show the options when the input field takes focus."
-  [cursor]
-  (swap! cursor assoc :has-focus? true
-                      :options-showing? true))
+  [app-path]
+  (swap! app-state update-in app-path merge {:has-focus? true
+                                             :options-showing? true}))
 
 ;; NOTE: make this configurable?
 (def hide-options-list-timeout-ms 200)
@@ -667,15 +670,13 @@
 
 (defn- blur-token-input
   "Hide the options shortly after they leave the input field."
-  [cursor]
-  (swap! cursor assoc :has-focus? false)
+  [app-path]
+  (swap! app-state assoc-in (conj app-path :has-focus?) false)
   (js/setTimeout
     (fn []
       ;; hide the options list if they have not re-focused the input field
-      (when-not (:has-focus? @cursor)
-        (swap! cursor assoc :options-showing? false)))
-        ; (.fadeOut ($ (str "#" menu-id)) menu-fadeout-speed-ms
-        ;   (fn [] (swap! cursor assoc :options-showing? false)))
+      (when-not (get-in @app-state (conj app-path :has-focus?))
+        (swap! app-state assoc-in (conj app-path :options-showing?) false)))
     hide-options-list-timeout-ms))
 
 (def default-token-input-placeholder "Add …")
@@ -705,10 +706,8 @@
              (:tokens m)
              [])})
 
-;; TODO: change this to be app-path instead of cursor
-;; allow either a cursor or an app-path to be passed in?
 (rum/defc TokensInput < rum/static
-  [cursor state]
+  [app-path state]
   (let [state (vocab-input-default-values state)
         {:keys [active-options
                 all-options
@@ -723,15 +722,15 @@
         at-max-tokens? (and (number? max-tokens)
                             (>= (count tokens) max-tokens))]
     [:div.token-wrapper-eb049
-      (map-indexed (partial Token cursor) tokens)
+      (map-indexed (partial Token app-path) tokens)
       [:div.token-input-wrapper-2eace
         ;; do not show the input field when we are at max tokens
         (when-not at-max-tokens?
           [:input.token-input-f464e
-            {:on-blur (partial blur-token-input cursor)
-             :on-change (partial change-token-input cursor all-options allow-freeform?)
-             :on-focus (partial focus-token-input cursor)
-             :on-key-down (partial key-down-token-input cursor state)
+            {:on-blur (partial blur-token-input app-path)
+             :on-change (partial change-token-input app-path all-options allow-freeform?)
+             :on-focus (partial focus-token-input app-path)
+             :on-key-down (partial key-down-token-input app-path state)
              :placeholder placeholder
              :value search-txt}])
         (cond
@@ -742,7 +741,7 @@
 
           (and options-showing?
                (not (empty? active-options)))
-          (ListMenu cursor active-options selected-option-idx)
+          (ListMenu app-path active-options selected-option-idx)
 
           :else nil)]]))
 

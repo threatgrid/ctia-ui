@@ -89,12 +89,6 @@
    :associated_actors related-actors-settings
    :confidence "Low"})
 
-;; token input cursors
-(def actor-type-cursor (rum/cursor-in app-state [:actor-form :actor_type]))
-(def motivation-cursor (rum/cursor-in app-state [:actor-form :motivation]))
-(def sophistication-cursor (rum/cursor-in app-state [:actor-form :sophistication]))
-(def intended-effect-cursor (rum/cursor-in app-state [:actor-form :intended_effect]))
-
 ;;------------------------------------------------------------------------------
 ;; Action Bar
 ;;------------------------------------------------------------------------------
@@ -138,19 +132,19 @@
     (TimeRange [:actor-form :valid_time] valid_time)
     [:div.chunk-e556a
       (InputLabel "Actor Type" true)
-      (TokensInput actor-type-cursor actor_type)]
+      (TokensInput [:actor-form :actor_type] actor_type)]
 
     ;; Optional Fields
     ;; TODO: identity c/Identity
     [:div.chunk-e556a
       (InputLabel "Motivation")
-      (TokensInput motivation-cursor motivation)]
+      (TokensInput [:actor-form :motivation] motivation)]
     [:div.chunk-e556a
       (InputLabel "Sophistication")
-      (TokensInput sophistication-cursor sophistication)]
+      (TokensInput [:actor-form :sophistication] sophistication)]
     [:div.chunk-e556a
       (InputLabel "Intended Effect")
-      (TokensInput intended-effect-cursor intended_effect)]
+      (TokensInput [:actor-form :intended_effect] intended_effect)]
     [:div.chunk-e556a
       (InputLabel "Planning and Operational Support")
       (TextareaInput [:actor-form :planning_and_operational_support] planning_and_operational_support)]
