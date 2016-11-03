@@ -1,0 +1,302 @@
+[
+  {
+    "valid_time": {
+      "end_time": "2016-10-02T13:32:04.000Z",
+      "start_time": "2016-09-02T13:32:04.000Z"
+    },
+    "schema_version": "0.3.1",
+    "observable": {
+      "value": "ftxcvvhqkxkfodws.pw",
+      "type": "domain"
+    },
+    "reason_uri": "https://panacea.threatgrid.com/feeds/doc-net-com-dns/samples/6ce6f7cfc0de22e2b23cbc20f673c882",
+    "indicators": [
+      {
+        "indicator_id": "http://tenzin-beta.amp.cisco.com:80/ctia/indicator/indicator-bc3667d7-8056-48e7-b8e3-66696659fc2b"
+      }
+    ],
+    "type": "judgement",
+    "created": "2016-10-19T00:51:32.182Z",
+    "source": "Threat Grid doc-net-com-dns feed",
+    "disposition": 2,
+    "reason": "DNS response information from requests made by document samples performing network communcations.",
+    "source_uri": "https://panacea.threatgrid.com/feeds/doc-net-com-dns/domains/ftxcvvhqkxkfodws.pw",
+    "disposition_name": "Malicious",
+    "priority": 90,
+    "id": "judgement-057c1665-a98b-4808-9cad-9c544e4d3c49",
+    "severity": 100,
+    "tlp": "green",
+    "confidence": "High",
+    "owner": "Unknown"
+  },
+  {
+    "valid_time": {
+      "end_time": "2016-10-02T13:32:04.000Z",
+      "start_time": "2016-09-02T13:32:04.000Z"
+    },
+    "schema_version": "0.3.1",
+    "observable": {
+      "value": "yftqqdon.info",
+      "type": "domain"
+    },
+    "reason_uri": "https://panacea.threatgrid.com/feeds/doc-net-com-dns/samples/6ce6f7cfc0de22e2b23cbc20f673c882",
+    "indicators": [
+      {
+        "indicator_id": "http://tenzin-beta.amp.cisco.com:80/ctia/indicator/indicator-bc3667d7-8056-48e7-b8e3-66696659fc2b"
+      }
+    ],
+    "type": "judgement",
+    "created": "2016-10-19T00:51:32.276Z",
+    "source": "Threat Grid doc-net-com-dns feed",
+    "disposition": 2,
+    "reason": "DNS response information from requests made by document samples performing network communcations.",
+    "source_uri": "https://panacea.threatgrid.com/feeds/doc-net-com-dns/domains/yftqqdon.info",
+    "disposition_name": "Malicious",
+    "priority": 90,
+    "id": "judgement-bf50fbb3-4ca4-4fc4-bdd5-681a277b1acd",
+    "severity": 100,
+    "tlp": "green",
+    "confidence": "High",
+    "owner": "Unknown"
+  },
+  {
+    "valid_time": {
+      "end_time": "2016-10-02T13:32:04.000Z",
+      "start_time": "2016-09-02T13:32:04.000Z"
+    },
+    "schema_version": "0.3.1",
+    "observable": {
+      "value": "eywlmqugxx.info",
+      "type": "domain"
+    },
+    "reason_uri": "https://panacea.threatgrid.com/feeds/doc-net-com-dns/samples/6ce6f7cfc0de22e2b23cbc20f673c882",
+    "indicators": [
+      {
+        "indicator_id": "http://tenzin-beta.amp.cisco.com:80/ctia/indicator/indicator-bc3667d7-8056-48e7-b8e3-66696659fc2b"
+      }
+    ],
+    "type": "judgement",
+    "created": "2016-10-19T00:51:32.294Z",
+    "source": "Threat Grid doc-net-com-dns feed",
+    "disposition": 2,
+    "reason": "DNS response information from requests made by document samples performing network communcations.",
+    "source_uri": "https://panacea.threatgrid.com/feeds/doc-net-com-dns/domains/eywlmqugxx.info",
+    "disposition_name": "Malicious",
+    "priority": 90,
+    "id": "judgement-cbeba1d4-cd5c-489c-8329-68ee7b4a2deb",
+    "severity": 100,
+    "tlp": "green",
+    "confidence": "High",
+    "owner": "Unknown"
+  },
+  {
+    "valid_time": {
+      "end_time": "2016-10-02T13:32:04.000Z",
+      "start_time": "2016-09-02T13:32:04.000Z"
+    },
+    "schema_version": "0.3.1",
+    "observable": {
+      "value": "hnwqsrhcvvvca.org",
+      "type": "domain"
+    },
+    "reason_uri": "https://panacea.threatgrid.com/feeds/doc-net-com-dns/samples/6ce6f7cfc0de22e2b23cbc20f673c882",
+    "indicators": [
+      {
+        "indicator_id": "http://tenzin-beta.amp.cisco.com:80/ctia/indicator/indicator-bc3667d7-8056-48e7-b8e3-66696659fc2b"
+      }
+    ],
+    "type": "judgement",
+    "created": "2016-10-19T00:51:32.311Z",
+    "source": "Threat Grid doc-net-com-dns feed",
+    "disposition": 2,
+    "reason": "DNS response information from requests made by document samples performing network communcations.",
+    "source_uri": "https://panacea.threatgrid.com/feeds/doc-net-com-dns/domains/hnwqsrhcvvvca.org",
+    "disposition_name": "Malicious",
+    "priority": 90,
+    "id": "judgement-36c0d2c6-6e32-4570-8feb-9be0f6c5cf06",
+    "severity": 100,
+    "tlp": "green",
+    "confidence": "High",
+    "owner": "Unknown"
+  },
+  {
+    "valid_time": {
+      "end_time": "2016-10-02T04:45:25.000Z",
+      "start_time": "2016-09-02T04:45:25.000Z"
+    },
+    "schema_version": "0.3.1",
+    "observable": {
+      "value": "agarwaen.atspace.org",
+      "type": "domain"
+    },
+    "reason_uri": "https://panacea.threatgrid.com/feeds/doc-net-com-dns/samples/8cd2486a2a1f3250efc49b966188b785",
+    "indicators": [
+      {
+        "indicator_id": "http://tenzin-beta.amp.cisco.com:80/ctia/indicator/indicator-bc3667d7-8056-48e7-b8e3-66696659fc2b"
+      }
+    ],
+    "type": "judgement",
+    "created": "2016-10-19T00:51:32.386Z",
+    "source": "Threat Grid doc-net-com-dns feed",
+    "disposition": 2,
+    "reason": "DNS response information from requests made by document samples performing network communcations.",
+    "source_uri": "https://panacea.threatgrid.com/feeds/doc-net-com-dns/domains/agarwaen.atspace.org",
+    "disposition_name": "Malicious",
+    "priority": 90,
+    "id": "judgement-39a5f8f2-6b9c-4980-8c7a-80fc740f87d9",
+    "severity": 100,
+    "tlp": "green",
+    "confidence": "High",
+    "owner": "Unknown"
+  },
+  {
+    "valid_time": {
+      "end_time": "2016-10-02T04:45:25.000Z",
+      "start_time": "2016-09-02T04:45:25.000Z"
+    },
+    "schema_version": "0.3.1",
+    "observable": {
+      "value": "www.callisto.cba.pl",
+      "type": "domain"
+    },
+    "reason_uri": "https://panacea.threatgrid.com/feeds/doc-net-com-dns/samples/8cd2486a2a1f3250efc49b966188b785",
+    "indicators": [
+      {
+        "indicator_id": "http://tenzin-beta.amp.cisco.com:80/ctia/indicator/indicator-bc3667d7-8056-48e7-b8e3-66696659fc2b"
+      }
+    ],
+    "type": "judgement",
+    "created": "2016-10-19T00:51:32.403Z",
+    "source": "Threat Grid doc-net-com-dns feed",
+    "disposition": 2,
+    "reason": "DNS response information from requests made by document samples performing network communcations.",
+    "source_uri": "https://panacea.threatgrid.com/feeds/doc-net-com-dns/domains/www.callisto.cba.pl",
+    "disposition_name": "Malicious",
+    "priority": 90,
+    "id": "judgement-c838d30d-c493-4041-beb7-f6eadcf53086",
+    "severity": 100,
+    "tlp": "green",
+    "confidence": "High",
+    "owner": "Unknown"
+  },
+  {
+    "valid_time": {
+      "end_time": "2016-10-02T21:20:17.000Z",
+      "start_time": "2016-09-02T21:20:17.000Z"
+    },
+    "schema_version": "0.3.1",
+    "observable": {
+      "value": "www.sieas.com",
+      "type": "domain"
+    },
+    "reason_uri": "https://panacea.threatgrid.com/feeds/doc-net-com-dns/samples/121d8df103061f55dd593cd26d3591c8",
+    "indicators": [
+      {
+        "indicator_id": "http://tenzin-beta.amp.cisco.com:80/ctia/indicator/indicator-bc3667d7-8056-48e7-b8e3-66696659fc2b"
+      }
+    ],
+    "type": "judgement",
+    "created": "2016-10-19T00:51:32.449Z",
+    "source": "Threat Grid doc-net-com-dns feed",
+    "disposition": 2,
+    "reason": "DNS response information from requests made by document samples performing network communcations.",
+    "source_uri": "https://panacea.threatgrid.com/feeds/doc-net-com-dns/domains/www.sieas.com",
+    "disposition_name": "Malicious",
+    "priority": 90,
+    "id": "judgement-d67d14e7-74d3-4bb7-b0e1-fab9b178afde",
+    "severity": 100,
+    "tlp": "green",
+    "confidence": "High",
+    "owner": "Unknown"
+  },
+  {
+    "valid_time": {
+      "end_time": "2016-10-02T04:45:26.000Z",
+      "start_time": "2016-09-02T04:45:26.000Z"
+    },
+    "schema_version": "0.3.1",
+    "observable": {
+      "value": "www.callisto.cba.pl",
+      "type": "domain"
+    },
+    "reason_uri": "https://panacea.threatgrid.com/feeds/doc-net-com-dns/samples/ac3ea932507c177c78db89868cf4d96b",
+    "indicators": [
+      {
+        "indicator_id": "http://tenzin-beta.amp.cisco.com:80/ctia/indicator/indicator-bc3667d7-8056-48e7-b8e3-66696659fc2b"
+      }
+    ],
+    "type": "judgement",
+    "created": "2016-10-19T00:51:32.523Z",
+    "source": "Threat Grid doc-net-com-dns feed",
+    "disposition": 2,
+    "reason": "DNS response information from requests made by document samples performing network communcations.",
+    "source_uri": "https://panacea.threatgrid.com/feeds/doc-net-com-dns/domains/www.callisto.cba.pl",
+    "disposition_name": "Malicious",
+    "priority": 90,
+    "id": "judgement-6b7750f7-162d-4a30-bb4d-b1dd6665ff57",
+    "severity": 100,
+    "tlp": "green",
+    "confidence": "High",
+    "owner": "Unknown"
+  },
+  {
+    "valid_time": {
+      "end_time": "2016-10-02T04:45:40.000Z",
+      "start_time": "2016-09-02T04:45:40.000Z"
+    },
+    "schema_version": "0.3.1",
+    "observable": {
+      "value": "agarwaen.atspace.org",
+      "type": "domain"
+    },
+    "reason_uri": "https://panacea.threatgrid.com/feeds/doc-net-com-dns/samples/74d8bb99839c073eef32f71ae0b658a4",
+    "indicators": [
+      {
+        "indicator_id": "http://tenzin-beta.amp.cisco.com:80/ctia/indicator/indicator-bc3667d7-8056-48e7-b8e3-66696659fc2b"
+      }
+    ],
+    "type": "judgement",
+    "created": "2016-10-19T00:51:32.542Z",
+    "source": "Threat Grid doc-net-com-dns feed",
+    "disposition": 2,
+    "reason": "DNS response information from requests made by document samples performing network communcations.",
+    "source_uri": "https://panacea.threatgrid.com/feeds/doc-net-com-dns/domains/agarwaen.atspace.org",
+    "disposition_name": "Malicious",
+    "priority": 90,
+    "id": "judgement-32186a85-4318-465e-a61f-ee1b11d2a962",
+    "severity": 100,
+    "tlp": "green",
+    "confidence": "High",
+    "owner": "Unknown"
+  },
+  {
+    "valid_time": {
+      "end_time": "2016-10-02T04:45:40.000Z",
+      "start_time": "2016-09-02T04:45:40.000Z"
+    },
+    "schema_version": "0.3.1",
+    "observable": {
+      "value": "www.callisto.cba.pl",
+      "type": "domain"
+    },
+    "reason_uri": "https://panacea.threatgrid.com/feeds/doc-net-com-dns/samples/74d8bb99839c073eef32f71ae0b658a4",
+    "indicators": [
+      {
+        "indicator_id": "http://tenzin-beta.amp.cisco.com:80/ctia/indicator/indicator-bc3667d7-8056-48e7-b8e3-66696659fc2b"
+      }
+    ],
+    "type": "judgement",
+    "created": "2016-10-19T00:51:32.567Z",
+    "source": "Threat Grid doc-net-com-dns feed",
+    "disposition": 2,
+    "reason": "DNS response information from requests made by document samples performing network communcations.",
+    "source_uri": "https://panacea.threatgrid.com/feeds/doc-net-com-dns/domains/www.callisto.cba.pl",
+    "disposition_name": "Malicious",
+    "priority": 90,
+    "id": "judgement-839eebe1-77e0-4b09-adaa-c7df689e743e",
+    "severity": 100,
+    "tlp": "green",
+    "confidence": "High",
+    "owner": "Unknown"
+  }
+]

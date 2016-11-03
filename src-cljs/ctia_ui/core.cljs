@@ -12,6 +12,7 @@
     [ctia-ui.pages.campaign-form :refer [CampaignFormPage]]
     [ctia-ui.pages.indicator-form :refer [IndicatorFormPage]]
     [ctia-ui.pages.judgement-form :refer [JudgementFormPage]]
+    [ctia-ui.pages.judgement-table :refer [JudgementTablePage]]
     [ctia-ui.pages.login :refer [LoginPage]]
     [ctia-ui.pages.sighting-form :refer [SightingFormPage]]
     [ctia-ui.pages.ttp-form :refer [TTPFormPage]]
@@ -35,6 +36,7 @@
    :sighting-form SightingFormPage
    :ttp-form TTPFormPage
 
+   :judgement-table JudgementTablePage
    :ttp-table TTPTablePage})
 
 (rum/defc IrohApp < rum/static

@@ -792,7 +792,7 @@
       (SVGIcon "global-search-icon-a61cb" "search")
       [:input.global-search-input-337ab
         {:on-change on-change-top-nav-search-txt
-         :placeholder "Search..."
+         :placeholder "Search …"
          :type "text"
          :value search-txt}]]
     [:div.pg-bar-65f2b
@@ -994,3 +994,153 @@
       [:div.chunk-e556a
         (InputLabel "Related Indicators")
         (ReferenceInput (conj app-path :indicators) indicators)]]))
+
+;;------------------------------------------------------------------------------
+;; Table Cells
+;;------------------------------------------------------------------------------
+
+;; TODO: write me
+(rum/defc ObservableCell < rum/static
+  []
+  [:div
+    [:td]])
+
+(rum/defc TextCell < rum/static
+  [kwd data]
+  [:div (get data kwd)])
+
+;;------------------------------------------------------------------------------
+;; Entity Table
+;;------------------------------------------------------------------------------
+
+(def table-cell-mixin
+  {:key-fn
+    (fn [_row idx _td]
+      (str idx))})
+
+(rum/defc TableCell < (merge rum/static table-cell-mixin)
+  [row idx td]
+  [:td
+    (cond
+      ;; if :td is a keyword, assume they just want a text cell
+      (keyword? td)
+      (TextCell td row)
+
+      ;; if :td is a function, it should be a React component
+      (fn? td)
+      (td row)
+
+      ;; NOTE: this should never happen
+      :else nil)])
+
+(def table-row-mixin
+  {:key-fn
+   (fn [_cols idx _row]
+     (str idx))})
+
+(rum/defc TableRow < (merge rum/static table-row-mixin)
+  [cols idx row]
+  [:tr
+    (map-indexed (partial TableCell row) (map :td cols))])
+
+(rum/defc ColumnHeader < rum/static
+  [txt]
+  [:th
+    [:div.th-fbe2f txt]])
+
+(def table-header-mixin
+  {:key-fn
+   (fn [idx _th]
+     (str idx))})
+
+(rum/defc TableHeader < (merge rum/static table-header-mixin)
+  [idx th]
+  (cond
+    (string? th)
+    (ColumnHeader th)
+
+    (fn? th)
+    (th)
+
+    ;; NOTE: this should never happen
+    :else nil))
+
+(rum/defc EntityTable < rum/static
+  [cols rows]
+  [:div.table-wrapper-f9eae
+    [:table.table-9ea31
+      [:thead
+        [:tr (map-indexed TableHeader (map :th cols))]]
+      [:tbody
+        (map-indexed (partial TableRow cols) rows)]]])
+
+(def tmp-style
+  {:height "200px"
+   :fontSize "16px"
+   :textAlign "center"
+   :color "red"})
+
+(rum/defc LoadingTable < rum/static
+  [cols rows]
+  [:div.table-wrapper-f9eae {:style tmp-style}
+    "TODO: sweet loading state with a spinny icon"])
+
+(rum/defc NoDataTable < rum/static
+  [cols rows]
+  [:div.table-wrapper-f9eae {:style tmp-style}
+    "TODO: 'no data found' message"])
+
+;;------------------------------------------------------------------------------
+;; Entity Table Search
+;;------------------------------------------------------------------------------
+
+(defn- on-change-table-search [page-key js-evt]
+  (let [new-text (aget js-evt "currentTarget" "value")]
+    (swap! app-state assoc-in [page-key :search-txt] new-text)))
+
+(rum/defc TableSearch < rum/static
+  [page-key search-txt]
+  [:div.page-search-group-fc210
+    [:input.page-search-input-9e520
+      {:on-change (partial on-change-table-search page-key)
+       :placeholder "Find …"
+       :type "text"
+       :value search-txt}]
+    (SVGIcon "page-search-icon-64c30" "search")])
+
+;;------------------------------------------------------------------------------
+;; Entity Table Page
+;;------------------------------------------------------------------------------
+
+(rum/defc EntityTableBody < rum/static
+  [page-key {:keys [cols data loading? search-txt]}]
+  [:div
+    (TableSearch page-key search-txt)
+    (cond
+      loading?
+      (LoadingTable)
+
+      (empty? data)
+      (NoDataTable)
+
+      :else
+      (EntityTable cols data))])
+
+(rum/defc EntityTablePage < rum/static
+  [state left-nav-txt page-key]
+  [:div.app-container-0e505
+    (HeaderBar (:header-bar state))
+    (LeftNavTabs left-nav-txt)
+    [:div.page-content-area-ad20c
+      [:div.full-panel-8e632
+        (EntityTableBody page-key (get state page-key))]]])
+
+;; TODO: finish this
+; (rum/defc PageShell < rum/static
+;   [state left-nav-txt body-component body-key]
+;   [:div.app-container-0e505
+;     (HeaderBar (:header-bar state))
+;     (LeftNavTabs left-nav-txt)
+;     [:div.page-content-area-ad20c
+;       [:div.full-panel-8e632
+;         (body-component (get state body-key))]]])
