@@ -1,7 +1,7 @@
 (ns ctia-ui.components
   (:require
     [clojure.string :refer [blank? lower-case]]
-    [ctim.schemas.common :refer [disposition-map]]
+    [ctim.schemas.common :refer [default-tlp disposition-map]]
     [ctim.schemas.vocabularies :refer [observable-type-identifier]]
     [goog.events.KeyCodes :refer [BACKSPACE DOWN ENTER ESC UP]]
     [ctia-ui.data :refer [crud-left-nav]]
@@ -123,7 +123,11 @@
 ;; Campaign Status
 ;;------------------------------------------------------------------------------
 
-;; TODO: make a generic component for "Buttons" and combine these
+;; TODO: make a generic "Buttons" component and combine:
+;; - TLP
+;; - CampaignStatus
+;; - Disposition
+;; - Confidence
 
 (defn- click-campaign-status-button [app-path txt _js-evt]
   (swap! app-state assoc-in app-path txt))
@@ -143,6 +147,35 @@
     (CampaignStatusButton app-path "Historic" (= status "Historic") "first-child")
     (CampaignStatusButton app-path "Ongoing" (= status "Ongoing"))
     (CampaignStatusButton app-path "Future" (= status "Future") "last-child")])
+
+;;------------------------------------------------------------------------------
+;; TLP Buttons
+;;------------------------------------------------------------------------------
+
+(defn- click-tlp-btn [app-path new-tlp]
+  (swap! app-state assoc-in app-path new-tlp))
+
+(def tlp-color-classes
+  {"white" "white-2ca39"
+   "green" "green-1eed1"
+   "amber" "amber-2a2ee"
+   "red"   "red-714b6"})
+
+(rum/defc TLPButton < rum/static
+  [app-path tlp active?]
+  [:label
+    {:class (str "outline-btn-series-f1745"
+                 (when active? (str " " (get tlp-color-classes (lower-case tlp)))))
+     :on-click (partial click-tlp-btn app-path (lower-case tlp))}
+    tlp])
+
+(rum/defc TLPButtons < rum/static
+  [app-path tlp]
+  [:div.group-be764
+    (TLPButton app-path "White" (= tlp "white"))
+    (TLPButton app-path "Green" (= tlp "green"))
+    (TLPButton app-path "Amber" (= tlp "amber"))
+    (TLPButton app-path "Red"   (= tlp "red"))])
 
 ;;------------------------------------------------------------------------------
 ;; CAPEC Input
@@ -993,6 +1026,7 @@
       :value ""}
    :disposition 1
    :priority 95
+   :tlp default-tlp
    :confidence "Low"
    :severity 5
    :valid_time
@@ -1016,6 +1050,7 @@
                 disposition
                 priority
                 confidence
+                tlp
                 severity
                 valid_time
                 reason
@@ -1023,7 +1058,6 @@
                 indicators]} state]
     [:div
       ; c/base-entity-entries
-      ;; TODO: does a Judgement need TLP? TLP is in base-entity-entries
       ; c/sourced-object-entries
 
       [:div.chunk-e556a
@@ -1042,6 +1076,9 @@
         (InputLabel "Severity" true)
         (NumberInput (conj app-path :severity) severity)]
       (TimeRange (conj app-path :valid_time) valid_time)
+      [:div.chunk-e556a
+        (InputLabel "TLP" true)
+        (TLPButtons (conj app-path :tlp) tlp)]
 
       ;; Optional Entries
       [:div.chunk-e556a

@@ -23,11 +23,13 @@
 ;;------------------------------------------------------------------------------
 
 (defn- click-create-judgement-btn []
-  ;; TODO: create the Judgement here
+  ;; TODO: set loading state
+  ;; TODO: send the new Judgement POST request
   nil)
 
 (defn- click-cancel-btn []
-  ;; TODO: cancel here
+  ;; TODO: what happens here? take them back to the Judgements table?
+  ;;       clear the input fields?
   nil)
 
 (rum/defc ActionBar < rum/static
@@ -45,7 +47,7 @@
 
 (rum/defc JudgementFormPageBody < rum/static
   [body-state]
-  [:div
+  [:div.form-wrapper-d8d6f
     (JudgementForm [:judgement-form] body-state)
     (ActionBar)])
 

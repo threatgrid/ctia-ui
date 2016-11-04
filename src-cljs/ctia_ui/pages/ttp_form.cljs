@@ -1,6 +1,7 @@
 (ns ctia-ui.pages.ttp-form
   (:require
     [clojure.string :refer [blank?]]
+    [ctim.schemas.common :refer [default-tlp]]
     [ctim.schemas.vocabularies :refer [attack-infrastructure
                                        attack-tool-type
                                        information-type
@@ -19,6 +20,7 @@
                                 TextareaInput
                                 TextInput
                                 TimeRange
+                                TLPButtons
                                 TokensInput]]
     [ctia-ui.state :refer [app-state]]
     [ctia-ui.util :refer [neutralize-event vec-remove]]
@@ -98,7 +100,7 @@
      {:start-time ""
       :end-time ""
       :valid-to-present? true}
-   :tlp "Green"
+   :tlp default-tlp
    :indicators indicators-settings
    :show-optional-fields? true
 
@@ -163,37 +165,6 @@
       {:on-change (fn [js-evt] (swap! page-state assoc key (aget js-evt "currentTarget" "value")))
        :value active-item}
       (map (fn [itm] [:option {:value itm} itm]) items)]])
-
-;;------------------------------------------------------------------------------
-;; TLP Buttons
-;;------------------------------------------------------------------------------
-
-;; TODO: move this to components.cljs
-
-(defn- click-tlp-btn [color]
-  (swap! page-state assoc :tlp color))
-
-(def tlp-color-classes
-  {"White" "white-2ca39"
-   "Green" "green-1eed1"
-   "Amber" "amber-2a2ee"
-   "Red" "red-714b6"})
-
-(rum/defc TLPButton < rum/static
-  [color active?]
-  [:label
-    {:class (str "outline-btn-series-f1745"
-                 (when active? (str " " (get tlp-color-classes color))))
-     :on-click (partial click-tlp-btn color)}
-    color])
-
-(rum/defc TLPButtons < rum/static
-  [selected]
-  [:div.group-be764
-    (TLPButton "White" (= selected "White"))
-    (TLPButton "Green" (= selected "Green"))
-    (TLPButton "Amber" (= selected "Amber"))
-    (TLPButton "Red"   (= selected "Red"))])
 
 ;;------------------------------------------------------------------------------
 ;; Show Section Button
@@ -425,7 +396,7 @@
       (ReferenceInput [:ttp-form :indicators] indicators)]
     [:div.chunk-e556a
       (InputLabel "Traffic Light Protocol" false)
-      (TLPButtons tlp)]
+      (TLPButtons [:ttp-form :tlp] tlp)]
 
     ;; Optional Fields
     [:div.chunk-e556a
