@@ -57,9 +57,17 @@
    {:th "Severity"
     :td :severity}])
 
+(rum/defc ExampleExpandedRow < rum/static
+  [row]
+  [:div {:style {:font-size "16px"
+                 :padding "20px 0"}}
+    "TODO: example expanded row component goes here"])
+
 (def initial-page-state
   {:cols cols
    :data []
+   :expanded-cmp ExampleExpandedRow
+   :expanded-rows #{}
    :loading? true
    :search-txt ""})
 

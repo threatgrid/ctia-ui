@@ -1111,6 +1111,12 @@
 ;; Entity Table
 ;;------------------------------------------------------------------------------
 
+(def tmp-style
+  {:height "200px"
+   :fontSize "16px"
+   :textAlign "center"
+   :color "red"})
+
 (def table-cell-mixin
   {:key-fn
     (fn [_row idx _td]
@@ -1131,15 +1137,40 @@
       ;; NOTE: this should never happen
       :else nil)])
 
-(def table-row-mixin
-  {:key-fn
-   (fn [_cols idx _row]
-     (str idx))})
+(defn- click-table-row [app-path row-id js-evt]
+  (neutralize-event js-evt)
+  (swap! app-state update-in (conj app-path :expanded-rows)
+    (fn [expanded-rows]
+      (if (contains? expanded-rows row-id)
+        (disj expanded-rows row-id)
+        (conj expanded-rows row-id)))))
 
-(rum/defc TableRow < (merge rum/static table-row-mixin)
-  [cols idx row]
-  [:tr
+(def table-data-row-mixin
+  {:key-fn
+   (fn [_app-path _cols row]
+     (str (:id row) "-data-row"))})
+
+(rum/defc TableDataRow < (merge rum/static table-data-row-mixin)
+  [app-path cols row]
+  [:tr {:on-click (partial click-table-row app-path (:id row))}
     (map-indexed (partial TableCell row) (map :td cols))])
+
+(def table-expanded-row-mixin
+  {:key-fn
+   (fn [_num-cols row]
+     (str (:id row) "-expanded-row"))})
+
+(rum/defc TableExpandedRow < (merge rum/static table-expanded-row-mixin)
+  [num-cols row expanded-cmp]
+  [:tr
+    [:td {:col-span num-cols}
+      (expanded-cmp row)]])
+
+(defn- table-row
+  [app-path cols expanded-cmp row]
+  (if (:_expanded? row)
+    (TableExpandedRow (count cols) row expanded-cmp)
+    (TableDataRow app-path cols row)))
 
 (rum/defc ColumnHeader < rum/static
   [txt]
@@ -1164,19 +1195,21 @@
     :else nil))
 
 (rum/defc EntityTable < rum/static
-  [cols rows]
-  [:div.table-wrapper-f9eae
-    [:table.table-9ea31
-      [:thead
-        [:tr (map-indexed TableHeader (map :th cols))]]
-      [:tbody
-        (map-indexed (partial TableRow cols) rows)]]])
-
-(def tmp-style
-  {:height "200px"
-   :fontSize "16px"
-   :textAlign "center"
-   :color "red"})
+  [app-path cols data expanded-rows expanded-cmp]
+  (let [rows (reduce
+               (fn [rows row-data]
+                 (if (contains? expanded-rows (:id row-data))
+                   (conj rows row-data (assoc row-data :_expanded? true))
+                   (conj rows row-data)))
+               []
+               data)]
+    [:div.table-wrapper-f9eae
+      [:table.table-9ea31
+        [:thead
+          [:tr
+            (map-indexed TableHeader (map :th cols))]]
+        [:tbody
+          (map (partial table-row app-path cols expanded-cmp) rows)]]]))
 
 (rum/defc LoadingTable < rum/static
   [cols rows]
@@ -1211,9 +1244,9 @@
 ;;------------------------------------------------------------------------------
 
 (rum/defc EntityTableBody < rum/static
-  [page-key {:keys [cols data loading? search-txt]}]
+  [app-path {:keys [cols data expanded-cmp expanded-rows loading? search-txt]}]
   [:div
-    (TableSearch page-key search-txt)
+    (TableSearch app-path search-txt)
     (cond
       loading?
       (LoadingTable)
@@ -1222,7 +1255,7 @@
       (NoDataTable)
 
       :else
-      (EntityTable cols data))])
+      (EntityTable app-path cols data expanded-rows expanded-cmp))])
 
 (rum/defc EntityTablePage < rum/static
   [state left-nav-txt page-key]
@@ -1231,7 +1264,7 @@
     (LeftNavTabs left-nav-txt)
     [:div.page-content-area-ad20c
       [:div.full-panel-8e632
-        (EntityTableBody page-key (get state page-key))]]])
+        (EntityTableBody [page-key] (get state page-key))]]])
 
 ;; TODO: finish this
 ; (rum/defc PageShell < rum/static
