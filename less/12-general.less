@@ -243,7 +243,7 @@ select::-moz-focus-inner{
     line-height: 18px;
     color: @globalBreadcrumbRoot;
     text-shadow: 0 1px 0 rgba(0,0,0, 0.5);
-    max-width: 320px;
+    max-width: 240px;
     overflow: hidden;
     text-overflow: ellipsis;
     vertical-align: middle;
@@ -839,6 +839,10 @@ select::-moz-focus-inner{
   flex: 1;
   padding: 20px;
   border: 1px solid red;
+  -moz-border-top-colors:   fade(@shadow, 7%);
+  -moz-border-left-colors:  fade(@shadow, 11%);
+  -moz-border-right-colors: fade(@shadow, 11%);
+  -moz-border-bottom-colors:fade(@shadow, 18%);
   border-color: fade(@shadow, 7%) fade(@shadow, 7%) fade(@shadow, 14%);
   border-radius: 4px;
   background-color: @panelBackgroundColor;
@@ -901,6 +905,7 @@ select::-moz-focus-inner{
 // Grouped components
 .group-fe67d {
   .Mixin_Groups();
+  vertical-align: middle;
 }
 
 .group-27bcf {

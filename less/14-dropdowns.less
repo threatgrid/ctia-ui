@@ -123,6 +123,10 @@
     text-align: left;
     border: 1px solid red;
     border-color: #e1e1e2 #e1e1e2 #c9cbcd;
+    -moz-border-top-colors:    rgba(26,38,51, 0.1); // Firefox renders border colors differently than Chrome when the background is clipped.
+    -moz-border-left-colors:   rgba(26,38,51, 0.18); // These -moz- lines are to help keep the look / feel consistent, cross browser.
+    -moz-border-right-colors:  rgba(26,38,51, 0.18); // This method is not standardized across all -moz- browsers, but Firefox supports it.
+    -moz-border-bottom-colors: rgba(26,38,51, 0.24); // Should it fail, one of the other methods will override.
     border-color: rgba(26,38,51, 0.1) rgba(26,38,51, 0.1) rgba(26,38,51, 0.1);
     border-radius: 5px;
     background-color: #fcfcfc;
@@ -403,6 +407,23 @@
   &.disabled { .Mixin_DropOptionDisabled(); }
 }
 
+.drop-option-1d581 {
+  .Mixin_DropOption();
+  padding: 12px 20px 13px;
+  color: @gray;
+  border-bottom-color: #e8ebee;
+  margin-top: -1px;
+
+  &:last-of-type { border-color: transparent; }
+  &:checked  { .Mixin_DropOptionSelected(); }
+  &.selected { .Mixin_DropOptionSelected(); }
+  &:hover    { .Mixin_DropOptionHover(); z-index: 1;}
+  &:active   { .Mixin_DropOptionActive(); }
+  &:disabled { .Mixin_DropOptionDisabled(); }
+  &.disabled { .Mixin_DropOptionDisabled(); }
+
+}
+
 .drop-option-cbd57 {
   .Mixin_DropOption();
   text-align: right;
@@ -497,6 +518,25 @@
   text-overflow: ellipsis;
   overflow: hidden;
   opacity: 0.5;
+}
+
+.secondary-ae743 {
+  display: block;
+  max-width: 360px;
+  margin-top: 2px;
+  margin-bottom: -5px;
+  font-size: 12px;
+  line-height: 19px;
+  font-weight: 400;
+  // color: @darkGray;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  opacity: 0.5;
+}
+
+.unread-42ae1 {
+  color: @black;
+  font-weight: 600;
 }
 
 
