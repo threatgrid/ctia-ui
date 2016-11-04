@@ -6,7 +6,8 @@
 (def initial-app-state
   "Initial application state."
   {:header-bar
-    {:search-txt ""}})
+    {:create-new-dropdown-showing? false
+     :search-txt ""}})
 
 (def app-state
   "This atom holds the application state."

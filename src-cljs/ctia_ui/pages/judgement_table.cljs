@@ -13,6 +13,16 @@
 (def $ js/jQuery)
 
 ;;------------------------------------------------------------------------------
+;; Page ID
+;;------------------------------------------------------------------------------
+
+;; TODO: we might want to handle this at the routing level and put the page-id
+;;       on app-state
+(def page-id
+  "Give every instance of this page a random id."
+  (atom nil))
+
+;;------------------------------------------------------------------------------
 ;; Data Fetching
 ;;------------------------------------------------------------------------------
 
@@ -26,28 +36,20 @@
 (defn- fetch-judgements [next-fn]
   (fetch-json-as-clj (judgements-url) next-fn))
 
-(defn- fetch-judgements-success [new-data]
-  (swap! app-state update-in [:judgement-table] merge
-    {:loading? false
-     :data new-data}))
+(defn- fetch-judgements-success [request-page-id new-data]
+  ;; make sure we are still on the same page instance when the request returns
+  (when (= request-page-id @page-id)
+    (swap! app-state update-in [:judgement-table] merge
+      {:loading? false
+       :data new-data})))
 
 ;;------------------------------------------------------------------------------
 ;; Initial Page State
 ;;------------------------------------------------------------------------------
 
-(rum/defc ExampleCell < rum/static
-  []
-  [:div "Example Cell"])
-
-(rum/defc ExampleHeaderComponent < rum/static
-  []
-  [:th "Example th"])
-
 (def cols
-  [{:th "Judgement"
-    :td ExampleCell}
-   {:th "Observable"
-    :td ExampleCell}
+  [{:th "Observable"
+    :td ObservableCell}
    {:th "Disposition"
     :td :disposition}
    {:th "Confidence"
@@ -76,9 +78,12 @@
 ;;------------------------------------------------------------------------------
 
 (defn init-judgement-table-page! []
-  (fetch-judgements fetch-judgements-success)
-  (swap! app-state assoc :page :judgement-table
-                         :judgement-table initial-page-state))
+  (let [new-page-id (str (random-uuid))]
+    (reset! page-id new-page-id)
+    (fetch-judgements (partial fetch-judgements-success new-page-id))
+    (swap! app-state assoc :page :judgement-table
+                           :judgement-table initial-page-state)))
 
 (defn destroy-judgement-table-page! []
-  (swap! app-state dissoc :page :judgement-table))
+  (swap! app-state dissoc :page :judgement-table)
+  (reset! page-id nil))

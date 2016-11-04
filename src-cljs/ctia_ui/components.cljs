@@ -6,7 +6,7 @@
     [goog.events.KeyCodes :refer [BACKSPACE DOWN ENTER ESC UP]]
     [ctia-ui.data :refer [crud-left-nav]]
     [ctia-ui.state :refer [app-state]]
-    [ctia-ui.util :refer [random-element-id truncate-id vec-remove]]
+    [ctia-ui.util :refer [neutralize-event random-element-id truncate-id vec-remove]]
     [oakmac.util :refer [by-id js-log log]]
     [rum.core :as rum]))
 
@@ -781,12 +781,62 @@
 ;; Header Bar
 ;;------------------------------------------------------------------------------
 
+;; NOTE: some of these routes are commented out because they are not ready yet
+(def create-new-dropdown-options
+  [{:txt "Actor"
+    :route "/create-actor"}
+   {:txt "Campaign"
+    :route "/create-campaign"}
+   {:txt "Course of Action"}
+    ;; :route "/create-coa"}
+   {:txt "Exploited Target"}
+    ;; :route "/create-exploit-target"}
+   {:txt "Feedback"}
+    ;; :route "/create-feedback"}
+   {:txt "Incident"}
+    ;; :route "/create-incident"}
+   {:txt "Indicator"
+    :route "/create-indicator"}
+   {:txt "Judgement"
+    :route "/create-judgement"}
+   {:txt "TTP"
+    :route "/create-ttp"}
+   {:txt "Verdict"}
+    ;; :route "/create-verdict"}
+   {:txt "Sighting"
+    :route "/create-sighting"}])
+
+(defn- click-dropdown-option [route js-evt]
+  (neutralize-event js-evt)
+  (when (and (string? route) (not (blank? route)))
+    (swap! app-state assoc-in [:header-bar :create-new-dropdown-showing?] false)
+    (aset js/document "location" "hash" route)))
+
+(def dropdown-option-mixin
+  {:key-fn
+   (fn [idx _itm]
+     (str idx))})
+
+(rum/defc DropdownOption < (merge rum/static dropdown-option-mixin)
+  [idx {:keys [route txt]}]
+  [:li.drop-option-97dd0
+    {:on-click (partial click-dropdown-option route)}
+    txt])
+
+(defn- click-create-new-btn [js-evt]
+  (neutralize-event js-evt)
+  (swap! app-state update-in [:header-bar :create-new-dropdown-showing?] not))
+
+(defn- mousedown-menu-layer [js-evt]
+  (neutralize-event js-evt)
+  (swap! app-state assoc-in [:header-bar :create-new-dropdown-showing?] false))
+
 (defn- on-change-top-nav-search-txt [js-evt]
   (let [new-text (aget js-evt "currentTarget" "value")]
     (swap! app-state assoc-in [:header-bar :search-txt] new-text)))
 
 (rum/defc HeaderBar < rum/static
-  [{:keys [search-txt]}]
+  [{:keys [create-new-dropdown-showing? search-txt]}]
   [:header.hdr-84fbe
     [:div.global-search-b63a6
       (SVGIcon "global-search-icon-a61cb" "search")
@@ -799,7 +849,16 @@
       [:div.pg-nav-collapse-24cf8
         [:div.nav-hamburger-809d2]
         [:div.nav-arrow-9ec1d]]
-      [:h1.pg-title-9c6e5 "CTIA Entites"]]])
+      [:h1.pg-title-9c6e5 "CTIA Entites"]
+      [:div.select-262cc
+        [:button.select-blue-btn-sml-9ebd4
+          {:on-click click-create-new-btn}
+          "Create New …"]
+        (when create-new-dropdown-showing?
+          [:div.menu-layer-00b55 {:on-mouse-down mousedown-menu-layer}])
+        (when create-new-dropdown-showing?
+          [:ul.drop-down-menu-59e92
+            (map-indexed DropdownOption create-new-dropdown-options)])]]])
 
 ;;------------------------------------------------------------------------------
 ;; Describable Entities Fields
@@ -999,11 +1058,13 @@
 ;; Table Cells
 ;;------------------------------------------------------------------------------
 
-;; TODO: write me
+;; TODO: need to enumerate all the observable types here and come up with good
+;; representations for them
 (rum/defc ObservableCell < rum/static
-  []
-  [:div
-    [:td]])
+  [data]
+  (let [observable (:observable data)
+        {:keys [type value]} observable]
+    [:div value]))
 
 (rum/defc TextCell < rum/static
   [kwd data]

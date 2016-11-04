@@ -30,7 +30,7 @@
     :route "/create-indicator"}
    {:txt "Judgements"
     :icon-id "judgment" ;; NOTE: no "e" in the spelling of "judgement" here
-    :route "/create-judgement"}
+    :route "/judgement-table"}
    {:txt "TTPs"
     :icon-id "ttp"
     :route "/create-ttp"}

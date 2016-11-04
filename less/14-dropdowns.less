@@ -21,6 +21,8 @@
 // MIXINS - .Mixin_TitleCase(){}
 //------------------------------------------------------------------------------
 
+
+
 // MARGIN OVERRIDE
   .Mixing_SelectBtnMargin() {
     margin: 0;
@@ -134,7 +136,7 @@
     box-shadow: inset 0 0 0 1px #fff, 0 5px 15px fade(@shadow, 10%), 0 20px 40px fade(@shadow, 10%);
     outline: none;
     cursor: default;
-    z-index: 10 !important;
+    z-index: @menuZ;
   }
 
   .Mixin_SelectMenu() {
@@ -1035,4 +1037,13 @@
   &:active:after   { .Mixin_DropCaretSmlWhite(); }
   &:disabled:after { .Mixin_DropCaretSmlWhite(); }
   &.disabled:after { .Mixin_DropCaretSmlWhite(); }
+}
+
+.menu-layer-00b55 {
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: @menuZ - 1;
 }
