@@ -1095,6 +1095,12 @@
 ;; Table Cells
 ;;------------------------------------------------------------------------------
 
+(rum/defc JudgementReasonCell < rum/static
+  [{:keys [disposition_name reason]}]
+  [:div
+    [:div.title-a77cb disposition_name]
+    [:div.description-f76f4 reason]])
+
 ;; TODO: need to enumerate all the observable types here and come up with good
 ;; representations for them
 (rum/defc ObservableCell < rum/static

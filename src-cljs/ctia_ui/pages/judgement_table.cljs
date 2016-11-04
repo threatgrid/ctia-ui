@@ -2,6 +2,7 @@
   (:require
     [ctia-ui.components :refer [EntityTablePage
                                 EntityTable
+                                JudgementReasonCell
                                 ObservableCell
                                 TextCell]]
     [ctia-ui.config :refer [config]]
@@ -48,10 +49,10 @@
 ;;------------------------------------------------------------------------------
 
 (def cols
-  [{:th "Observable"
+  [{:th "Judgement"
+    :td JudgementReasonCell}
+   {:th "Observable"
     :td ObservableCell}
-   {:th "Disposition"
-    :td :disposition}
    {:th "Confidence"
     :td :confidence}
    {:th "Severity"
