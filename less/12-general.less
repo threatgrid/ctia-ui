@@ -1043,6 +1043,32 @@ select::-moz-focus-inner{
 
 
 //------------------------------------------------------------------------------
+// Loading Indicators
+//------------------------------------------------------------------------------
+
+.loader-62d59 {
+  display: inline-block;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  fill: @colHeader;
+  vertical-align: middle;
+}
+
+.velocity-spin-e1754 {
+  transform-origin: 10px 10px;
+  animation:loading-anim-b73f7 2s cubic-bezier(0.445, 0.150, 0.550, 0.850) infinite;
+}
+
+@keyframes loading-anim-b73f7{
+  100%,100%{
+    transform:rotate(1800deg);
+  }
+}
+
+
+
+//------------------------------------------------------------------------------
 // Breakpoint Overrides
 //------------------------------------------------------------------------------
 
