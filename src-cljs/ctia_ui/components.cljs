@@ -1218,14 +1218,32 @@
           (map (partial table-row app-path cols expanded-cmp) rows)]]]))
 
 (rum/defc LoadingTable < rum/static
-  [cols rows]
-  [:div.table-wrapper-f9eae {:style tmp-style}
-    "TODO: sweet loading state with a spinny icon"])
+  [cols entity-name]
+  [:div.table-wrapper-f9eae
+    [:table.table-9ea31
+      [:thead
+        [:tr
+          (map-indexed TableHeader (map :th cols))]]
+      [:tbody
+        [:tr.loading-4a502
+          [:td {:col-span (count cols)}
+            [:svg.loader-62d59
+              {:dangerouslySetInnerHTML
+                {:__html (str "<use xlink:href='images/icon-sprite.svg#loader-track'></use>"
+                              "<use xlink:href='images/icon-sprite.svg#loader-spin' class='velocity-spin-e1754'></use>")}}]
+            [:span (str " Loading " entity-name " …")]]]]]])
 
 (rum/defc NoDataTable < rum/static
-  [cols rows]
-  [:div.table-wrapper-f9eae {:style tmp-style}
-    "TODO: 'no data found' message"])
+  [cols entity-name]
+  [:div.table-wrapper-f9eae
+    [:table.table-9ea31
+      [:thead
+        [:tr
+          (map-indexed TableHeader (map :th cols))]]
+      [:tbody
+        [:tr.loading-4a502
+          [:td {:col-span (count cols)}
+            [:span (str "No " entity-name " Were Found")]]]]]])
 
 ;;------------------------------------------------------------------------------
 ;; Entity Table Search
@@ -1250,15 +1268,15 @@
 ;;------------------------------------------------------------------------------
 
 (rum/defc EntityTableBody < rum/static
-  [app-path {:keys [cols data expanded-cmp expanded-rows loading? search-txt]}]
+  [app-path {:keys [cols data entity-name expanded-cmp expanded-rows loading? search-txt]}]
   [:div
     (TableSearch app-path search-txt)
     (cond
       loading?
-      (LoadingTable)
+      (LoadingTable cols entity-name)
 
       (empty? data)
-      (NoDataTable)
+      (NoDataTable cols entity-name)
 
       :else
       (EntityTable app-path cols data expanded-rows expanded-cmp))])

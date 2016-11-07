@@ -31,7 +31,7 @@
 
 (defn- judgements-url []
   (if (:use-demo-data? config)
-    "data/fake-judgements.json"
+    "data/fake-judgements.json?_slow=true"
     "TODO: wire this up to beta tenzin"))
 
 (defn- fetch-judgements [next-fn]
@@ -67,6 +67,7 @@
 (def initial-page-state
   {:cols cols
    :data []
+   :entity-name "Judgements"
    :expanded-cmp ExampleExpandedRow
    :expanded-rows #{}
    :loading? true
