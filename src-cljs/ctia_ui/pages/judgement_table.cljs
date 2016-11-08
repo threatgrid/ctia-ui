@@ -1,27 +1,14 @@
 (ns ctia-ui.pages.judgement-table
   (:require
     [ctia-ui.components :refer [EntityTablePage
-                                EntityTable
                                 JudgementReasonCell
-                                ObservableCell
-                                TextCell]]
+                                ObservableCell]]
     [ctia-ui.config :refer [config]]
     [ctia-ui.state :refer [app-state]]
-    [ctia-ui.util :refer [neutralize-event vec-remove]]
     [oakmac.util :refer [atom-logger by-id fetch-json-as-clj js-log log]]
     [rum.core :as rum]))
 
 (def $ js/jQuery)
-
-;;------------------------------------------------------------------------------
-;; Page ID
-;;------------------------------------------------------------------------------
-
-;; TODO: we might want to handle this at the routing level and put the page-id
-;;       on app-state
-(def page-id
-  "Give every instance of this page a random id."
-  (atom nil))
 
 ;;------------------------------------------------------------------------------
 ;; Data Fetching
@@ -34,15 +21,22 @@
     "data/fake-judgements.json?_slow=true"
     "TODO: wire this up to beta tenzin"))
 
-(defn- fetch-judgements [next-fn]
-  (fetch-json-as-clj (judgements-url) next-fn))
+(defn- fetch-judgements-error [request-page-id]
+  ;; make sure we are still on the same page instance when the request returns
+  (when (= request-page-id (:page-id @app-state))
+    (swap! app-state update-in [:judgement-table] merge
+      {:ajax-error? true
+       :loading? false})))
 
 (defn- fetch-judgements-success [request-page-id new-data]
   ;; make sure we are still on the same page instance when the request returns
-  (when (= request-page-id @page-id)
+  (when (= request-page-id (:page-id @app-state))
     (swap! app-state update-in [:judgement-table] merge
       {:loading? false
        :data new-data})))
+
+(defn- fetch-judgements [next-fn error-fn]
+  (fetch-json-as-clj (judgements-url) next-fn error-fn))
 
 ;;------------------------------------------------------------------------------
 ;; Initial Page State
@@ -65,10 +59,11 @@
     "TODO: example expanded row component goes here"])
 
 (def initial-page-state
-  {:cols cols
+  {:ajax-error? false
+   :cols cols
    :data []
    :entity-name "Judgements"
-   :expanded-cmp ExampleExpandedRow
+   :expanded-row-cmp ExampleExpandedRow
    :expanded-rows #{}
    :loading? true
    :search-txt ""})
@@ -89,11 +84,11 @@
 
 (defn init-judgement-table-page! []
   (let [new-page-id (str (random-uuid))]
-    (reset! page-id new-page-id)
-    (fetch-judgements (partial fetch-judgements-success new-page-id))
+    (fetch-judgements (partial fetch-judgements-success new-page-id)
+                      (partial fetch-judgements-error new-page-id))
     (swap! app-state assoc :page :judgement-table
+                           :page-id new-page-id
                            :judgement-table initial-page-state)))
 
 (defn destroy-judgement-table-page! []
-  (swap! app-state dissoc :page :judgement-table)
-  (reset! page-id nil))
+  (swap! app-state dissoc :page :page-id :judgement-table))

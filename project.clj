@@ -10,7 +10,7 @@
                  [cljsjs/marked "0.3.5-0"]
                  [cljsjs/moment "2.10.6-4"]
                  [com.oakmac/util "3.0.0"]
-                 [rum "0.10.5"]
+                 [rum "0.10.7"]
                  [threatgrid/ctim "0.2.0"]]
 
   :plugins [[lein-cljsbuild "1.1.4"]]

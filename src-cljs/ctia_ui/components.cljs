@@ -12,15 +12,22 @@
 
 (def $ js/jQuery)
 
+(def tmp-style
+  {:height "200px"
+   :fontSize "16px"
+   :textAlign "center"
+   :color "red"})
+
 ;;------------------------------------------------------------------------------
 ;; SVG Icons
 ;;------------------------------------------------------------------------------
 
 (rum/defc SVGIcon < rum/static
   [svg-class icon-id]
-  [:svg {:class svg-class
-         :dangerouslySetInnerHTML
-           {:__html (str "<use xlink:href='images/icon-sprite.svg#" icon-id "' />")}}])
+  [:svg
+    {:class svg-class
+     :dangerouslySetInnerHTML
+       {:__html (str "<use xlink:href='images/icon-sprite.svg#" icon-id "' />")}}])
 
 ;;------------------------------------------------------------------------------
 ;; Labels
@@ -1117,12 +1124,6 @@
 ;; Entity Table
 ;;------------------------------------------------------------------------------
 
-(def tmp-style
-  {:height "200px"
-   :fontSize "16px"
-   :textAlign "center"
-   :color "red"})
-
 (def table-cell-mixin
   {:key-fn
     (fn [_row idx _td]
@@ -1167,15 +1168,17 @@
      (str (:id row) "-expanded-row"))})
 
 (rum/defc TableExpandedRow < (merge rum/static table-expanded-row-mixin)
-  [num-cols row expanded-cmp]
+  [num-cols row expanded-row-cmp]
   [:tr
     [:td {:col-span num-cols}
-      (expanded-cmp row)]])
+      ;; safeguard
+      (when (fn? expanded-row-cmp)
+        (expanded-row-cmp row))]])
 
 (defn- table-row
-  [app-path cols expanded-cmp row]
+  [app-path cols expanded-row-cmp row]
   (if (:_expanded? row)
-    (TableExpandedRow (count cols) row expanded-cmp)
+    (TableExpandedRow (count cols) row expanded-row-cmp)
     (TableDataRow app-path cols row)))
 
 (rum/defc ColumnHeader < rum/static
@@ -1201,7 +1204,7 @@
     :else nil))
 
 (rum/defc EntityTable < rum/static
-  [app-path cols data expanded-rows expanded-cmp]
+  [app-path cols data expanded-rows expanded-row-cmp]
   (let [rows (reduce
                (fn [rows row-data]
                  (if (contains? expanded-rows (:id row-data))
@@ -1215,7 +1218,25 @@
           [:tr
             (map-indexed TableHeader (map :th cols))]]
         [:tbody
-          (map (partial table-row app-path cols expanded-cmp) rows)]]]))
+          (map (partial table-row app-path cols expanded-row-cmp) rows)]]]))
+
+;;------------------------------------------------------------------------------
+;; Entity Table Other States
+;;------------------------------------------------------------------------------
+
+;; TODO: add an "error icon" here
+(rum/defc ErrorTable < rum/static
+  [cols entity-name]
+  [:div.table-wrapper-f9eae
+    [:table.table-9ea31
+      [:thead
+        [:tr
+          (map-indexed TableHeader (map :th cols))]]
+      [:tbody
+        [:tr.loading-4a502
+          [:td {:col-span (count cols)}
+            [:span (str "Error loading " entity-name ". "
+                        "Please refresh the page and try again.")]]]]]])
 
 (rum/defc LoadingTable < rum/static
   [cols entity-name]
@@ -1249,15 +1270,15 @@
 ;; Entity Table Search
 ;;------------------------------------------------------------------------------
 
-(defn- on-change-table-search [page-key js-evt]
+(defn- on-change-table-search [app-path js-evt]
   (let [new-text (aget js-evt "currentTarget" "value")]
-    (swap! app-state assoc-in [page-key :search-txt] new-text)))
+    (swap! app-state assoc-in (conj app-path :search-txt) new-text)))
 
-(rum/defc TableSearch < rum/static
-  [page-key search-txt]
+(rum/defc TableSearchBar < rum/static
+  [app-path search-txt]
   [:div.page-search-group-fc210
     [:input.page-search-input-9e520
-      {:on-change (partial on-change-table-search page-key)
+      {:on-change (partial on-change-table-search app-path)
        :placeholder "Find …"
        :type "text"
        :value search-txt}]
@@ -1268,10 +1289,20 @@
 ;;------------------------------------------------------------------------------
 
 (rum/defc EntityTableBody < rum/static
-  [app-path {:keys [cols data entity-name expanded-cmp expanded-rows loading? search-txt]}]
+  [app-path {:keys [ajax-error?
+                    cols
+                    data
+                    entity-name
+                    expanded-row-cmp
+                    expanded-rows
+                    loading?
+                    search-txt]}]
   [:div
-    (TableSearch app-path search-txt)
+    (TableSearchBar app-path search-txt)
     (cond
+      ajax-error?
+      (ErrorTable cols entity-name)
+
       loading?
       (LoadingTable cols entity-name)
 
@@ -1279,7 +1310,7 @@
       (NoDataTable cols entity-name)
 
       :else
-      (EntityTable app-path cols data expanded-rows expanded-cmp))])
+      (EntityTable app-path cols data expanded-rows expanded-row-cmp))])
 
 (rum/defc EntityTablePage < rum/static
   [state left-nav-txt page-key]
