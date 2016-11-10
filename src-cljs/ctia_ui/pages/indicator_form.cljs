@@ -6,15 +6,14 @@
                                 DescribableEntityInputs
                                 EntityFormPage
                                 HeaderBar
+                                initial-judgement-form-state
                                 InputLabel
-                                JudgementForm
                                 LeftNavTabs
                                 ReferenceInput
-                                TextInput
                                 TextareaInput
+                                TextInput
                                 TimeRange
-                                TokensInput
-                                initial-judgement-form-state]]
+                                TokensInput]]
     [ctia-ui.state :refer [app-state]]
     [oakmac.util :refer [atom-logger by-id js-log log]]
     [rum.core :as rum]))
@@ -98,8 +97,7 @@
    :related_campaigns related-campaign-settings
    :related_COAs related-coas-settings
    :kill_chain_phases kill-chain-token-settings
-   :test_mechanisms test-mechanisms-token-settings
-   :new-judgement initial-judgement-form-state})
+   :test_mechanisms test-mechanisms-token-settings})
 
 ;;------------------------------------------------------------------------------
 ;; Specification Dropdown
@@ -147,23 +145,23 @@
 (def likely-impact-placeholder "What is likely potential impact if this Indicator were to occur?")
 
 (rum/defc IndicatorForm < rum/static
-  [{:keys [valid_time
-           producer
-           alternate_ids
-           negate
-           tags
+  [{:keys [alternate_ids
+           confidence
+           indicated_TTP
            indicator_type
            judgements
-           indicated_TTP
-           suggested_COAs
-           confidence
-           related_indicators
+           kill_chain_phases
+           likely_impact
+           negate
+           new-judgement
+           producer
            related_campaigns
            related_COAs
-           likely_impact
-           kill_chain_phases
+           related_indicators
+           suggested_COAs
+           tags
            test_mechanisms
-           new-judgement]
+           valid_time]
     :as state}]
   [:div.form-wrapper-d8d6f
     (DescribableEntityInputs [:indicator-form] state "Indicator")
@@ -218,16 +216,6 @@
     [:div.chunk-e556a
       (InputLabel "Related Judgements")
       (ReferenceInput [:indicator-form :judgements] judgements)]
-
-
-    ;; NOTE: this is fixed to "Judgement" for demo purposes
-    [:div.chunk-e556a
-      (InputLabel "Specification")
-      (SpecificationDropdown "Judgement")]
-
-    [:h3.panel-title-0235d "New Judgement"]
-    [:div {:style {:padding "5px 10px"}}
-      (JudgementForm [:indicator-form :new-judgement] new-judgement)]
 
     (ActionBar)])
 
