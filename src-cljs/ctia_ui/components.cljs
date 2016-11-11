@@ -1152,14 +1152,21 @@
         (disj expanded-rows row-id)
         (conj expanded-rows row-id)))))
 
+(defn- mouseover-table-row [app-path row-id js-evt]
+  (neutralize-event js-evt)
+  (swap! app-state assoc-in (conj app-path :hovered-row-id) row-id))
+
 (def table-data-row-mixin
   {:key-fn
    (fn [_app-path _cols row]
      (str (:id row) "-data-row"))})
 
 (rum/defc TableDataRow < (merge rum/static table-data-row-mixin)
-  [app-path cols row]
-  [:tr {:on-click (partial click-table-row app-path (:id row))}
+  [app-path cols row expanded?]
+  [:tr
+    {:class (when expanded? "selected-row-8017d")
+     :on-click (partial click-table-row app-path (:id row))
+     :on-mouse-over (partial mouseover-table-row app-path (:id row))}
     (map-indexed (partial TableCell row) (map :td cols))])
 
 (def table-expanded-row-mixin
@@ -1168,18 +1175,18 @@
      (str (:id row) "-expanded-row"))})
 
 (rum/defc TableExpandedRow < (merge rum/static table-expanded-row-mixin)
-  [num-cols row expanded-row-cmp]
-  [:tr
+  [num-cols row expanded-row-cmp hovered?]
+  [:tr {:class (str "expanded-row-73e88" (when hovered? " hover-cefd1"))}
     [:td {:col-span num-cols}
       ;; safeguard
       (when (fn? expanded-row-cmp)
         (expanded-row-cmp row))]])
 
 (defn- table-row
-  [app-path cols expanded-row-cmp row]
+  [app-path cols hovered-row-id expanded-rows expanded-row-cmp row]
   (if (:_expanded? row)
-    (TableExpandedRow (count cols) row expanded-row-cmp)
-    (TableDataRow app-path cols row)))
+    (TableExpandedRow (count cols) row expanded-row-cmp (= hovered-row-id (:id row)))
+    (TableDataRow app-path cols row (contains? expanded-rows (:id row)))))
 
 (rum/defc ColumnHeader < rum/static
   [txt]
@@ -1204,7 +1211,7 @@
     :else nil))
 
 (rum/defc EntityTable < rum/static
-  [app-path cols data expanded-rows expanded-row-cmp]
+  [app-path cols data hovered-row-id expanded-rows expanded-row-cmp]
   (let [rows (reduce
                (fn [rows row-data]
                  (if (contains? expanded-rows (:id row-data))
@@ -1218,7 +1225,7 @@
           [:tr
             (map-indexed TableHeader (map :th cols))]]
         [:tbody
-          (map (partial table-row app-path cols expanded-row-cmp) rows)]]]))
+          (map (partial table-row app-path cols hovered-row-id expanded-rows expanded-row-cmp) rows)]]]))
 
 ;;------------------------------------------------------------------------------
 ;; Entity Table Other States
@@ -1295,6 +1302,7 @@
                     entity-name
                     expanded-row-cmp
                     expanded-rows
+                    hovered-row-id
                     loading?
                     search-txt]}]
   [:div
@@ -1310,7 +1318,7 @@
       (NoDataTable cols entity-name)
 
       :else
-      (EntityTable app-path cols data expanded-rows expanded-row-cmp))])
+      (EntityTable app-path cols data hovered-row-id expanded-rows expanded-row-cmp))])
 
 (rum/defc EntityTablePage < rum/static
   [state left-nav-txt page-key]

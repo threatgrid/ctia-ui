@@ -6,7 +6,6 @@
                                 DescribableEntityInputs
                                 EntityFormPage
                                 HeaderBar
-                                initial-judgement-form-state
                                 InputLabel
                                 LeftNavTabs
                                 ReferenceInput

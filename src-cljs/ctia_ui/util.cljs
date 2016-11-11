@@ -3,6 +3,9 @@
   (:require
     [clojure.string :refer [split]]))
 
+(defn encode-uri [s]
+  (js/encodeURIComponent (str s)))
+
 (defn vec-remove
   "Remove an element from a collection via idx."
   [coll idx]
