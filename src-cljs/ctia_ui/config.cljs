@@ -8,6 +8,7 @@
 ;; or loading a config.json file
 
 (def default-config
-  {:use-demo-data? true})
+  {:api-key "fake-api-key"
+   :in-demo-mode? true})
 
 (def config default-config)

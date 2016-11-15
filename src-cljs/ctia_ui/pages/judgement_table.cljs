@@ -21,7 +21,7 @@
 (defn- judgements-url
   ([] (judgements-url ""))
   ([query-str]
-   (if (:use-demo-data? config)
+   (if (:in-demo-mode? config)
      "data/fake-judgements.json?_slow=true"
      (str tenzin-base-url "ctia/judgement/search?query=" (encode-uri query-str)))))
 

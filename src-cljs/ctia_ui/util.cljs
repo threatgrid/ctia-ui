@@ -6,6 +6,11 @@
 (defn encode-uri [s]
   (js/encodeURIComponent (str s)))
 
+(defn json-stringify
+  "Returns a string of JSON for x"
+  [x]
+  (.stringify js/JSON (clj->js x)))
+
 (defn vec-remove
   "Remove an element from a collection via idx."
   [coll idx]
