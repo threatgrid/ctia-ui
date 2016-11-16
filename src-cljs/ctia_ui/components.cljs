@@ -1165,8 +1165,8 @@
   [app-path cols row expanded?]
   [:tr
     {:class (when expanded? "selected-row-8017d")
-     :on-click (partial click-table-row app-path (:id row))
-     :on-mouse-over (partial mouseover-table-row app-path (:id row))}
+     :on-click (partial click-table-row app-path (:id row))}
+     ;; :on-mouse-over (partial mouseover-table-row app-path (:id row))}
     (map-indexed (partial TableCell row) (map :td cols))])
 
 (def table-expanded-row-mixin

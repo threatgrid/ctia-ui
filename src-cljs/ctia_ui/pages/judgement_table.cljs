@@ -1,5 +1,6 @@
 (ns ctia-ui.pages.judgement-table
   (:require
+    [clojure.string :refer [blank? capitalize lower-case]]
     [ctia-ui.components :refer [EntityTablePage
                                 JudgementReasonCell
                                 ObservableCell]]
@@ -46,102 +47,140 @@
 ;; Page Components
 ;;------------------------------------------------------------------------------
 
-(rum/defc JudgementLeftCol < rum/static
-  [judgement]
-  [:div.left-4a390
-    [:div.map-entry-wrapper-0def3
-      [:table.map-entry-e11e5
-        [:tbody
-          [:tr
-            [:th "Disposition Name"]
-            [:td "Content"]]
-          [:tr
-            [:th "Disposition"]
-            [:td "Content"]]
-          [:tr
-            [:th "Observable"]
-            [:td "Content"]]
-          [:tr
-            [:th "Source"]
-            [:td "Content"]]
-          [:tr
-            [:th "Confidence"]
-            [:td "Content"]]
-          [:tr
-            [:th "Severity"]
-            [:td "Content"]]
-          [:tr
-            [:th "Priority"]
-            [:td "Content"]]
-          [:tr
-            [:th "Type"]
-            [:td "Content"]]
-          [:tr
-            [:th "ID"]
-            [:td "Content"]]
-          [:tr
-            [:th "Valid Time"]
-            [:td "Content"]]
-          [:tr
-            [:th "Schema Version"]
-            [:td "Content"]]]]]])
+;; NOTE: some of these components can probably be moved to components.cljs
 
-(rum/defc JudgementRightCol < rum/static
-  [judgement]
-  [:div.right-03e80
-    [:div.map-entry-wrapper-0def3
-      [:table.map-entry-e11e5
-        [:tbody
-          [:tr
-            [:th "External IDs"]
-            [:td "Content"]]
-          [:tr
-            [:th "Indicators"]
-            [:td "Content"]]
-          [:tr
-            [:th "Language"]
-            [:td "Content"]]
-          [:tr
-            [:th "Reason"]
-            [:td "Content"]]
-          [:tr
-            [:th "Reason URI"]
-            [:td "Content"]]
-          [:tr
-            [:th "Revision"]
-            [:td "Content"]]
-          [:tr
-            [:th "Source URI"]
-            [:td "Content"]]
-          [:tr
-            [:th "Timestamp"]
-            [:td "Content"]]
-          [:tr
-            [:th "TLP"]
-            [:td "Content"]]
-          [:tr
-            [:th "URI"]
-            [:td "Content"]]]]]])
+(def lorem-ipsum "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+
+;; NOTE: reason might be Markdown here
+(rum/defc JudgementReason < rum/static
+  [reason-txt]
+  [:div.expanded-cell-7f813
+    [:div.expanded-title-a18ca "Reason"]
+    [:div.expanded-details-2072d reason-txt]])
+
+(def indicator-row-mixin
+  {:key-fn
+     (fn [idx _indicator]
+       (str idx))})
+
+(rum/defc JudgementIndicator < (merge rum/static indicator-row-mixin)
+  [idx indicator]
+  [:div
+    [:div.expanded-indicator-d1f16 "Indicator Title"]
+    [:div.expanded-secondary-info-3a554 "Secondary Info"]
+    [:div.expanded-details-2072d lorem-ipsum]])
+
+(rum/defc JudgementIndicators < rum/static
+  [indicators]
+  [:div.expanded-cell-7f813
+    [:div.expanded-title-a18ca "Indicators"]
+    (map-indexed JudgementIndicator indicators)])
+
+(rum/defc JudgementSource < rum/static
+  [source-txt]
+  [:div.expanded-cell-7f813
+    [:div.expanded-title-a18ca "Source"]
+    [:div.expanded-details-2072d source-txt]])
+
+(rum/defc JudgementMetadata < rum/static
+  [language priority]
+  [:div.expanded-cell-7f813
+    (when-not (blank? language)
+      [:div.meta-data-e653c (str "Language: " language)])
+    [:div.meta-data-e653c (str "Priority: " priority)]])
 
 (rum/defc JudgementExpandedRow < rum/static
-  [judgement]
+  [{:keys [indicators reason source language priority]}]
   [:div.details-wrapper-819a2
-    (JudgementLeftCol judgement)
-    (JudgementRightCol judgement)])
+    (JudgementReason reason)
+    (JudgementIndicators indicators)
+    (JudgementSource source)
+    (JudgementMetadata language priority)])
+
+(def disposition-name-classes
+  {"malicious" "malicious-e4c73"})
+  ;; TODO: add more disposition name classes here
+
+(rum/defc JudgementObservableCell < rum/static
+  [{:keys [disposition_name observable]}]
+  [:div
+    ;; TODO: we will want different formats for different observable types here
+    [:div.title-a77cb (:value observable)]
+    [:div.disposition-06e65
+      [:div {:class (get disposition-name-classes (lower-case disposition_name) "")}
+        (capitalize disposition_name)]]])
+
+(rum/defc IndicatorToken < rum/static
+  [txt]
+  [:div.indicator-241b3 txt])
+
+;; TODO: this may change once we figure out indicator "injection"
+(rum/defc IndicatorsCell < rum/static
+  [{:keys [indicators]}]
+  (let [num-indicators (count indicators)]
+    [:div
+      (IndicatorToken (-> indicators first :title))
+      (when (> num-indicators 1)
+        (IndicatorToken (str "+" (dec num-indicators) " More")))]))
+
+(def severity-cell-classes
+  {"high" "high-severity-3e887"})
+  ;; TODO: add more classes here as necessary
+
+(rum/defc SeverityCell < rum/static
+  [{:keys [severity]}]
+  [:div {:class (get severity-cell-classes (lower-case severity) "")}
+    severity])
+
+(def confidence-cell-classes
+  {"high" "high-conf-117f2"
+   "none" "no-conf-b8d6d"
+   "unknown" "unknown-5dbe8"})
+  ;; NOTE: no classes needed for "low" and "medium"
+
+(rum/defc ConfidenceCell < rum/static
+  [{:keys [confidence]}]
+  [:div {:class (get confidence-cell-classes (lower-case confidence) "")}
+    (capitalize confidence)])
+
+(def tlp-cell-classes
+  {"amber" "tlp-amber-689ed"
+   "green" "tlp-green-793b3"
+   "red" "tlp-red-95c3e"
+   ;; NOTE: no specific class needed for "white"
+   "white" ""})
+
+(rum/defc TLPCell < rum/static
+  [{:keys [tlp]}]
+  [:div {:class (get tlp-cell-classes (lower-case tlp) "")}
+    (capitalize tlp)])
+
+(rum/defc TimeCell < rum/static
+  [{:keys [valid_time]}]
+  [:div "Time cell"])
 
 ;;------------------------------------------------------------------------------
 ;; Initial Page State
 ;;------------------------------------------------------------------------------
 
 (def cols
-  [{:th "Judgement"
-    :td JudgementReasonCell}
-   {:th "Observable"
-    :td ObservableCell}
-   {:th "Confidence"
-    :td :confidence}
-   {:th "Severity"
-    :td :severity}])
+  [{:th "Observable"
+    :td JudgementObservableCell}
+   {:th "Reason"
+    :td :reason}
+   {:th "Indicators"
+    :td IndicatorsCell}
+   {:th "Source"
+    :td :source}
+   {:th "Sev."
+    :td :severity}
+   {:th "Conf."
+    :td ConfidenceCell}
+   {:th "TLP"
+    :td TLPCell}])
+   ;; FIXME: punting on the time cell for now...
+   ; {:th "Time"
+   ;  :td TimeCell}])
 
 (def initial-page-state
   {:ajax-error? false
