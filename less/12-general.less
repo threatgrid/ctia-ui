@@ -847,7 +847,7 @@ select::-moz-focus-inner{
   border-radius: 4px;
   background-color: @panelBackgroundColor;
   background-clip: padding-box;
-  box-shadow: inset 0 0 0 1px #fff, 0 1px 1px fade(@shadow, 7%);
+  box-shadow: inset 0 0 0 1px #fff, 0 1px 0 fade(@shadow, 5%);
 }
 
 // Page specific content container
@@ -1046,14 +1046,55 @@ select::-moz-focus-inner{
 // Loading Indicators
 //------------------------------------------------------------------------------
 
-.loader-62d59 {
+.load-message-8db46 {
   display: inline-block;
+  position: absolute;
+  margin-top: 20px;
+  color: @white;
+  font-weight: 600;
+  .Mixin_CenterVertically();
+  .Mixin_CenterHorizontally();
+}
+
+.Mixin_LoaderBase() {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.loader-62d59 {
+  .Mixin_LoaderBase();
   position: relative;
   margin: -2px 0 0 -4px;
   width: 20px;
   height: 20px;
   fill: @colHeader;
-  vertical-align: middle;
+}
+
+.loader-1f3f5 {
+  .Mixin_LoaderBase();
+  position: relative;
+  margin: -17px 0 -15px -8px;
+  width: 20px;
+  height: 20px;
+  fill: #789;
+}
+
+.loader-14eec {
+  .Mixin_LoaderBase();
+  position: relative;
+  margin: -17px 0 -15px -8px;
+  width: 20px;
+  height: 20px;
+  fill: #977;
+}
+
+.loader-cb24d {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  fill: @white;
+  .Mixin_CenterVertically();
+  .Mixin_CenterHorizontally();
 }
 
 .velocity-spin-e1754 {
@@ -1061,9 +1102,14 @@ select::-moz-focus-inner{
   animation:loading-anim-b73f7 2s cubic-bezier(0.445, 0.150, 0.550, 0.850) infinite;
 }
 
+.velocity-spin-eb76f {
+  transform-origin: 30px 30px;
+  animation:loading-anim-b73f7 2s cubic-bezier(0.445, 0.150, 0.550, 0.850) infinite;
+}
+
 @keyframes loading-anim-b73f7{
   100%,100%{
-    transform:rotate(1800deg);
+    transform:translateZ(0) rotate(1800deg);
   }
 }
 
