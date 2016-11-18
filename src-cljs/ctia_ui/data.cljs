@@ -1,7 +1,8 @@
 (ns ctia-ui.data
   "Just some pure data.")
 
-(def tenzin-base-url "http://tenzin-beta.amp.cisco.com/")
+(def tenzin-base-url
+  "https://tenzin-beta.amp.cisco.com/")
 
 ;;------------------------------------------------------------------------------
 ;; CRUD Left Nav Tabs

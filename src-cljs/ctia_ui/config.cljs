@@ -9,6 +9,6 @@
 
 (def default-config
   {:api-key "fake-api-key"
-   :in-demo-mode? true})
+   :in-demo-mode? (not= -1 (.indexOf js/document.location.href "demo"))})
 
 (def config default-config)
