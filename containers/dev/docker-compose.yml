@@ -1,0 +1,25 @@
+redis-dev:
+  image: redis
+  ports:
+    - "6379:6379"
+elasticsearch-dev:
+  image: elasticsearch:2.3.3
+  command: "elasticsearch -Des.cluster.name=elasticsearch -Des.node.master=true"
+  ports:
+    - "9200:9200"
+    - "9300:9300"
+kibana-dev:
+  image: kibana:4.5.1
+  ports:
+    - "5601:5601"
+  environment:
+    - ELASTICSEARCH_URL=http://elasticsearch-dev:9200
+  links:
+    - elasticsearch-dev
+ctia-dev:
+  image: threatgrid/ctia:latest
+  ports:
+    - 3000:3000
+  command: java -Xmx4g -Djava.awt.headless=true -Dctia.store.es.default.host=elasticsearch-dev -server -cp ctia.jar:resources:. clojure.main -m ctia.main
+  links:
+    - elasticsearch-dev
