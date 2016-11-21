@@ -33,22 +33,22 @@ A docker-compose development environment, including ES, Redis, and CTIA is avail
 
 1. checkout CTIA on github:
 
-`git clone git@github.com:threatgrid/ctia.git`
+   `git clone git@github.com:threatgrid/ctia.git`
 
 2. build the jar:
 
-`cd ctia && lein uberjar`
+   `cd ctia && lein uberjar`
 
 3. build CTIA docker container:
 
-`docker build -t threatgrid/ctia:latest .`
+   `docker build -t threatgrid/ctia:latest .`
 
 4. launch the compose receipe:
 
-```bash
-cd <ctia-ui-project-path>
-docker-compose -f containers/dev/docker-compose.yml up
-```
+   ```bash
+      cd <ctia-ui-project-path>
+      docker-compose -f containers/dev/docker-compose.yml up
+   ```
 
 5. change `tenzin-base-uri` to `http://127.0.0.1:3000/ctia` 
 
