@@ -27,6 +27,19 @@ grunt watch
 node server.js 6886
 ```
 
+## Tenzin Docker Demo
+
+A simple Docker container is available for testing:
+
+### Build
+
+`docker build -t threatgrid/ctia-ui:latest .`
+
+### Run
+
+`docker run -t -p 8080:8080 threatgrid/ctia-ui`
+
+
 ## License (TBD)
 
 Copyright (c) Cisco Systems. All rights reserved.
