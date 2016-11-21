@@ -27,43 +27,53 @@ grunt watch
 node server.js 6886
 ```
 
-## Development environment with docker-compose
+## Launch a CTIA-UI demo via docker-compose
 
-A docker-compose development environment, including ES, Redis, and CTIA is available:
+A docker-compose demo environment, including ES, Redis, CTIA, and the CTIA-UI is available:
 
-1. checkout CTIA on github:
+1. Clone into the CTIA repository on github:
 
    `git clone git@github.com:threatgrid/ctia.git`
 
-2. build the jar:
+2. Build the CTIA uberjar:
 
    `cd ctia && lein uberjar`
 
-3. build CTIA docker container:
+3. Build CTIA docker container:
 
    `docker build -t threatgrid/ctia:latest .`
 
-4. launch the compose receipe:
+4. Launch the CTIA-UI via docker-compose:
+
+   ```bash
+      cd <ctia-ui-project-path>
+      docker-compose -f containers/demo/docker-compose.yml up
+   ```
+
+## Launch dev container via docker-compose
+
+A docker-compose development environment, including ES, Redis, and CTIA is available:
+
+1. Clone into the CTIA repository on github:
+
+   `git clone git@github.com:threatgrid/ctia.git`
+
+2. Build the CTIA uberjar:
+
+   `cd ctia && lein uberjar`
+
+3. Build CTIA docker container:
+
+   `docker build -t threatgrid/ctia:latest .`
+
+4. Launch the CTIA-UI via docker-compose:
 
    ```bash
       cd <ctia-ui-project-path>
       docker-compose -f containers/dev/docker-compose.yml up
    ```
 
-5. change `tenzin-base-uri` to `http://127.0.0.1:3000/ctia` 
-
-
-## Tenzin Docker Demo
-
-A simple Docker container is available for testing:
-
-### Build
-
-`docker build -t threatgrid/ctia-ui:latest .`
-
-### Run
-
-`docker run -t -p 8080:8080 threatgrid/ctia-ui`
+5. Launch CTIA-UI in your development environment and use http://localhost:3000 as your CTIA server.
 
 ## License (TBD)
 

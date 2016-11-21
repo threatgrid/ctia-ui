@@ -1,5 +1,12 @@
 version: "2"
 services:
+  ctia-ui:
+    image: ctia-ui:latest
+    build:
+      context: ../../
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
   redis-dev:
     image: redis
     ports:
