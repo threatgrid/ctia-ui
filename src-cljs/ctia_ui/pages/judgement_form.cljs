@@ -7,7 +7,6 @@
                                 LeftNavTabs
                                 LoadingButton]]
     [ctia-ui.config :refer [config]]
-    [ctia-ui.data :refer [tenzin-base-url]]
     [ctia-ui.state :refer [app-state]]
     [ctia-ui.util :refer [json-stringify neutralize-event vec-remove]]
     [oakmac.util :refer [atom-logger by-id js-log log]]
@@ -38,7 +37,7 @@
 (defn- new-judgement-url []
   (if (:in-demo-mode? config)
     "data/create-judgement.json?_slow=true"
-    (str tenzin-base-url "ctia/judgement")))
+    (str (:api-base-url config) "ctia/judgement")))
 
 (defn- create-judgement [new-judgement success-fn error-fn]
   (.ajax $

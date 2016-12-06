@@ -5,7 +5,6 @@
                                 JudgementReasonCell
                                 ObservableCell]]
     [ctia-ui.config :refer [config]]
-    [ctia-ui.data :refer [tenzin-base-url]]
     [ctia-ui.state :refer [app-state]]
     [ctia-ui.util :refer [encode-uri]]
     [oakmac.util :refer [atom-logger by-id fetch-json-as-clj js-log log]]
@@ -24,7 +23,7 @@
   ([query-str]
    (if (:in-demo-mode? config)
      "data/fake-judgements.json?_slow=true"
-     (str tenzin-base-url "ctia/judgement/search?query=*" (encode-uri query-str)))))
+     (str (:api-base-url config) "ctia/judgement/search?query=*" (encode-uri query-str)))))
 
 (defn- fetch-judgements-error [request-page-id]
   ;; make sure we are still on the same page instance when the request returns
