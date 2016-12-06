@@ -53,6 +53,23 @@
     label])
 
 ;;------------------------------------------------------------------------------
+;; Loading Button
+;;------------------------------------------------------------------------------
+
+(def spinny-icons-inner-svg
+  (str "<use xlink:href='images/icon-sprite.svg#loader-track'></use>"
+       "<use xlink:href='images/icon-sprite.svg#loader-spin' class='velocity-spin-e1754'></use>"))
+
+(rum/defc LoadingButton < rum/static
+  [txt]
+  [:button.blue-btn-680b8.working
+    [:svg.loader-1f3f5
+      {:dangerouslySetInnerHTML
+        {:__html spinny-icons-inner-svg}}]
+    ;; NOTE: add this space before the text for spacing
+    (str " " txt)])
+
+;;------------------------------------------------------------------------------
 ;; Text Inputs
 ;;------------------------------------------------------------------------------
 
@@ -92,7 +109,7 @@
      :on-click (partial click-disposition-btn app-path disposition-num)}
     txt])
 
-;; TODO: map this to disposition-map
+;; TODO: link this to disposition-map instead of hard-coding
 (rum/defc DispositionButtons < rum/static
   [app-path disposition-number]
   [:div.group-be764
@@ -189,7 +206,7 @@
 ;;------------------------------------------------------------------------------
 
 (defn- select-capec [app-path js-evt js-ui]
-  (.preventDefault js-evt)
+  (neutralize-event js-evt)
   (let [js-capec (aget js-ui "item" "value")
         capec {:capec-id (aget js-capec "id")
                :description (aget js-capec "description")}
@@ -1257,8 +1274,7 @@
           [:td {:col-span (count cols)}
             [:svg.loader-62d59
               {:dangerouslySetInnerHTML
-                {:__html (str "<use xlink:href='images/icon-sprite.svg#loader-track'></use>"
-                              "<use xlink:href='images/icon-sprite.svg#loader-spin' class='velocity-spin-e1754'></use>")}}]
+                {:__html spinny-icons-inner-svg}}]
             [:span (str " Loading " entity-name " …")]]]]]])
 
 (rum/defc NoDataTable < rum/static

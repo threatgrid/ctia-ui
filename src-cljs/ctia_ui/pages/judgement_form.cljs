@@ -4,7 +4,8 @@
                                 HeaderBar
                                 initial-judgement-form-state
                                 JudgementForm
-                                LeftNavTabs]]
+                                LeftNavTabs
+                                LoadingButton]]
     [ctia-ui.config :refer [config]]
     [ctia-ui.data :refer [tenzin-base-url]]
     [ctia-ui.state :refer [app-state]]
@@ -74,14 +75,11 @@
   ;;       reset the form?
   nil)
 
-;; FIXME: get styles for this from Samuel
 (rum/defc LoadingActionBar < rum/static
   []
   [:footer.panel-footer-25e7f
     [:div.page-save-cancel-eaa54
-      {:style {:height "25px"
-               :font-size "14px"}}
-      "(spinny icon) Creating Judgement …"]])
+      (LoadingButton "Creating Judgement …")]])
 
 (rum/defc ActionBar < rum/static
   []
