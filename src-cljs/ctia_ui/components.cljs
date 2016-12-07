@@ -1,6 +1,6 @@
 (ns ctia-ui.components
   (:require
-    [clojure.string :refer [blank? lower-case]]
+    [clojure.string :refer [blank? capitalize lower-case]]
     [ctim.schemas.common :refer [default-tlp disposition-map]]
     [ctim.schemas.vocabularies :refer [observable-type-identifier]]
     [goog.events.KeyCodes :refer [BACKSPACE DOWN ENTER ESC UP]]
@@ -1118,6 +1118,29 @@
 ;;------------------------------------------------------------------------------
 ;; Table Cells
 ;;------------------------------------------------------------------------------
+
+(def confidence-cell-classes
+  {"high" "high-conf-117f2"
+   "none" "no-conf-b8d6d"
+   "unknown" "unknown-5dbe8"})
+  ;; NOTE: no classes needed for "low" and "medium"
+
+(rum/defc ConfidenceCell < rum/static
+  [{:keys [confidence]}]
+  [:div {:class (get confidence-cell-classes (lower-case confidence) "")}
+    (capitalize confidence)])
+
+(def tlp-cell-classes
+  {"amber" "tlp-amber-689ed"
+   "green" "tlp-green-793b3"
+   "red" "tlp-red-95c3e"
+   ;; NOTE: no specific class needed for "white"
+   "white" ""})
+
+(rum/defc TLPCell < rum/static
+  [{:keys [tlp]}]
+  [:div {:class (get tlp-cell-classes (lower-case tlp) "")}
+    (capitalize tlp)])
 
 (rum/defc JudgementReasonCell < rum/static
   [{:keys [disposition_name reason]}]

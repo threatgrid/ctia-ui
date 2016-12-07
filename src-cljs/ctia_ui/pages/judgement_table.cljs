@@ -1,16 +1,16 @@
 (ns ctia-ui.pages.judgement-table
   (:require
     [clojure.string :refer [blank? capitalize lower-case]]
-    [ctia-ui.components :refer [EntityTablePage
+    [ctia-ui.components :refer [ConfidenceCell
+                                EntityTablePage
                                 JudgementReasonCell
-                                ObservableCell]]
+                                ObservableCell
+                                TLPCell]]
     [ctia-ui.config :refer [config]]
     [ctia-ui.state :refer [app-state]]
     [ctia-ui.util :refer [encode-uri]]
     [oakmac.util :refer [atom-logger by-id fetch-json-as-clj js-log log]]
     [rum.core :as rum]))
-
-(def $ js/jQuery)
 
 ;;------------------------------------------------------------------------------
 ;; Data Fetching
@@ -130,29 +130,6 @@
   [{:keys [severity]}]
   [:div {:class (get severity-cell-classes (lower-case severity) "")}
     severity])
-
-(def confidence-cell-classes
-  {"high" "high-conf-117f2"
-   "none" "no-conf-b8d6d"
-   "unknown" "unknown-5dbe8"})
-  ;; NOTE: no classes needed for "low" and "medium"
-
-(rum/defc ConfidenceCell < rum/static
-  [{:keys [confidence]}]
-  [:div {:class (get confidence-cell-classes (lower-case confidence) "")}
-    (capitalize confidence)])
-
-(def tlp-cell-classes
-  {"amber" "tlp-amber-689ed"
-   "green" "tlp-green-793b3"
-   "red" "tlp-red-95c3e"
-   ;; NOTE: no specific class needed for "white"
-   "white" ""})
-
-(rum/defc TLPCell < rum/static
-  [{:keys [tlp]}]
-  [:div {:class (get tlp-cell-classes (lower-case tlp) "")}
-    (capitalize tlp)])
 
 (rum/defc TimeCell < rum/static
   [{:keys [valid_time]}]

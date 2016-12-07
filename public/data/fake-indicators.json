@@ -1,0 +1,242 @@
+[
+  {
+    "description":"DNS response information from requests made by samples downloading PE executables.",
+    "tags":[
+
+    ],
+    "valid_time":{
+      "start_time":"2016-12-05T19:10:10.142Z",
+      "end_time":"2525-01-01T00:00:00.000Z"
+    },
+    "producer":"ThreatGrid",
+    "schema_version":"0.4.0",
+    "type":"indicator",
+    "created":"2016-12-05T19:10:10.142Z",
+    "external_ids":[
+      "indicator-50d9873d6cdf3fa02a674294993378dfc5469373"
+    ],
+    "modified":"2016-12-05T19:10:10.142Z",
+    "short_description":"ThreatGrid downloaded-pe-dns Feed.",
+    "title":"tg-feed-downloaded-pe-dns",
+    "id":"https://tenzin-beta.amp.cisco.com:443/ctia/indicator/indicator-0b19fd05-0482-4b97-a149-cda808b2fec8",
+    "tlp":"green",
+    "confidence":"High",
+    "owner":"Unknown"
+  },
+  {
+    "description":"Banking Trojan TinyBanker Network Communications",
+    "tags":[
+
+    ],
+    "valid_time":{
+      "start_time":"2016-12-05T19:10:05.146Z",
+      "end_time":"2525-01-01T00:00:00.000Z"
+    },
+    "producer":"ThreatGrid",
+    "schema_version":"0.4.0",
+    "type":"indicator",
+    "created":"2016-12-05T19:10:05.146Z",
+    "external_ids":[
+      "indicator-0766359c6f80f92ff536879817603ccc857d37aa"
+    ],
+    "modified":"2016-12-05T19:10:05.146Z",
+    "short_description":"ThreatGrid banking-dns Feed.",
+    "title":"tg-feed-banking-dns",
+    "id":"https://tenzin-beta.amp.cisco.com:443/ctia/indicator/indicator-0c01b1a0-18b3-469e-b88f-05e26b15faea",
+    "tlp":"green",
+    "confidence":"High",
+    "owner":"Unknown"
+  },
+  {
+    "description":"DNS response information for domains queried by samples contacting sinkholed IP addresses.",
+    "tags":[
+
+    ],
+    "valid_time":{
+      "start_time":"2016-12-05T19:10:20.533Z",
+      "end_time":"2525-01-01T00:00:00.000Z"
+    },
+    "producer":"ThreatGrid",
+    "schema_version":"0.4.0",
+    "type":"indicator",
+    "created":"2016-12-05T19:10:20.533Z",
+    "external_ids":[
+      "indicator-14456b876675d1f5f016cb978c1c1c9661a7b12d"
+    ],
+    "modified":"2016-12-05T19:10:20.533Z",
+    "short_description":"ThreatGrid sinkholed-ip-dns Feed.",
+    "title":"tg-feed-sinkholed-ip-dns",
+    "id":"https://tenzin-beta.amp.cisco.com:443/ctia/indicator/indicator-133e8b52-8ab8-479f-b028-9296ec43411b",
+    "tlp":"green",
+    "confidence":"High",
+    "owner":"Unknown"
+  },
+  {
+    "description":"Submitted Sample Leveraging DLL Search Order Hijacking Technique: XTREME",
+    "tags":[
+
+    ],
+    "valid_time":{
+      "start_time":"2016-12-05T19:24:57.141Z",
+      "end_time":"2525-01-01T00:00:00.000Z"
+    },
+    "producer":"ThreatGrid",
+    "schema_version":"0.4.0",
+    "type":"indicator",
+    "created":"2016-12-05T19:24:57.141Z",
+    "external_ids":[
+      "indicator-e88d01057fca8aa43133a7b61d35b90bf3b23dff"
+    ],
+    "modified":"2016-12-05T19:24:57.141Z",
+    "short_description":"ThreatGrid dll-hijacking-dns Feed.",
+    "title":"tg-feed-dll-hijacking-dns",
+    "id":"https://tenzin-beta.amp.cisco.com:443/ctia/indicator/indicator-1906c52e-0190-4c02-a9d4-1c2d189ec3f0",
+    "tlp":"green",
+    "confidence":"High",
+    "owner":"Unknown"
+  },
+  {
+    "description":"DNS response information for domains that resolve to local or loopback addresses.",
+    "tags":[
+
+    ],
+    "valid_time":{
+      "start_time":"2016-12-05T19:10:11.172Z",
+      "end_time":"2525-01-01T00:00:00.000Z"
+    },
+    "producer":"ThreatGrid",
+    "schema_version":"0.4.0",
+    "type":"indicator",
+    "created":"2016-12-05T19:10:11.172Z",
+    "external_ids":[
+      "indicator-e8264915a4fdd5ccfc65ef396fc54c60b60aabfc"
+    ],
+    "modified":"2016-12-05T19:10:11.172Z",
+    "short_description":"ThreatGrid parked-dns Feed.",
+    "title":"tg-feed-parked-dns",
+    "id":"https://tenzin-beta.amp.cisco.com:443/ctia/indicator/indicator-6a91d700-6464-4d40-b297-09dd1565e90f",
+    "tlp":"green",
+    "confidence":"High",
+    "owner":"Unknown"
+  },
+  {
+    "description":"Submitted Sample Modifying the Windows Hosts File",
+    "tags":[
+
+    ],
+    "valid_time":{
+      "start_time":"2016-12-05T19:10:10.835Z",
+      "end_time":"2525-01-01T00:00:00.000Z"
+    },
+    "producer":"ThreatGrid",
+    "schema_version":"0.4.0",
+    "type":"indicator",
+    "created":"2016-12-05T19:10:10.835Z",
+    "external_ids":[
+      "indicator-7fd6c3628748fe563aacfcbb7e9406cc91268f5a"
+    ],
+    "modified":"2016-12-05T19:10:10.835Z",
+    "short_description":"ThreatGrid modified-hosts-dns Feed.",
+    "title":"tg-feed-modified-hosts-dns",
+    "id":"https://tenzin-beta.amp.cisco.com:443/ctia/indicator/indicator-7ffe5c70-4ef6-4553-9ccf-add951122f81",
+    "tlp":"green",
+    "confidence":"High",
+    "owner":"Unknown"
+  },
+  {
+    "description":"Remote Access Trojan (RAT) Network Communications",
+    "tags":[
+
+    ],
+    "valid_time":{
+      "start_time":"2016-12-05T19:10:11.346Z",
+      "end_time":"2525-01-01T00:00:00.000Z"
+    },
+    "producer":"ThreatGrid",
+    "schema_version":"0.4.0",
+    "type":"indicator",
+    "created":"2016-12-05T19:10:11.346Z",
+    "external_ids":[
+      "indicator-f692961d56dad3d55f9f264c4904f8fdd7cb098f"
+    ],
+    "modified":"2016-12-05T19:10:11.346Z",
+    "short_description":"ThreatGrid rat-dns Feed.",
+    "title":"tg-feed-rat-dns",
+    "id":"https://tenzin-beta.amp.cisco.com:443/ctia/indicator/indicator-b239eedc-0eb0-46db-8a4e-0d0adf50b913",
+    "tlp":"green",
+    "confidence":"High",
+    "owner":"Unknown"
+  },
+  {
+    "description":"DNS response information for sample Performing a Check for the Public IP Address of the Host",
+    "tags":[
+
+    ],
+    "valid_time":{
+      "start_time":"2016-12-05T19:37:53.142Z",
+      "end_time":"2525-01-01T00:00:00.000Z"
+    },
+    "producer":"ThreatGrid",
+    "schema_version":"0.4.0",
+    "type":"indicator",
+    "created":"2016-12-05T19:37:53.142Z",
+    "external_ids":[
+      "indicator-befb96059045a13c04b451f40308cae3094de21c"
+    ],
+    "modified":"2016-12-05T19:37:53.142Z",
+    "short_description":"ThreatGrid public-ip-check-dns Feed.",
+    "title":"tg-feed-public-ip-check-dns",
+    "id":"https://tenzin-beta.amp.cisco.com:443/ctia/indicator/indicator-c71f9915-e673-4952-a5a5-7eb82af858be",
+    "tlp":"green",
+    "confidence":"High",
+    "owner":"Unknown"
+  },
+  {
+    "description":"DNS response information for sample queries to dynamic DNS resolution domains.",
+    "tags":[
+
+    ],
+    "valid_time":{
+      "start_time":"2016-12-05T19:10:10.601Z",
+      "end_time":"2525-01-01T00:00:00.000Z"
+    },
+    "producer":"ThreatGrid",
+    "schema_version":"0.4.0",
+    "type":"indicator",
+    "created":"2016-12-05T19:10:10.601Z",
+    "external_ids":[
+      "indicator-5f36b793159471a811d99b63ad9b7471e6ccf1ef"
+    ],
+    "modified":"2016-12-05T19:10:10.601Z",
+    "short_description":"ThreatGrid dynamic-dns Feed.",
+    "title":"tg-feed-dynamic-dns",
+    "id":"https://tenzin-beta.amp.cisco.com:443/ctia/indicator/indicator-d7eece85-9d39-4c0e-bc6f-fdd31138112a",
+    "tlp":"green",
+    "confidence":"High",
+    "owner":"Unknown"
+  },
+  {
+    "description":"DNS response information from requests made by document samples performing network communcations.",
+    "tags":[
+
+    ],
+    "valid_time":{
+      "start_time":"2016-12-05T19:10:09.633Z",
+      "end_time":"2525-01-01T00:00:00.000Z"
+    },
+    "producer":"ThreatGrid",
+    "schema_version":"0.4.0",
+    "type":"indicator",
+    "created":"2016-12-05T19:10:09.633Z",
+    "external_ids":[
+      "indicator-1cdfe3954a45dc203e1f29435684a10105a9f5c8"
+    ],
+    "modified":"2016-12-05T19:10:09.633Z",
+    "short_description":"ThreatGrid doc-net-com-dns Feed.",
+    "title":"tg-feed-doc-net-com-dns",
+    "id":"https://tenzin-beta.amp.cisco.com:443/ctia/indicator/indicator-fe63002d-11ef-47d0-9820-227775387963",
+    "tlp":"green",
+    "confidence":"High",
+    "owner":"Unknown"
+  }
+]

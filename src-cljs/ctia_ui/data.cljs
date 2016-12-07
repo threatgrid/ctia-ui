@@ -27,13 +27,13 @@
     ;: route "/create-incident"}
    {:txt "Indicators"
     :icon-id "indicator"
-    :route "/create-indicator"}
+    :route "/indicator-table"}
    {:txt "Judgements"
     :icon-id "judgment" ;; NOTE: no "e" in the spelling of "judgement" here
     :route "/judgement-table"}
    {:txt "TTPs"
     :icon-id "ttp"
-    :route "/create-ttp"}
+    :route "/ttp-table"}
    {:txt "Verdicts"
     :icon-id "verdict"}
     ;; :route "/create-verdict"}

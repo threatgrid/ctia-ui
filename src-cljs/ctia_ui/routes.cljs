@@ -5,6 +5,7 @@
     [ctia-ui.pages.campaign-form :refer [destroy-campaign-form-page! init-campaign-form-page!]]
     [ctia-ui.pages.create-account :as create-account-page]
     [ctia-ui.pages.indicator-form :refer [destroy-indicator-form-page! init-indicator-form-page!]]
+    [ctia-ui.pages.indicator-table :refer [destroy-indicator-table-page! init-indicator-table-page!]]
     [ctia-ui.pages.judgement-form :refer [destroy-judgement-form-page! init-judgement-form-page!]]
     [ctia-ui.pages.judgement-table :refer [destroy-judgement-table-page! init-judgement-table-page!]]
     [ctia-ui.pages.login :refer [destroy-login-page! init-login-page!]]
@@ -31,6 +32,7 @@
    "/create-sighting" [init-sighting-form-page! destroy-sighting-form-page!]
    "/create-ttp" [init-ttp-form-page! destroy-ttp-form-page!]
 
+   "/indicator-table" [init-indicator-table-page! destroy-indicator-table-page!]
    "/judgement-table" [init-judgement-table-page! destroy-judgement-table-page!]
    "/ttp-table" [init-ttp-table-page! destroy-ttp-table-page!]})
 

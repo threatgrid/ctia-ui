@@ -11,6 +11,7 @@
     [ctia-ui.pages.actor-form :refer [ActorFormPage]]
     [ctia-ui.pages.campaign-form :refer [CampaignFormPage]]
     [ctia-ui.pages.indicator-form :refer [IndicatorFormPage]]
+    [ctia-ui.pages.indicator-table :refer [IndicatorTablePage]]
     [ctia-ui.pages.judgement-form :refer [JudgementFormPage]]
     [ctia-ui.pages.judgement-table :refer [JudgementTablePage]]
     [ctia-ui.pages.login :refer [LoginPage]]
@@ -36,6 +37,7 @@
    :sighting-form SightingFormPage
    :ttp-form TTPFormPage
 
+   :indicator-table IndicatorTablePage
    :judgement-table JudgementTablePage
    :ttp-table TTPTablePage})
 
