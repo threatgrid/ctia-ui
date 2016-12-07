@@ -9,22 +9,22 @@
 (def crud-left-nav
   [{:txt "Actors"
     :icon-id "actor"
-    :route "/create-actor"}
+    :route "/actor-table"}
    {:txt "Campaigns"
     :icon-id "campaign"
-    :route "/create-campaign"}
+    :route "/campaign-table"}
    {:txt "Courses of Action"
-    :icon-id "coa"}
-    ;; :route "/create-coa"}])
+    :icon-id "coa"
+    :route "/coa-table"}
    {:txt "Exploited Targets"
     :icon-id "target"}
-    ;; :route "/create-exploit-target"}])
+    ;; :route "/exploit-target-table"}])
    {:txt "Feedback"
     :icon-id "feedback"}
-    ;; :route "/create-feedback"}
+    ;; :route "/feedback-table"}
    {:txt "Incidents"
-    :icon-id "incident"}
-    ;: route "/create-incident"}
+    :icon-id "incident"
+    :route "/incident-table"}
    {:txt "Indicators"
     :icon-id "indicator"
     :route "/indicator-table"}
@@ -35,11 +35,11 @@
     :icon-id "ttp"
     :route "/ttp-table"}
    {:txt "Verdicts"
-    :icon-id "verdict"}
-    ;; :route "/create-verdict"}
+    :icon-id "verdict"
+    :route "/verdict-table"}
    {:txt "Sightings"
     :icon-id "sighting"
-    :route "/create-sighting"}
+    :route "/sighting-table"}
    {:txt "Vocabularies"
     :icon-id "vocabulary"}])
-    ;; :route "/create-vocabulary"}])
+    ;; :route "/vocabulary-table"}])

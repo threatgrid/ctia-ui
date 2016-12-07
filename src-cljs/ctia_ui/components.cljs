@@ -1156,6 +1156,8 @@
         {:keys [type value]} observable]
     [:div value]))
 
+;; TODO: need an ObservablesCell for handling multiple Observables
+
 (rum/defc TextCell < rum/static
   [kwd data]
   [:div (get data kwd)])

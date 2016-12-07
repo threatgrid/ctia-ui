@@ -9,15 +9,21 @@
     [cljsjs.moment]
     [goog.functions :refer [once]]
     [ctia-ui.pages.actor-form :refer [ActorFormPage]]
+    [ctia-ui.pages.actor-table :refer [ActorTablePage]]
     [ctia-ui.pages.campaign-form :refer [CampaignFormPage]]
+    [ctia-ui.pages.campaign-table :refer [CampaignTablePage]]
+    [ctia-ui.pages.coa-table :refer [COATablePage]]
+    [ctia-ui.pages.incident-table :refer [IncidentTablePage]]
     [ctia-ui.pages.indicator-form :refer [IndicatorFormPage]]
     [ctia-ui.pages.indicator-table :refer [IndicatorTablePage]]
     [ctia-ui.pages.judgement-form :refer [JudgementFormPage]]
     [ctia-ui.pages.judgement-table :refer [JudgementTablePage]]
     [ctia-ui.pages.login :refer [LoginPage]]
     [ctia-ui.pages.sighting-form :refer [SightingFormPage]]
+    [ctia-ui.pages.sighting-table :refer [SightingTablePage]]
     [ctia-ui.pages.ttp-form :refer [TTPFormPage]]
     [ctia-ui.pages.ttp-table :refer [TTPTablePage]]
+    [ctia-ui.pages.verdict-table :refer [VerdictTablePage]]
     [ctia-ui.routes :as routes]
     [ctia-ui.state :refer [app-state]]
     [oakmac.util :refer [by-id js-log log]]
@@ -37,9 +43,15 @@
    :sighting-form SightingFormPage
    :ttp-form TTPFormPage
 
+   :actor-table ActorTablePage
+   :campaign-table CampaignTablePage
+   :coa-table COATablePage
+   :incident-table IncidentTablePage
    :indicator-table IndicatorTablePage
    :judgement-table JudgementTablePage
-   :ttp-table TTPTablePage})
+   :sighting-table SightingTablePage
+   :ttp-table TTPTablePage
+   :verdict-table VerdictTablePage})
 
 (rum/defc IrohApp < rum/static
   [state]

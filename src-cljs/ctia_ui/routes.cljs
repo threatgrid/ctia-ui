@@ -2,8 +2,12 @@
   (:require
     [goog.functions :refer [once]]
     [ctia-ui.pages.actor-form :refer [destroy-actor-form-page! init-actor-form-page!]]
+    [ctia-ui.pages.actor-table :refer [destroy-actor-table-page! init-actor-table-page!]]
     [ctia-ui.pages.campaign-form :refer [destroy-campaign-form-page! init-campaign-form-page!]]
+    [ctia-ui.pages.campaign-table :refer [destroy-campaign-table-page! init-campaign-table-page!]]
+    [ctia-ui.pages.coa-table :refer [destroy-coa-table-page! init-coa-table-page!]]
     [ctia-ui.pages.create-account :as create-account-page]
+    [ctia-ui.pages.incident-table :refer [destroy-incident-table-page! init-incident-table-page!]]
     [ctia-ui.pages.indicator-form :refer [destroy-indicator-form-page! init-indicator-form-page!]]
     [ctia-ui.pages.indicator-table :refer [destroy-indicator-table-page! init-indicator-table-page!]]
     [ctia-ui.pages.judgement-form :refer [destroy-judgement-form-page! init-judgement-form-page!]]
@@ -11,8 +15,10 @@
     [ctia-ui.pages.login :refer [destroy-login-page! init-login-page!]]
     [ctia-ui.pages.reset-password :as reset-password-page]
     [ctia-ui.pages.sighting-form :refer [destroy-sighting-form-page! init-sighting-form-page!]]
+    [ctia-ui.pages.sighting-table :refer [destroy-sighting-table-page! init-sighting-table-page!]]
     [ctia-ui.pages.ttp-form :refer [destroy-ttp-form-page! init-ttp-form-page!]]
-    [ctia-ui.pages.ttp-table :refer [destroy-ttp-table-page! init-ttp-table-page!]]))
+    [ctia-ui.pages.ttp-table :refer [destroy-ttp-table-page! init-ttp-table-page!]]
+    [ctia-ui.pages.verdict-table :refer [destroy-verdict-table-page! init-verdict-table-page!]]))
 
 ;;------------------------------------------------------------------------------
 ;; Routes
@@ -32,9 +38,15 @@
    "/create-sighting" [init-sighting-form-page! destroy-sighting-form-page!]
    "/create-ttp" [init-ttp-form-page! destroy-ttp-form-page!]
 
+   "/actor-table" [init-actor-table-page! destroy-actor-table-page!]
+   "/campaign-table" [init-campaign-table-page! destroy-campaign-table-page!]
+   "/coa-table" [init-coa-table-page! destroy-coa-table-page!]
+   "/incident-table" [init-incident-table-page! destroy-incident-table-page!]
    "/indicator-table" [init-indicator-table-page! destroy-indicator-table-page!]
    "/judgement-table" [init-judgement-table-page! destroy-judgement-table-page!]
-   "/ttp-table" [init-ttp-table-page! destroy-ttp-table-page!]})
+   "/sighting-table" [init-sighting-table-page! destroy-sighting-table-page!]
+   "/ttp-table" [init-ttp-table-page! destroy-ttp-table-page!]
+   "/verdict-table" [init-verdict-table-page! destroy-verdict-table-page!]})
 
 (def previous-page-destroy-fn (atom nil))
 
