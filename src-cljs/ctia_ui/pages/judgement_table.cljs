@@ -136,6 +136,21 @@
   [:div "Time cell"])
 
 ;;------------------------------------------------------------------------------
+;; Danger Zone!
+;;------------------------------------------------------------------------------
+
+(def danger-zone-video-url
+  "https://www.youtube.com/watch?v=siwpn14IE7E")
+
+(rum/defc DangerZoneCell < rum/static
+  [{:keys [disposition_name]}]
+  [:div
+    (when (= (lower-case disposition_name) "malicious")
+      [:a {:href danger-zone-video-url}
+        [:img {:style {:width "45px"}
+               :src "/images/danger-zone.jpg"}]])])
+
+;;------------------------------------------------------------------------------
 ;; Initial Page State
 ;;------------------------------------------------------------------------------
 
@@ -153,7 +168,10 @@
    {:th "Conf."
     :td ConfidenceCell}
    {:th "TLP"
-    :td TLPCell}])
+    :td TLPCell}
+   {:th "Danger Zone?"
+    :td DangerZoneCell}])
+
    ;; FIXME: punting on the time cell for now...
    ; {:th "Time"
    ;  :td TimeCell}])
