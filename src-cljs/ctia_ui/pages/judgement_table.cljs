@@ -144,37 +144,39 @@
 
 (rum/defc DangerZoneCell < rum/static
   [{:keys [disposition_name]}]
-  [:div
+  [:div {:style {:text-align "center"}}
     (when (= (lower-case disposition_name) "malicious")
       [:a {:href danger-zone-video-url}
-        [:img {:style {:width "45px"}
-               :src "/images/danger-zone.jpg"}]])])
+        [:img {:style {:width "25px"}
+               :src "/images/archer-head.png"}]])])
 
 ;;------------------------------------------------------------------------------
 ;; Initial Page State
 ;;------------------------------------------------------------------------------
 
 (def cols
-  [{:th "Observable"
-    :td JudgementObservableCell}
-   {:th "Reason"
-    :td :reason}
-   {:th "Indicators"
-    :td IndicatorsCell}
-   {:th "Source"
-    :td :source}
-   {:th "Sev."
-    :td :severity}
-   {:th "Conf."
-    :td ConfidenceCell}
-   {:th "TLP"
-    :td TLPCell}
-   {:th "Danger Zone?"
-    :td DangerZoneCell}])
+  (conj
+    [{:th "Observable"
+      :td JudgementObservableCell}
+     {:th "Reason"
+      :td :reason}
+     {:th "Indicators"
+      :td IndicatorsCell}
+     {:th "Source"
+      :td :source}
+     {:th "Sev."
+      :td :severity}
+     {:th "Conf."
+      :td ConfidenceCell}
+     {:th "TLP"
+      :td TLPCell}]
+   (when (:danger-zone? config)
+     {:th "Danger Zone?"
+      :td DangerZoneCell})))
 
-   ;; FIXME: punting on the time cell for now...
-   ; {:th "Time"
-   ;  :td TimeCell}])
+;; FIXME: punting on the time cell for now...
+; {:th "Time"
+;  :td TimeCell}])
 
 (def initial-page-state
   {:ajax-error? false

@@ -14,6 +14,7 @@
 (def default-config
   {:api-key "fake-api-key"
    :api-base-url tenzin-base-url
+   :danger-zone? (not= -1 (.indexOf js/document.location.href "dangerzone=true"))
    :in-demo-mode? (not= -1 (.indexOf js/document.location.href "demo"))})
 
 (def config default-config)
